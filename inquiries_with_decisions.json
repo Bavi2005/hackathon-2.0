@@ -1,0 +1,94 @@
+[
+  {
+    "id": "inq_536f496f",
+    "domain": "loan",
+    "data": {
+      "age": 25,
+      "income": 40000
+    },
+    "status": "received",
+    "timestamp": "2026-01-13T07:35:16.894039+00:00",
+    "ai_result": {
+      "applicant": {
+        "domain": "loan",
+        "data": {
+          "age": 25,
+          "income": 40000
+        }
+      },
+      "decision": {
+        "status": "REJECTED",
+        "risk_score": -80.0,
+        "confidence": 0.8
+      },
+      "explanation": {
+        "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+        "positive_factors": [],
+        "negative_factors": [
+          "Low credit score",
+          "Limited employment history",
+          "High debt relative to income"
+        ]
+      },
+      "counterfactuals": [
+        "If credit score increased above 650, approval likelihood would improve.",
+        "Longer employment history would improve approval chances."
+      ],
+      "fairness": {
+        "bias_checked": true,
+        "bias_detected": false,
+        "notes": "No protected attributes were used in the decision."
+      },
+      "audit": {
+        "model": "rule-based-xai-v1",
+        "timestamp": "2026-01-13T08:06:56.570231+00:00"
+      }
+    }
+  },
+  {
+    "id": "inq_c0d0efd8",
+    "domain": "loan",
+    "data": {
+      "age": 25,
+      "income": 40000
+    },
+    "status": "received",
+    "timestamp": "2026-01-13T07:43:50.835016+00:00",
+    "ai_result": {
+      "applicant": {
+        "domain": "loan",
+        "data": {
+          "age": 25,
+          "income": 40000
+        }
+      },
+      "decision": {
+        "status": "REJECTED",
+        "risk_score": -80.0,
+        "confidence": 0.8
+      },
+      "explanation": {
+        "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+        "positive_factors": [],
+        "negative_factors": [
+          "Low credit score",
+          "Limited employment history",
+          "High debt relative to income"
+        ]
+      },
+      "counterfactuals": [
+        "If credit score increased above 650, approval likelihood would improve.",
+        "Longer employment history would improve approval chances."
+      ],
+      "fairness": {
+        "bias_checked": true,
+        "bias_detected": false,
+        "notes": "No protected attributes were used in the decision."
+      },
+      "audit": {
+        "model": "rule-based-xai-v1",
+        "timestamp": "2026-01-13T08:06:56.655973+00:00"
+      }
+    }
+  }
+]

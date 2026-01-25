@@ -1,0 +1,212 @@
+[
+  {
+    "id": "37572cdc",
+    "domain": "loan",
+    "data": {
+      "age": "27",
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": "4",
+      "employment_type": "Permanent",
+      "monthly_income": "9000",
+      "existing_debt": "2000",
+      "credit_score": "800",
+      "loan_amount": "20000",
+      "loan_purpose": "Vehicle"
+    },
+    "status": "pending_human",
+    "timestamp": "2026-01-13T17:59:15.808643+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": "27",
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": "4",
+        "employment_type": "Permanent",
+        "monthly_income": "9000",
+        "existing_debt": "2000",
+        "credit_score": "800",
+        "loan_amount": "20000",
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Applicant's age is within the typical range for responsible borrowers; employment type and years suggest financial stability which correlates with reliable repayment capability."
+      },
+      "counterfactuals": [
+        {
+          "change_in_employment_years": "-5",
+          "decision": "REJECTED"
+        },
+        {
+          "change_in_existing_debt": "+2000",
+          "decision": "REJECTED"
+        }
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None identified based on provided criteria."
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-13T17:59:59.842239+00:00"
+      }
+    }
+  },
+  {
+    "id": "d1b8b7b5",
+    "domain": "loan",
+    "data": {
+      "age": "26",
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": "4",
+      "employment_type": "Permanent",
+      "monthly_income": "9000",
+      "existing_debt": "2000",
+      "credit_score": "800",
+      "loan_amount": "15000",
+      "loan_purpose": "Vehicle"
+    },
+    "status": "pending_human",
+    "timestamp": "2026-01-13T18:01:35.714508+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": "26",
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": "4",
+        "employment_type": "Permanent",
+        "monthly_income": "9000",
+        "existing_debt": "2000",
+        "credit_score": "800",
+        "loan_amount": "15000",
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 1.0,
+        "reasoning": "The applicant has a stable income and employment history with no default on credit."
+      },
+      "counterfactuals": [
+        {
+          "age_increase": -2
+        },
+        {
+          "employment_years_decrease": -1
+        }
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": null
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-13T18:02:07.759054+00:00"
+      }
+    }
+  },
+  {
+    "id": "b4718f5a",
+    "domain": "job",
+    "data": {
+      "job_title": "Software Engineer",
+      "years_experience": "5",
+      "education_level": "Master",
+      "companies_worked": "2",
+      "career_gaps": "0",
+      "expected_salary": "5000"
+    },
+    "status": "pending_human",
+    "timestamp": "2026-01-13T18:04:25.842933+00:00",
+    "ai_result": {
+      "decision_type": "job",
+      "applicant": {
+        "job_title": "Software Engineer",
+        "years_experience": "5",
+        "education_level": "Master",
+        "companies_worked": "2",
+        "career_gaps": "0",
+        "expected_salary": "5000"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Applicant meets the job title requirement with sufficient years of experience and a relevant education level; worked at multiple companies demonstrating adaptability and potentially diverse skill set."
+      },
+      "counterfactuals": [
+        {
+          "input_variation": {
+            "education_level": "Bachelor",
+            "companies_worked": "3"
+          },
+          "output_decision": {
+            "status": "REJECTED",
+            "confidence": 0.95,
+            "reasoning": "Insufficient education level for the job title; however, additional experience and company diversity may compensate."
+          }
+        }
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-13T18:05:10.180254+00:00"
+      }
+    }
+  },
+  {
+    "id": "d5b7237a",
+    "domain": "job",
+    "data": {
+      "job_title": "Software Engineer",
+      "years_experience": "5",
+      "education_level": "PhD",
+      "companies_worked": "2",
+      "career_gaps": "0",
+      "expected_salary": "5000"
+    },
+    "status": "pending_human",
+    "timestamp": "2026-01-13T18:08:38.278155+00:00",
+    "ai_result": {
+      "decision_type": "job",
+      "applicant": {
+        "job_title": "Software Engineer",
+        "years_experience": "5",
+        "education_level": "PhD",
+        "companies_worked": "2",
+        "career_gaps": "0",
+        "expected_salary": "5000"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "The candidate meets the required experience and educational standards for a Software Engineer position."
+      },
+      "counterfactuals": [
+        {
+          "years_experience": "4",
+          "status": "APPROVED"
+        },
+        {
+          "education_level": "Master's degree",
+          "years_experience": "6",
+          "status": "APPROVED"
+        }
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-13T18:09:26.480188+00:00"
+      }
+    }
+  }
+]

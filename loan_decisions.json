@@ -1,0 +1,4273 @@
+[
+  {
+    "decision_id": "loan_0",
+    "domain": "loan",
+    "timestamp": "2026-01-13T05:42:44.527390+00:00",
+    "input": {
+      "applicant_id": 0,
+      "age": 38,
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": 20,
+      "employment_type": "Permanent",
+      "monthly_income": 4373,
+      "existing_debt": 35119,
+      "credit_score": 396,
+      "loan_amount": 100863,
+      "loan_purpose": "Personal",
+      "dependents": 9
+    },
+    "output": {
+      "batch_results": [
+        {
+          "applicant": {
+            "applicant_id": 0,
+            "age": 38,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 20,
+            "employment_type": "Permanent",
+            "monthly_income": 4373,
+            "existing_debt": 35119,
+            "credit_score": 396,
+            "loan_amount": 100863,
+            "loan_purpose": "Personal",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.351996+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 1,
+            "age": 31,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 13,
+            "employment_type": "Unemployed",
+            "monthly_income": 4289,
+            "existing_debt": 15772,
+            "credit_score": 392,
+            "loan_amount": 149453,
+            "loan_purpose": "Education",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.354808+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 2,
+            "age": 54,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 20,
+            "employment_type": "Permanent",
+            "monthly_income": 14998,
+            "existing_debt": 3249,
+            "credit_score": 526,
+            "loan_amount": 17211,
+            "loan_purpose": "Home",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.355604+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 3,
+            "age": 44,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 3,
+            "employment_type": "Self-Employed",
+            "monthly_income": 7922,
+            "existing_debt": 6753,
+            "credit_score": 492,
+            "loan_amount": 102621,
+            "loan_purpose": "Personal",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.358190+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 4,
+            "age": 63,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 1,
+            "employment_type": "Contract",
+            "monthly_income": 18266,
+            "existing_debt": 44590,
+            "credit_score": 844,
+            "loan_amount": 117090,
+            "loan_purpose": "Auto",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Manageable debt relative to income. Key risk factors include: Limited employment history.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.359902+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 5,
+            "age": 55,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 9,
+            "employment_type": "Contract",
+            "monthly_income": 7890,
+            "existing_debt": 45809,
+            "credit_score": 549,
+            "loan_amount": 26457,
+            "loan_purpose": "Auto",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -60.0,
+            "confidence": 0.6
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.361234+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 6,
+            "age": 49,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 14,
+            "employment_type": "Self-Employed",
+            "monthly_income": 4398,
+            "existing_debt": 7737,
+            "credit_score": 824,
+            "loan_amount": 114608,
+            "loan_purpose": "Home",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.362852+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 7,
+            "age": 27,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 1,
+            "employment_type": "Permanent",
+            "monthly_income": 12280,
+            "existing_debt": 22290,
+            "credit_score": 658,
+            "loan_amount": 160810,
+            "loan_purpose": "Education",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Manageable debt relative to income. Key risk factors include: Limited employment history.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.364009+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 8,
+            "age": 47,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 30,
+            "employment_type": "Self-Employed",
+            "monthly_income": 17535,
+            "existing_debt": 45681,
+            "credit_score": 366,
+            "loan_amount": 20904,
+            "loan_purpose": "Auto",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.365220+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 9,
+            "age": 61,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 22,
+            "employment_type": "Unemployed",
+            "monthly_income": 13370,
+            "existing_debt": 1478,
+            "credit_score": 772,
+            "loan_amount": 98182,
+            "loan_purpose": "Home",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.366851+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 10,
+            "age": 25,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 6,
+            "employment_type": "Self-Employed",
+            "monthly_income": 6238,
+            "existing_debt": 48389,
+            "credit_score": 553,
+            "loan_amount": 109306,
+            "loan_purpose": "Education",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.368005+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 11,
+            "age": 23,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 12,
+            "employment_type": "Self-Employed",
+            "monthly_income": 6486,
+            "existing_debt": 28214,
+            "credit_score": 585,
+            "loan_amount": 190177,
+            "loan_purpose": "Education",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 0.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.369312+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 12,
+            "age": 61,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 4,
+            "employment_type": "Permanent",
+            "monthly_income": 7774,
+            "existing_debt": 9915,
+            "credit_score": 537,
+            "loan_amount": 177626,
+            "loan_purpose": "Home",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.370847+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 13,
+            "age": 49,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 9,
+            "employment_type": "Permanent",
+            "monthly_income": 6773,
+            "existing_debt": 27456,
+            "credit_score": 847,
+            "loan_amount": 101797,
+            "loan_purpose": "Auto",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.372417+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 14,
+            "age": 62,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 28,
+            "employment_type": "Unemployed",
+            "monthly_income": 15043,
+            "existing_debt": 26147,
+            "credit_score": 703,
+            "loan_amount": 32141,
+            "loan_purpose": "Education",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.373750+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 15,
+            "age": 21,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 6,
+            "employment_type": "Unemployed",
+            "monthly_income": 7318,
+            "existing_debt": 7204,
+            "credit_score": 648,
+            "loan_amount": 162477,
+            "loan_purpose": "Personal",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.375932+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 16,
+            "age": 18,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 3,
+            "employment_type": "Self-Employed",
+            "monthly_income": 2835,
+            "existing_debt": 4608,
+            "credit_score": 512,
+            "loan_amount": 165974,
+            "loan_purpose": "Education",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.377192+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 17,
+            "age": 58,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 19,
+            "employment_type": "Self-Employed",
+            "monthly_income": 17536,
+            "existing_debt": 8050,
+            "credit_score": 418,
+            "loan_amount": 132944,
+            "loan_purpose": "Education",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.379000+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 18,
+            "age": 48,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 4,
+            "employment_type": "Permanent",
+            "monthly_income": 13227,
+            "existing_debt": 48519,
+            "credit_score": 571,
+            "loan_amount": 130467,
+            "loan_purpose": "Home",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.380217+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 19,
+            "age": 19,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 11,
+            "employment_type": "Contract",
+            "monthly_income": 19798,
+            "existing_debt": 1772,
+            "credit_score": 840,
+            "loan_amount": 83142,
+            "loan_purpose": "Personal",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.381821+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 20,
+            "age": 51,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 11,
+            "employment_type": "Contract",
+            "monthly_income": 19451,
+            "existing_debt": 35492,
+            "credit_score": 814,
+            "loan_amount": 91419,
+            "loan_purpose": "Home",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.382971+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 21,
+            "age": 30,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 23,
+            "employment_type": "Contract",
+            "monthly_income": 8550,
+            "existing_debt": 33923,
+            "credit_score": 804,
+            "loan_amount": 98208,
+            "loan_purpose": "Personal",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 60.0,
+            "confidence": 0.6
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.384315+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 22,
+            "age": 35,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 6,
+            "employment_type": "Self-Employed",
+            "monthly_income": 16654,
+            "existing_debt": 47390,
+            "credit_score": 657,
+            "loan_amount": 100587,
+            "loan_purpose": "Personal",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.385878+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 23,
+            "age": 24,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 6,
+            "employment_type": "Self-Employed",
+            "monthly_income": 8696,
+            "existing_debt": 31631,
+            "credit_score": 301,
+            "loan_amount": 130691,
+            "loan_purpose": "Auto",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.386859+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 24,
+            "age": 60,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 25,
+            "employment_type": "Contract",
+            "monthly_income": 17664,
+            "existing_debt": 11699,
+            "credit_score": 744,
+            "loan_amount": 171682,
+            "loan_purpose": "Auto",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 55.0,
+            "confidence": 0.55
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.388345+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 25,
+            "age": 64,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 12,
+            "employment_type": "Permanent",
+            "monthly_income": 7205,
+            "existing_debt": 11141,
+            "credit_score": 430,
+            "loan_amount": 12221,
+            "loan_purpose": "Home",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.389861+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 26,
+            "age": 47,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 26,
+            "employment_type": "Unemployed",
+            "monthly_income": 13482,
+            "existing_debt": 10217,
+            "credit_score": 434,
+            "loan_amount": 10609,
+            "loan_purpose": "Personal",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.391831+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 27,
+            "age": 51,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 27,
+            "employment_type": "Contract",
+            "monthly_income": 8915,
+            "existing_debt": 1834,
+            "credit_score": 557,
+            "loan_amount": 60778,
+            "loan_purpose": "Auto",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.393041+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 28,
+            "age": 33,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 17,
+            "employment_type": "Unemployed",
+            "monthly_income": 6295,
+            "existing_debt": 3991,
+            "credit_score": 662,
+            "loan_amount": 125104,
+            "loan_purpose": "Education",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.394356+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 29,
+            "age": 26,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 16,
+            "employment_type": "Permanent",
+            "monthly_income": 16422,
+            "existing_debt": 12000,
+            "credit_score": 304,
+            "loan_amount": 44269,
+            "loan_purpose": "Home",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.395805+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 30,
+            "age": 48,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 1,
+            "employment_type": "Self-Employed",
+            "monthly_income": 18985,
+            "existing_debt": 34781,
+            "credit_score": 794,
+            "loan_amount": 32815,
+            "loan_purpose": "Personal",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Manageable debt relative to income. Key risk factors include: Limited employment history.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.397405+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 31,
+            "age": 30,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 24,
+            "employment_type": "Permanent",
+            "monthly_income": 18636,
+            "existing_debt": 29633,
+            "credit_score": 328,
+            "loan_amount": 21611,
+            "loan_purpose": "Education",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.398780+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 32,
+            "age": 57,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 8,
+            "employment_type": "Unemployed",
+            "monthly_income": 18651,
+            "existing_debt": 34949,
+            "credit_score": 789,
+            "loan_amount": 138104,
+            "loan_purpose": "Home",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 55.0,
+            "confidence": 0.55
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.400097+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 33,
+            "age": 34,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 4,
+            "employment_type": "Unemployed",
+            "monthly_income": 5985,
+            "existing_debt": 25713,
+            "credit_score": 752,
+            "loan_amount": 87832,
+            "loan_purpose": "Personal",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.401883+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 34,
+            "age": 45,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 21,
+            "employment_type": "Self-Employed",
+            "monthly_income": 6009,
+            "existing_debt": 10121,
+            "credit_score": 674,
+            "loan_amount": 42481,
+            "loan_purpose": "Auto",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 55.0,
+            "confidence": 0.55
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.403106+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 35,
+            "age": 47,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 30,
+            "employment_type": "Permanent",
+            "monthly_income": 15050,
+            "existing_debt": 31933,
+            "credit_score": 466,
+            "loan_amount": 180068,
+            "loan_purpose": "Home",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.404411+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 36,
+            "age": 63,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 12,
+            "employment_type": "Self-Employed",
+            "monthly_income": 15804,
+            "existing_debt": 12828,
+            "credit_score": 665,
+            "loan_amount": 88499,
+            "loan_purpose": "Personal",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.405823+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 37,
+            "age": 19,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 14,
+            "employment_type": "Unemployed",
+            "monthly_income": 2592,
+            "existing_debt": 25188,
+            "credit_score": 639,
+            "loan_amount": 140642,
+            "loan_purpose": "Auto",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.407196+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 38,
+            "age": 22,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 28,
+            "employment_type": "Permanent",
+            "monthly_income": 4754,
+            "existing_debt": 17404,
+            "credit_score": 578,
+            "loan_amount": 15377,
+            "loan_purpose": "Home",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.409406+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 39,
+            "age": 26,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 26,
+            "employment_type": "Self-Employed",
+            "monthly_income": 15302,
+            "existing_debt": 9788,
+            "credit_score": 849,
+            "loan_amount": 139947,
+            "loan_purpose": "Education",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.410864+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 40,
+            "age": 23,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 25,
+            "employment_type": "Contract",
+            "monthly_income": 15936,
+            "existing_debt": 4745,
+            "credit_score": 575,
+            "loan_amount": 9412,
+            "loan_purpose": "Personal",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.412094+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 41,
+            "age": 23,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 8,
+            "employment_type": "Permanent",
+            "monthly_income": 16869,
+            "existing_debt": 756,
+            "credit_score": 647,
+            "loan_amount": 149982,
+            "loan_purpose": "Education",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.413397+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 42,
+            "age": 57,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 16,
+            "employment_type": "Contract",
+            "monthly_income": 5586,
+            "existing_debt": 10580,
+            "credit_score": 568,
+            "loan_amount": 18206,
+            "loan_purpose": "Home",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 40.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.414824+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 43,
+            "age": 37,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 24,
+            "employment_type": "Contract",
+            "monthly_income": 11501,
+            "existing_debt": 29208,
+            "credit_score": 812,
+            "loan_amount": 181201,
+            "loan_purpose": "Home",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.416106+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 44,
+            "age": 40,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 1,
+            "employment_type": "Permanent",
+            "monthly_income": 2604,
+            "existing_debt": 48043,
+            "credit_score": 817,
+            "loan_amount": 149454,
+            "loan_purpose": "Home",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score. Key risk factors include: Limited employment history, High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score"
+            ],
+            "negative_factors": [
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.417365+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 45,
+            "age": 48,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 3,
+            "employment_type": "Unemployed",
+            "monthly_income": 18220,
+            "existing_debt": 35776,
+            "credit_score": 702,
+            "loan_amount": 137824,
+            "loan_purpose": "Auto",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.418851+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 46,
+            "age": 32,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 26,
+            "employment_type": "Contract",
+            "monthly_income": 15261,
+            "existing_debt": 22777,
+            "credit_score": 355,
+            "loan_amount": 39031,
+            "loan_purpose": "Personal",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.420180+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 47,
+            "age": 58,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 5,
+            "employment_type": "Permanent",
+            "monthly_income": 4768,
+            "existing_debt": 43596,
+            "credit_score": 690,
+            "loan_amount": 137629,
+            "loan_purpose": "Auto",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.422069+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 48,
+            "age": 33,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 14,
+            "employment_type": "Contract",
+            "monthly_income": 7162,
+            "existing_debt": 17631,
+            "credit_score": 756,
+            "loan_amount": 5949,
+            "loan_purpose": "Auto",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.423078+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 49,
+            "age": 39,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 1,
+            "employment_type": "Self-Employed",
+            "monthly_income": 9139,
+            "existing_debt": 23369,
+            "credit_score": 487,
+            "loan_amount": 5280,
+            "loan_purpose": "Auto",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.425153+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 50,
+            "age": 23,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 16,
+            "employment_type": "Contract",
+            "monthly_income": 10132,
+            "existing_debt": 33078,
+            "credit_score": 305,
+            "loan_amount": 28816,
+            "loan_purpose": "Auto",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -10.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.427245+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 51,
+            "age": 27,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 1,
+            "employment_type": "Unemployed",
+            "monthly_income": 2737,
+            "existing_debt": 19637,
+            "credit_score": 611,
+            "loan_amount": 170064,
+            "loan_purpose": "Home",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.429246+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 52,
+            "age": 55,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 28,
+            "employment_type": "Unemployed",
+            "monthly_income": 12686,
+            "existing_debt": 47230,
+            "credit_score": 806,
+            "loan_amount": 44180,
+            "loan_purpose": "Auto",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.431000+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 53,
+            "age": 59,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 26,
+            "employment_type": "Unemployed",
+            "monthly_income": 18565,
+            "existing_debt": 9129,
+            "credit_score": 836,
+            "loan_amount": 137217,
+            "loan_purpose": "Personal",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.432351+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 54,
+            "age": 63,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 0,
+            "employment_type": "Permanent",
+            "monthly_income": 6361,
+            "existing_debt": 41754,
+            "credit_score": 669,
+            "loan_amount": 32503,
+            "loan_purpose": "Education",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score. Key risk factors include: Limited employment history, High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score"
+            ],
+            "negative_factors": [
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.433744+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 55,
+            "age": 53,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 0,
+            "employment_type": "Contract",
+            "monthly_income": 18033,
+            "existing_debt": 17287,
+            "credit_score": 303,
+            "loan_amount": 124786,
+            "loan_purpose": "Personal",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.434886+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 56,
+            "age": 52,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 16,
+            "employment_type": "Permanent",
+            "monthly_income": 17527,
+            "existing_debt": 16527,
+            "credit_score": 376,
+            "loan_amount": 74614,
+            "loan_purpose": "Home",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.436204+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 57,
+            "age": 32,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 27,
+            "employment_type": "Unemployed",
+            "monthly_income": 4514,
+            "existing_debt": 31392,
+            "credit_score": 594,
+            "loan_amount": 17254,
+            "loan_purpose": "Home",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.437828+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 58,
+            "age": 56,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 8,
+            "employment_type": "Self-Employed",
+            "monthly_income": 6372,
+            "existing_debt": 817,
+            "credit_score": 793,
+            "loan_amount": 20901,
+            "loan_purpose": "Education",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 55.0,
+            "confidence": 0.55
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.439319+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 59,
+            "age": 61,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 6,
+            "employment_type": "Unemployed",
+            "monthly_income": 11530,
+            "existing_debt": 46456,
+            "credit_score": 828,
+            "loan_amount": 79853,
+            "loan_purpose": "Education",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 40.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.442108+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 60,
+            "age": 47,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 6,
+            "employment_type": "Self-Employed",
+            "monthly_income": 4813,
+            "existing_debt": 30994,
+            "credit_score": 317,
+            "loan_amount": 80913,
+            "loan_purpose": "Education",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.443397+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 61,
+            "age": 50,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 12,
+            "employment_type": "Contract",
+            "monthly_income": 8904,
+            "existing_debt": 4889,
+            "credit_score": 392,
+            "loan_amount": 42156,
+            "loan_purpose": "Auto",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.445091+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 62,
+            "age": 26,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 22,
+            "employment_type": "Self-Employed",
+            "monthly_income": 9581,
+            "existing_debt": 32629,
+            "credit_score": 797,
+            "loan_amount": 108305,
+            "loan_purpose": "Personal",
+            "dependents": 3
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 60.0,
+            "confidence": 0.6
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.447121+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 63,
+            "age": 18,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 14,
+            "employment_type": "Unemployed",
+            "monthly_income": 11894,
+            "existing_debt": 47656,
+            "credit_score": 444,
+            "loan_amount": 114099,
+            "loan_purpose": "Auto",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.450892+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 64,
+            "age": 38,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 0,
+            "employment_type": "Self-Employed",
+            "monthly_income": 13084,
+            "existing_debt": 26100,
+            "credit_score": 422,
+            "loan_amount": 56312,
+            "loan_purpose": "Personal",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.451741+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 65,
+            "age": 34,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 12,
+            "employment_type": "Unemployed",
+            "monthly_income": 4503,
+            "existing_debt": 23639,
+            "credit_score": 738,
+            "loan_amount": 77130,
+            "loan_purpose": "Personal",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 0.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.453862+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 66,
+            "age": 24,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 9,
+            "employment_type": "Contract",
+            "monthly_income": 10169,
+            "existing_debt": 17414,
+            "credit_score": 746,
+            "loan_amount": 138945,
+            "loan_purpose": "Auto",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.456067+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 67,
+            "age": 41,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 25,
+            "employment_type": "Unemployed",
+            "monthly_income": 19997,
+            "existing_debt": 13332,
+            "credit_score": 382,
+            "loan_amount": 17969,
+            "loan_purpose": "Education",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.458689+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 68,
+            "age": 57,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 27,
+            "employment_type": "Self-Employed",
+            "monthly_income": 17911,
+            "existing_debt": 3209,
+            "credit_score": 430,
+            "loan_amount": 49764,
+            "loan_purpose": "Education",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.461438+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 69,
+            "age": 39,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 8,
+            "employment_type": "Self-Employed",
+            "monthly_income": 15310,
+            "existing_debt": 42991,
+            "credit_score": 544,
+            "loan_amount": 83862,
+            "loan_purpose": "Education",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.462502+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 70,
+            "age": 60,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 5,
+            "employment_type": "Contract",
+            "monthly_income": 4463,
+            "existing_debt": 13623,
+            "credit_score": 812,
+            "loan_amount": 135305,
+            "loan_purpose": "Home",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.463400+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 71,
+            "age": 39,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 4,
+            "employment_type": "Contract",
+            "monthly_income": 9998,
+            "existing_debt": 5945,
+            "credit_score": 478,
+            "loan_amount": 94641,
+            "loan_purpose": "Personal",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.465928+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 72,
+            "age": 33,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 25,
+            "employment_type": "Contract",
+            "monthly_income": 2658,
+            "existing_debt": 49129,
+            "credit_score": 722,
+            "loan_amount": 105358,
+            "loan_purpose": "Education",
+            "dependents": 9
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.466883+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 73,
+            "age": 31,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 10,
+            "employment_type": "Permanent",
+            "monthly_income": 18323,
+            "existing_debt": 18187,
+            "credit_score": 668,
+            "loan_amount": 37997,
+            "loan_purpose": "Home",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 55.0,
+            "confidence": 0.55
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.468061+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 74,
+            "age": 35,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 12,
+            "employment_type": "Unemployed",
+            "monthly_income": 16150,
+            "existing_debt": 20448,
+            "credit_score": 322,
+            "loan_amount": 38357,
+            "loan_purpose": "Personal",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.469075+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 75,
+            "age": 63,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 15,
+            "employment_type": "Permanent",
+            "monthly_income": 4396,
+            "existing_debt": 25658,
+            "credit_score": 840,
+            "loan_amount": 127723,
+            "loan_purpose": "Education",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.470102+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 76,
+            "age": 24,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 4,
+            "employment_type": "Permanent",
+            "monthly_income": 16985,
+            "existing_debt": 5570,
+            "credit_score": 340,
+            "loan_amount": 5358,
+            "loan_purpose": "Home",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.471083+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 77,
+            "age": 54,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 22,
+            "employment_type": "Self-Employed",
+            "monthly_income": 6193,
+            "existing_debt": 41056,
+            "credit_score": 557,
+            "loan_amount": 143478,
+            "loan_purpose": "Education",
+            "dependents": 2
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.474671+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 78,
+            "age": 24,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 16,
+            "employment_type": "Contract",
+            "monthly_income": 14716,
+            "existing_debt": 17097,
+            "credit_score": 528,
+            "loan_amount": 162564,
+            "loan_purpose": "Personal",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.476376+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 79,
+            "age": 52,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 8,
+            "employment_type": "Self-Employed",
+            "monthly_income": 9941,
+            "existing_debt": 31149,
+            "credit_score": 838,
+            "loan_amount": 66543,
+            "loan_purpose": "Home",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 50.0,
+            "confidence": 0.5
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.477552+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 80,
+            "age": 44,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 0,
+            "employment_type": "Contract",
+            "monthly_income": 18328,
+            "existing_debt": 44201,
+            "credit_score": 730,
+            "loan_amount": 26257,
+            "loan_purpose": "Auto",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Manageable debt relative to income. Key risk factors include: Limited employment history.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.478973+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 81,
+            "age": 60,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 7,
+            "employment_type": "Unemployed",
+            "monthly_income": 3117,
+            "existing_debt": 45601,
+            "credit_score": 646,
+            "loan_amount": 193306,
+            "loan_purpose": "Education",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -40.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history. Key risk factors include: Low credit score, High debt relative to income.",
+            "positive_factors": [
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.480800+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 82,
+            "age": 61,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 0,
+            "employment_type": "Self-Employed",
+            "monthly_income": 18543,
+            "existing_debt": 4419,
+            "credit_score": 510,
+            "loan_amount": 134943,
+            "loan_purpose": "Home",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.481957+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 83,
+            "age": 30,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 7,
+            "employment_type": "Self-Employed",
+            "monthly_income": 11664,
+            "existing_debt": 7143,
+            "credit_score": 807,
+            "loan_amount": 164933,
+            "loan_purpose": "Home",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 65.0,
+            "confidence": 0.65
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.483426+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 84,
+            "age": 49,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 1,
+            "employment_type": "Contract",
+            "monthly_income": 14892,
+            "existing_debt": 3562,
+            "credit_score": 518,
+            "loan_amount": 11194,
+            "loan_purpose": "Home",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.484735+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 85,
+            "age": 21,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 12,
+            "employment_type": "Unemployed",
+            "monthly_income": 12295,
+            "existing_debt": 48019,
+            "credit_score": 415,
+            "loan_amount": 25804,
+            "loan_purpose": "Home",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.485864+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 86,
+            "age": 30,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 29,
+            "employment_type": "Unemployed",
+            "monthly_income": 3045,
+            "existing_debt": 20435,
+            "credit_score": 687,
+            "loan_amount": 103011,
+            "loan_purpose": "Auto",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Requesting a smaller loan amount could change the decision."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.486967+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 87,
+            "age": 28,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 2,
+            "employment_type": "Self-Employed",
+            "monthly_income": 4646,
+            "existing_debt": 23033,
+            "credit_score": 730,
+            "loan_amount": 37429,
+            "loan_purpose": "Home",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -25.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score. Key risk factors include: Limited employment history, High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score"
+            ],
+            "negative_factors": [
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.488061+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 88,
+            "age": 40,
+            "gender": "F",
+            "marital_status": "Married",
+            "employment_years": 2,
+            "employment_type": "Permanent",
+            "monthly_income": 17514,
+            "existing_debt": 12826,
+            "credit_score": 681,
+            "loan_amount": 146958,
+            "loan_purpose": "Education",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Manageable debt relative to income. Key risk factors include: Limited employment history.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.488971+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 89,
+            "age": 38,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 28,
+            "employment_type": "Unemployed",
+            "monthly_income": 2992,
+            "existing_debt": 41396,
+            "credit_score": 720,
+            "loan_amount": 70015,
+            "loan_purpose": "Education",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 10.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history. Key risk factors include: High debt relative to income.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history"
+            ],
+            "negative_factors": [
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "Reducing existing debt by 30\u201340% would significantly lower risk."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.489808+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 90,
+            "age": 42,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 2,
+            "employment_type": "Permanent",
+            "monthly_income": 10421,
+            "existing_debt": 12775,
+            "credit_score": 364,
+            "loan_amount": 163758,
+            "loan_purpose": "Auto",
+            "dependents": 6
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -30.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.490606+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 91,
+            "age": 35,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 1,
+            "employment_type": "Self-Employed",
+            "monthly_income": 12370,
+            "existing_debt": 18063,
+            "credit_score": 604,
+            "loan_amount": 5988,
+            "loan_purpose": "Personal",
+            "dependents": 1
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Manageable debt relative to income. Key risk factors include: Low credit score, Limited employment history.",
+            "positive_factors": [
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.492026+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 92,
+            "age": 32,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 22,
+            "employment_type": "Unemployed",
+            "monthly_income": 14665,
+            "existing_debt": 16452,
+            "credit_score": 740,
+            "loan_amount": 134361,
+            "loan_purpose": "Home",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "APPROVED",
+            "risk_score": 45.0,
+            "confidence": 0.45
+          },
+          "explanation": {
+            "summary": "The application was approved based on an overall risk assessment. Key positive factors include: Acceptable to strong credit score, Stable employment history, Manageable debt relative to income. Key risk factors include: none.",
+            "positive_factors": [
+              "Acceptable to strong credit score",
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": []
+          },
+          "counterfactuals": [],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.494701+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 93,
+            "age": 29,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 9,
+            "employment_type": "Contract",
+            "monthly_income": 9737,
+            "existing_debt": 21482,
+            "credit_score": 627,
+            "loan_amount": 125791,
+            "loan_purpose": "Auto",
+            "dependents": 10
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.495655+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 94,
+            "age": 23,
+            "gender": "M",
+            "marital_status": "Married",
+            "employment_years": 24,
+            "employment_type": "Contract",
+            "monthly_income": 10103,
+            "existing_debt": 26722,
+            "credit_score": 366,
+            "loan_amount": 175274,
+            "loan_purpose": "Personal",
+            "dependents": 8
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.497788+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 95,
+            "age": 53,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 13,
+            "employment_type": "Permanent",
+            "monthly_income": 4364,
+            "existing_debt": 17359,
+            "credit_score": 386,
+            "loan_amount": 59615,
+            "loan_purpose": "Personal",
+            "dependents": 7
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.498527+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 96,
+            "age": 49,
+            "gender": "F",
+            "marital_status": "Single",
+            "employment_years": 7,
+            "employment_type": "Contract",
+            "monthly_income": 15659,
+            "existing_debt": 30207,
+            "credit_score": 540,
+            "loan_amount": 146181,
+            "loan_purpose": "Personal",
+            "dependents": 5
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.501828+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 97,
+            "age": 36,
+            "gender": "F",
+            "marital_status": "Divorced",
+            "employment_years": 8,
+            "employment_type": "Self-Employed",
+            "monthly_income": 10324,
+            "existing_debt": 48369,
+            "credit_score": 566,
+            "loan_amount": 57216,
+            "loan_purpose": "Education",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 15.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.502638+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 98,
+            "age": 29,
+            "gender": "M",
+            "marital_status": "Single",
+            "employment_years": 4,
+            "employment_type": "Self-Employed",
+            "monthly_income": 8168,
+            "existing_debt": 21386,
+            "credit_score": 366,
+            "loan_amount": 108827,
+            "loan_purpose": "Auto",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -20.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.503910+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "applicant_id": 99,
+            "age": 50,
+            "gender": "M",
+            "marital_status": "Divorced",
+            "employment_years": 25,
+            "employment_type": "Permanent",
+            "monthly_income": 17201,
+            "existing_debt": 2426,
+            "credit_score": 404,
+            "loan_amount": 6177,
+            "loan_purpose": "Education",
+            "dependents": 4
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": 5.0,
+            "confidence": 0.4
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: Stable employment history, Manageable debt relative to income. Key risk factors include: Low credit score.",
+            "positive_factors": [
+              "Stable employment history",
+              "Manageable debt relative to income"
+            ],
+            "negative_factors": [
+              "Low credit score"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.505005+00:00"
+          }
+        }
+      ],
+      "count": 100
+    }
+  }
+]

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explainable AI Decision Engine</title>
+  <style>
+    body { font-family: Arial; background:#f4f4f4; padding:20px;}
+    h1 { text-align:center; }
+    .container { max-width: 600px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+    input, textarea, select, button { width:100%; margin:8px 0; padding:8px; border-radius:4px; border:1px solid #ccc;}
+    pre { background:#eee; padding:10px; border-radius:4px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Explainable AI Decision Engine</h1>
+
+    <h3>Upload CSV File</h3>
+    <input type="file" id="csvFile">
+    <button onclick="uploadCSV()">Submit CSV</button>
+
+    <h3>Upload JSON File</h3>
+    <input type="file" id="jsonFile">
+    <button onclick="uploadJSON()">Submit JSON</button>
+
+    <h3>Or Enter Form Data</h3>
+    <input type="number" id="age" placeholder="Age">
+    <input type="number" id="income" placeholder="Income">
+    <input type="number" id="credit_score" placeholder="Credit Score">
+    <input type="number" id="existing_loans" placeholder="Existing Loans">
+    <input type="number" id="employment_years" placeholder="Employment Years">
+    <button onclick="submitForm()">Submit Form</button>
+
+    <h3>AI Output</h3>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    const output = document.getElementById('output');
+
+    async function uploadCSV() {
+      const file = document.getElementById('csvFile').files[0];
+      if(!file) { alert("Select a CSV file"); return; }
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("http://127.0.0.1:8000/decision/csv", {method:"POST", body:formData});
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function uploadJSON() {
+      const file = document.getElementById('jsonFile').files[0];
+      if(!file) { alert("Select a JSON file"); return; }
+      const text = await file.text();
+      const jsonData = JSON.parse(text);
+      const res = await fetch("http://127.0.0.1:8000/decision/json", {
+        method:"POST",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(jsonData)
+      });
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function submitForm() {
+      const record = {
+        age: parseFloat(document.getElementById('age').value),
+        income: parseFloat(document.getElementById('income').value),
+        credit_score: parseFloat(document.getElementById('credit_score').value),
+        existing_loans: parseFloat(document.getElementById('existing_loans').value),
+        employment_years: parseFloat(document.getElementById('employment_years').value)
+      };
+      const formData = new URLSearchParams(record);
+      const res = await fetch("http://127.0.0.1:8000/decision/form", {
+        method:"POST",
+        body: formData
+      });
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

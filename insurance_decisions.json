@@ -1,0 +1,4124 @@
+[
+  {
+    "decision_id": "insurance_0",
+    "domain": "insurance",
+    "timestamp": "2026-01-13T05:42:44.951945+00:00",
+    "input": {
+      "customer_id": 0,
+      "age": 26,
+      "gender": "M",
+      "policy_type": "Health",
+      "policy_years": 2,
+      "previous_claims": 3,
+      "claim_amount": 29957,
+      "incident_severity": "moderate",
+      "location_type": "rural",
+      "annual_premium": 8219
+    },
+    "output": {
+      "batch_results": [
+        {
+          "applicant": {
+            "customer_id": 0,
+            "age": 26,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 3,
+            "claim_amount": 29957,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 8219
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.800835+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 1,
+            "age": 68,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 8,
+            "previous_claims": 0,
+            "claim_amount": 26046,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 14489
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.801591+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 2,
+            "age": 67,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 8,
+            "previous_claims": 2,
+            "claim_amount": 47786,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 3674
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.802265+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 3,
+            "age": 75,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 1,
+            "previous_claims": 0,
+            "claim_amount": 43068,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 8245
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.802967+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 4,
+            "age": 61,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 12,
+            "previous_claims": 0,
+            "claim_amount": 35078,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 10123
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.803661+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 5,
+            "age": 53,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 4,
+            "previous_claims": 5,
+            "claim_amount": 14838,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 2352
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.804322+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 6,
+            "age": 44,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 11,
+            "previous_claims": 5,
+            "claim_amount": 19924,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 7450
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.805018+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 7,
+            "age": 75,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 14,
+            "previous_claims": 5,
+            "claim_amount": 12941,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 11626
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.805708+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 8,
+            "age": 74,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 7,
+            "previous_claims": 4,
+            "claim_amount": 2762,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 14185
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.806378+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 9,
+            "age": 69,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 11,
+            "previous_claims": 1,
+            "claim_amount": 24559,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 14711
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.807093+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 10,
+            "age": 61,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 8,
+            "previous_claims": 5,
+            "claim_amount": 33820,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 10535
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.807779+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 11,
+            "age": 71,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 8,
+            "previous_claims": 5,
+            "claim_amount": 2438,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 7054
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.808445+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 12,
+            "age": 63,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 3,
+            "previous_claims": 1,
+            "claim_amount": 33414,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 14624
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.809424+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 13,
+            "age": 30,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 9,
+            "previous_claims": 2,
+            "claim_amount": 38366,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 6411
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.810529+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 14,
+            "age": 60,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 13,
+            "previous_claims": 5,
+            "claim_amount": 34087,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 14736
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.811951+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 15,
+            "age": 53,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 1,
+            "previous_claims": 3,
+            "claim_amount": 24403,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 5274
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.814773+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 16,
+            "age": 50,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 14,
+            "previous_claims": 2,
+            "claim_amount": 27659,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 10822
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.815686+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 17,
+            "age": 52,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 10,
+            "previous_claims": 0,
+            "claim_amount": 15547,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 11023
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.818026+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 18,
+            "age": 55,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 13,
+            "previous_claims": 4,
+            "claim_amount": 17230,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 3154
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.819892+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 19,
+            "age": 23,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 1,
+            "previous_claims": 2,
+            "claim_amount": 16855,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 12236
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.822204+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 20,
+            "age": 29,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 1,
+            "claim_amount": 10961,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 4754
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.823095+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 21,
+            "age": 60,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 12,
+            "previous_claims": 2,
+            "claim_amount": 30299,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 10134
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.824528+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 22,
+            "age": 48,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 5,
+            "previous_claims": 3,
+            "claim_amount": 23001,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 6233
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.826148+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 23,
+            "age": 24,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 9,
+            "previous_claims": 1,
+            "claim_amount": 40191,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 5692
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.828761+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 24,
+            "age": 19,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 1,
+            "previous_claims": 5,
+            "claim_amount": 11000,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 10295
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.829704+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 25,
+            "age": 61,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 14,
+            "previous_claims": 1,
+            "claim_amount": 41838,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 9386
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.831159+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 26,
+            "age": 32,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 11,
+            "previous_claims": 4,
+            "claim_amount": 21553,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 8984
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.833078+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 27,
+            "age": 21,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 4,
+            "previous_claims": 0,
+            "claim_amount": 20579,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 7084
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.834748+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 28,
+            "age": 37,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 10,
+            "previous_claims": 2,
+            "claim_amount": 9045,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 2621
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.836070+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 29,
+            "age": 55,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 8,
+            "previous_claims": 1,
+            "claim_amount": 46638,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 2613
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.837440+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 30,
+            "age": 42,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 1,
+            "claim_amount": 38077,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 11689
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.839086+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 31,
+            "age": 30,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 11,
+            "previous_claims": 3,
+            "claim_amount": 19903,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 2281
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.840837+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 32,
+            "age": 38,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 1,
+            "previous_claims": 1,
+            "claim_amount": 13663,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 14823
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.841692+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 33,
+            "age": 26,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 4,
+            "previous_claims": 2,
+            "claim_amount": 44701,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 10972
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.843419+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 34,
+            "age": 40,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 4,
+            "previous_claims": 0,
+            "claim_amount": 48044,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 4179
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.845254+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 35,
+            "age": 28,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 4,
+            "previous_claims": 2,
+            "claim_amount": 22273,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 6182
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.847036+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 36,
+            "age": 41,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 2,
+            "claim_amount": 15913,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 10008
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.848643+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 37,
+            "age": 26,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 1,
+            "previous_claims": 3,
+            "claim_amount": 5296,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 4048
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.850324+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 38,
+            "age": 39,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 10,
+            "previous_claims": 3,
+            "claim_amount": 5523,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 5665
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.852778+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 39,
+            "age": 54,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 6,
+            "previous_claims": 2,
+            "claim_amount": 37491,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 9500
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.853615+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 40,
+            "age": 75,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 13,
+            "previous_claims": 0,
+            "claim_amount": 19881,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 12984
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.855138+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 41,
+            "age": 18,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 0,
+            "claim_amount": 12815,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 8897
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.856836+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 42,
+            "age": 28,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 3,
+            "previous_claims": 5,
+            "claim_amount": 16321,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 3684
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.858070+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 43,
+            "age": 45,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 15,
+            "previous_claims": 2,
+            "claim_amount": 36558,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 9815
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.860308+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 44,
+            "age": 38,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 11,
+            "previous_claims": 2,
+            "claim_amount": 3096,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 14891
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.862797+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 45,
+            "age": 36,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 7,
+            "previous_claims": 2,
+            "claim_amount": 26619,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 7199
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.864643+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 46,
+            "age": 56,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 5,
+            "previous_claims": 1,
+            "claim_amount": 40988,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 9682
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.865458+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 47,
+            "age": 60,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 3,
+            "previous_claims": 4,
+            "claim_amount": 14120,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 6036
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.867085+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 48,
+            "age": 41,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 2,
+            "previous_claims": 3,
+            "claim_amount": 6430,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 12542
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.868755+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 49,
+            "age": 39,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 5,
+            "previous_claims": 0,
+            "claim_amount": 21946,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 14988
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.870207+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 50,
+            "age": 72,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 6,
+            "previous_claims": 0,
+            "claim_amount": 36166,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 11764
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.872790+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 51,
+            "age": 23,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 1,
+            "previous_claims": 1,
+            "claim_amount": 26830,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 11030
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.874469+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 52,
+            "age": 73,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 2,
+            "previous_claims": 0,
+            "claim_amount": 42140,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 14299
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.876119+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 53,
+            "age": 68,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 8,
+            "previous_claims": 1,
+            "claim_amount": 7114,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 3263
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.877385+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 54,
+            "age": 50,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 13,
+            "previous_claims": 1,
+            "claim_amount": 9775,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 3751
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.879515+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 55,
+            "age": 63,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 15,
+            "previous_claims": 1,
+            "claim_amount": 9785,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 2520
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.881916+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 56,
+            "age": 67,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 13,
+            "previous_claims": 5,
+            "claim_amount": 36738,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 5365
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.883037+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 57,
+            "age": 29,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 9,
+            "previous_claims": 1,
+            "claim_amount": 3682,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 6051
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.885899+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 58,
+            "age": 34,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 8,
+            "previous_claims": 3,
+            "claim_amount": 36496,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 9199
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.886929+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 59,
+            "age": 72,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 7,
+            "previous_claims": 2,
+            "claim_amount": 11740,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 2399
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.889798+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 60,
+            "age": 68,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 1,
+            "previous_claims": 0,
+            "claim_amount": 45831,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 4265
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.892167+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 61,
+            "age": 55,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 5,
+            "previous_claims": 2,
+            "claim_amount": 26570,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 4820
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.894172+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 62,
+            "age": 57,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 8,
+            "previous_claims": 0,
+            "claim_amount": 12137,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 10206
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.896213+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 63,
+            "age": 75,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 11,
+            "previous_claims": 5,
+            "claim_amount": 15293,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 10111
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.897714+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 64,
+            "age": 61,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 12,
+            "previous_claims": 3,
+            "claim_amount": 22582,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 13931
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.898647+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 65,
+            "age": 59,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 4,
+            "previous_claims": 0,
+            "claim_amount": 5189,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 8040
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.899524+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 66,
+            "age": 28,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 5,
+            "previous_claims": 5,
+            "claim_amount": 20132,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 4706
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.901739+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 67,
+            "age": 62,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 2,
+            "previous_claims": 0,
+            "claim_amount": 40221,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 8180
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.908033+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 68,
+            "age": 29,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 7,
+            "previous_claims": 1,
+            "claim_amount": 37823,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 10110
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.911074+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 69,
+            "age": 61,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 11,
+            "previous_claims": 2,
+            "claim_amount": 25664,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 10916
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.912483+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 70,
+            "age": 64,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 2,
+            "previous_claims": 2,
+            "claim_amount": 41686,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 14073
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.914267+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 71,
+            "age": 23,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 14,
+            "previous_claims": 5,
+            "claim_amount": 45498,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 9291
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.915439+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 72,
+            "age": 72,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 13,
+            "previous_claims": 3,
+            "claim_amount": 26533,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 9178
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.917862+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 73,
+            "age": 26,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 2,
+            "previous_claims": 3,
+            "claim_amount": 39866,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 3934
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.918723+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 74,
+            "age": 60,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 4,
+            "previous_claims": 3,
+            "claim_amount": 49624,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 5110
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.921890+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 75,
+            "age": 51,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 1,
+            "previous_claims": 0,
+            "claim_amount": 41625,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 6266
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.922947+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 76,
+            "age": 31,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 3,
+            "previous_claims": 4,
+            "claim_amount": 13636,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 11596
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.923821+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 77,
+            "age": 66,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 8,
+            "previous_claims": 1,
+            "claim_amount": 36241,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 8880
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.924621+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 78,
+            "age": 72,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 10,
+            "previous_claims": 3,
+            "claim_amount": 13923,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 2395
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.925383+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 79,
+            "age": 25,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 5,
+            "previous_claims": 5,
+            "claim_amount": 47968,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 3231
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.926280+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 80,
+            "age": 50,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 13,
+            "previous_claims": 2,
+            "claim_amount": 29150,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 7846
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.927268+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 81,
+            "age": 66,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 2,
+            "previous_claims": 3,
+            "claim_amount": 47552,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 6993
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.928282+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 82,
+            "age": 52,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 13,
+            "previous_claims": 5,
+            "claim_amount": 45288,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 3852
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.929472+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 83,
+            "age": 59,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 4,
+            "previous_claims": 4,
+            "claim_amount": 753,
+            "incident_severity": "moderate",
+            "location_type": "rural",
+            "annual_premium": 11800
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.930370+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 84,
+            "age": 64,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 10,
+            "previous_claims": 4,
+            "claim_amount": 27301,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 7002
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.931154+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 85,
+            "age": 62,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 10,
+            "previous_claims": 5,
+            "claim_amount": 35296,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 10621
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.931913+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 86,
+            "age": 18,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 7,
+            "previous_claims": 3,
+            "claim_amount": 22520,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 14023
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.932583+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 87,
+            "age": 62,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 12,
+            "previous_claims": 1,
+            "claim_amount": 42466,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 12316
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.933812+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 88,
+            "age": 19,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 11,
+            "previous_claims": 1,
+            "claim_amount": 42032,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 4918
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.934553+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 89,
+            "age": 67,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 1,
+            "previous_claims": 2,
+            "claim_amount": 17839,
+            "incident_severity": "severe",
+            "location_type": "suburban",
+            "annual_premium": 13223
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.935252+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 90,
+            "age": 52,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 8,
+            "previous_claims": 2,
+            "claim_amount": 32255,
+            "incident_severity": "minor",
+            "location_type": "suburban",
+            "annual_premium": 10361
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.935958+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 91,
+            "age": 20,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 2,
+            "previous_claims": 5,
+            "claim_amount": 39207,
+            "incident_severity": "moderate",
+            "location_type": "urban",
+            "annual_premium": 7819
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.936657+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 92,
+            "age": 22,
+            "gender": "F",
+            "policy_type": "Auto",
+            "policy_years": 3,
+            "previous_claims": 4,
+            "claim_amount": 47046,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 3524
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.937334+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 93,
+            "age": 43,
+            "gender": "F",
+            "policy_type": "Property",
+            "policy_years": 5,
+            "previous_claims": 1,
+            "claim_amount": 35109,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 7471
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.938058+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 94,
+            "age": 35,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 12,
+            "previous_claims": 4,
+            "claim_amount": 43674,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 10380
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.938735+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 95,
+            "age": 53,
+            "gender": "M",
+            "policy_type": "Auto",
+            "policy_years": 5,
+            "previous_claims": 5,
+            "claim_amount": 48674,
+            "incident_severity": "severe",
+            "location_type": "rural",
+            "annual_premium": 6419
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.939401+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 96,
+            "age": 40,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 9,
+            "previous_claims": 3,
+            "claim_amount": 11795,
+            "incident_severity": "moderate",
+            "location_type": "suburban",
+            "annual_premium": 12000
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.940182+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 97,
+            "age": 39,
+            "gender": "M",
+            "policy_type": "Health",
+            "policy_years": 10,
+            "previous_claims": 5,
+            "claim_amount": 16505,
+            "incident_severity": "severe",
+            "location_type": "urban",
+            "annual_premium": 12198
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.940906+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 98,
+            "age": 43,
+            "gender": "F",
+            "policy_type": "Health",
+            "policy_years": 15,
+            "previous_claims": 1,
+            "claim_amount": 18135,
+            "incident_severity": "minor",
+            "location_type": "urban",
+            "annual_premium": 12254
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.941642+00:00"
+          }
+        },
+        {
+          "applicant": {
+            "customer_id": 99,
+            "age": 64,
+            "gender": "M",
+            "policy_type": "Property",
+            "policy_years": 8,
+            "previous_claims": 4,
+            "claim_amount": 48226,
+            "incident_severity": "minor",
+            "location_type": "rural",
+            "annual_premium": 6292
+          },
+          "decision": {
+            "status": "REJECTED",
+            "risk_score": -80.0,
+            "confidence": 0.8
+          },
+          "explanation": {
+            "summary": "The application was rejected based on an overall risk assessment. Key positive factors include: none. Key risk factors include: Low credit score, Limited employment history, High debt relative to income.",
+            "positive_factors": [],
+            "negative_factors": [
+              "Low credit score",
+              "Limited employment history",
+              "High debt relative to income"
+            ]
+          },
+          "counterfactuals": [
+            "If credit score increased above 650, approval likelihood would improve.",
+            "Longer employment history would improve approval chances."
+          ],
+          "fairness": {
+            "bias_checked": true,
+            "bias_detected": false,
+            "notes": "No protected attributes were used in the decision."
+          },
+          "audit": {
+            "model": "rule-based-xai-v1",
+            "timestamp": "2026-01-13T05:42:44.942352+00:00"
+          }
+        }
+      ],
+      "count": 100
+    }
+  }
+]

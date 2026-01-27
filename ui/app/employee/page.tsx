@@ -153,8 +153,8 @@ export default function EmployeeDashboard() {
                                             <span className="font-mono text-xs text-slate-500">#{app.id}</span>
                                             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{app.domain}</span>
                                         </div>
-                                        <div className="font-semibold truncate">
-                                            Applicant Data...
+                                        <div className="font-semibold truncate text-white">
+                                            {app.data.full_name || 'Anonymous Applicant'}
                                         </div>
                                         <div className="text-xs text-slate-400 mt-2 flex justify-between items-center">
                                             <span>{new Date(app.timestamp).toLocaleDateString()}</span>

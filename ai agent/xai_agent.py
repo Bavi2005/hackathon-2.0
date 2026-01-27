@@ -28,7 +28,7 @@ app.add_middleware(
 # CONFIG (RAM-SAFE)
 # =====================================================
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "qwen2.5:3b"
+MODEL_NAME = "qwen2.5:1.5b"
 
 MAX_CSV_ROWS = 50
 MAX_CONCURRENCY = 5  # Increased for parallel batch processing
@@ -209,6 +209,7 @@ If data is insufficient, reject conservatively.
 
 TASK:
 Evaluate a {decision_type.value} application.
+If REJECTED, provide 3-5 clear, simple, actionable steps (in simple English) the applicant can take to get approved in the "counterfactuals" list. Do NOT use technical jargon.
 
 INPUT (JSON):
 {json.dumps(applicant, indent=2)}
@@ -222,10 +223,10 @@ OUTPUT (STRICT JSON ONLY):
     "confidence": 0.0,
     "reasoning": "Audit-grade explanation"
   }},
-  "counterfactuals": [],
+  "counterfactuals": ["Step 1: ...", "Step 2: ...", "Step 3: ..."],
   "fairness": {{
     "assessment": "Fair or Potentially Unfair",
-    "concerns": "None"
+    "concerns": "One sentence summary"
   }},
   "key_metrics": {{
     "risk_score": 0-100,
@@ -298,16 +299,21 @@ def extract_json(text: str) -> Dict[str, Any]:
                 continue
     
     # Fallback response
+    print(f"DEBUG: Parsing failed for text: {text[:200]}")
     return {
         "decision": {
             "status": "REJECTED",
             "confidence": 0.5,
-            "reasoning": "Model output invalid or incomplete"
+            "reasoning": "Model output invalid or incomplete - System Error"
         },
-        "counterfactuals": [],
+        "counterfactuals": [
+            "Ensure all application fields are filled correctly.",
+            "Verify income and employment details.",
+            "Contact support for manual review."
+        ],
         "fairness": {
-            "assessment": "Fair",
-            "concerns": "None"
+            "assessment": "Unknown",
+            "concerns": "Processing Error"
         },
         "key_metrics": {
             "risk_score": 50,
@@ -321,16 +327,25 @@ def extract_json(text: str) -> Dict[str, Any]:
 # =====================================================
 async def call_ai(prompt: str) -> Dict[str, Any]:
     async with semaphore:
-        async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT) as client:
+        async with httpx.AsyncClient(timeout=300.0) as client: # Increased timeout for older hardware
             try:
+                print(f"DEBUG: Call AI with model {MODEL_NAME}...")
                 response = await client.post(
                     OLLAMA_URL,
-                    json={"model": MODEL_NAME, "prompt": prompt, "stream": False}
+                    json={
+                        "model": MODEL_NAME, 
+                        "prompt": prompt, 
+                        "stream": False,
+                        "format": "json"  # FORCE JSON MODE
+                    }
                 )
-            except Exception:
+                response.raise_for_status()
+            except Exception as e:
+                print(f"ERROR: AI Call Failed: {e}")
                 return extract_json("")
 
     raw = response.json().get("response", "")
+    print(f"DEBUG: AI Output: {raw[:100]}...") # Print first 100 chars
     return extract_json(raw)
 
 # =====================================================

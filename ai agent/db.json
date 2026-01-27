@@ -331,5 +331,232 @@
         ]
       }
     }
+  },
+  {
+    "id": "APP-4104",
+    "domain": "loan",
+    "data": {
+      "age": 58,
+      "gender": "M",
+      "marital_status": "Widowed",
+      "employment_years": 19,
+      "employment_type": "Permanent",
+      "monthly_income": 49998,
+      "existing_debt": 199997,
+      "credit_score": 847,
+      "loan_amount": 249994,
+      "loan_purpose": "Business",
+      "created_at": "2026-01-27T17:29:46.157318+00:00"
+    },
+    "status": "rejected",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 58,
+        "gender": "M",
+        "marital_status": "Widowed",
+        "employment_years": 19,
+        "employment_type": "Permanent",
+        "monthly_income": 49998,
+        "existing_debt": 199997,
+        "credit_score": 847,
+        "loan_amount": 249994,
+        "loan_purpose": "Business",
+        "created_at": "2026-01-27T17:29:46.157318+00:00"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-27T17:29:50.597352+00:00"
+      }
+    },
+    "timestamp": "2026-01-27T17:29:50.597370+00:00",
+    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
+    "reviewed_at": "2026-01-27T17:41:30.151822+00:00",
+    "final_decision": "rejected",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      }
+    },
+    "agent_explanation": "AI Suggestion: REJECTED. Model output invalid or incomplete - System Error",
+    "explanation_edited": true
+  },
+  {
+    "id": "APP-1147",
+    "domain": "loan",
+    "data": {
+      "age": 74,
+      "gender": "M",
+      "marital_status": "Single",
+      "employment_years": 49,
+      "employment_type": "Permanent",
+      "monthly_income": 5000,
+      "existing_debt": -1,
+      "credit_score": 848,
+      "loan_amount": 49999,
+      "loan_purpose": "Vehicle",
+      "created_at": "2026-01-27T17:42:09.653863+00:00"
+    },
+    "status": "approved",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 74,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 49,
+        "employment_type": "Permanent",
+        "monthly_income": 5000,
+        "existing_debt": -1,
+        "credit_score": 848,
+        "loan_amount": 49999,
+        "loan_purpose": "Vehicle",
+        "created_at": "2026-01-27T17:42:09.653863+00:00"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-27T17:42:12.204950+00:00"
+      }
+    },
+    "timestamp": "2026-01-27T17:42:12.204974+00:00",
+    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
+    "reviewed_at": "2026-01-27T18:00:55.986273+00:00",
+    "final_decision": "approved",
+    "is_override": true,
+    "override_explanation": {
+      "summary": "The application was manually approved by an auditor due to additional evidence provided.",
+      "detailed_reasoning": "Based on the applicant's age (74), high risk profile, and additional information provided regarding a family member living with them, the loan eligibility did not meet AI recommendations. The human auditor reviewed the case thoroughly and determined that it was best handled by a manual approval process to ensure thorough consideration of all factors.",
+      "next_steps": [
+        "Follow up with the auditor for any missing documents",
+        "Provide the additional evidence mentioned"
+      ],
+      "conditions": [
+        "The applicant must provide proof of family member's residency or relationship document",
+        "Verify financial statements and income sources"
+      ],
+      "override_context": "The agent overrode your recommendation because the loan request exceeded system parameters, but an auditor approved it based on a detailed review."
+    }
+  },
+  {
+    "id": "APP-4608",
+    "domain": "loan",
+    "data": {
+      "age": 44,
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": 20,
+      "employment_type": "Permanent",
+      "monthly_income": 15000,
+      "existing_debt": 19999,
+      "credit_score": 748,
+      "loan_amount": 500000,
+      "loan_purpose": "Home",
+      "created_at": "2026-01-27T17:59:53.170022+00:00"
+    },
+    "status": "pending_human",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 44,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 15000,
+        "existing_debt": 19999,
+        "credit_score": 748,
+        "loan_amount": 500000,
+        "loan_purpose": "Home",
+        "created_at": "2026-01-27T17:59:53.170022+00:00"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.95,
+        "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score by paying off high-interest debt and avoiding late payments.",
+        "Step 2: Increase your monthly income to better match the required payment amount (i.e., $495.63).",
+        "Step 3: Consider applying for a lower-amount loan or refinancing if possible."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "Loan approvals are based on credit score, which may discriminate against individuals with lower scores."
+      },
+      "key_metrics": {
+        "risk_score": 20,
+        "approval_probability": 0.15,
+        "critical_factors": [
+          "Credit Score",
+          "Existing Debt"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-27T18:00:37.129711+00:00"
+      }
+    },
+    "timestamp": "2026-01-27T18:00:37.129738+00:00"
   }
 ]

@@ -31,6 +31,21 @@ export default function AiResult({ result, onReset }: AiResultProps) {
 				<h1 className={`text-5xl font-black mb-4 tracking-tight ${isApproved ? 'text-white' : 'text-red-100'}`}>{result.decision}</h1>
 				<p className="text-amber-100/70 mb-10 text-lg font-medium leading-relaxed">"{result.summary}"</p>
 
+				{/* Steps to Approval (Counterfactuals) */}
+				{result.counterfactuals && result.counterfactuals.length > 0 && (
+					<div className="mb-10 text-left bg-[#1a100e]/50 p-6 rounded-2xl border border-amber-500/10">
+						<h3 className="text-amber-400 font-bold uppercase tracking-wider text-sm mb-4">Steps to Approval</h3>
+						<ul className="space-y-3">
+							{result.counterfactuals.map((step: string, i: number) => (
+								<li key={i} className="flex items-start text-amber-100/80">
+									<span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+									<span>{step}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
+
 				<button onClick={onReset} className="w-full py-4 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white rounded-2xl font-black text-lg uppercase tracking-wider transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
 					Return to Portal
 				</button>

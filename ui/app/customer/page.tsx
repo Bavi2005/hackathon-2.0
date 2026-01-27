@@ -133,6 +133,17 @@ export default function CustomerPortal() {
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-6 bg-neutral-900/50 p-8 rounded-2xl border border-neutral-800">
+                             <div className="mb-4">
+                                <label className="block text-slate-400 mb-2">Full Name</label>
+                                <input
+                                    type="text"
+                                    name="full_name"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            
                             {renderFormFields()}
 
                             {error && (
@@ -156,7 +167,7 @@ export default function CustomerPortal() {
                         <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto text-green-500">
                             <CheckCircle2 size={40} />
                         </div>
-                        <h2 className="text-3xl font-bold text-white">Application Received</h2>
+                        <h2 className="text-3xl font-bold text-white">Application Received, {success.data?.full_name || 'Applicant'}</h2>
                         <div className="text-neutral-400 space-y-2">
                             <p>Your application ID is <span className="font-mono text-white bg-neutral-800 px-2 py-1 rounded">{success.id}</span></p>
                             <p>Our AI has processed your request and it is currently: <span className="text-blue-400 font-semibold">{success.status.replace('_', ' ').toUpperCase()}</span></p>

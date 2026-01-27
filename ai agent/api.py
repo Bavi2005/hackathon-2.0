@@ -1,134 +1,250 @@
-from fastapi import FastAPI, File, UploadFile, Form
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Query, Body, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-import csv
-import io
-from typing import Union, List
-import json
-import os
-from uuid import uuid4
+from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
+import random
+import uuid
 
-app = FastAPI(title="Explainable AI Decision Engine")
+# Import logic from xai_agent
+# Note: This implies xai_agent.py is in the same directory
+from xai_agent import (
+    ai_decision, 
+    DecisionType, 
+    policy_memory, 
+    build_override_prompt, 
+    call_ai,
+    extract_json
+)
+from database import SimpleDB
 
-# Allow all origins for simple UI testing
+app = FastAPI(title="Explainable AI Decision Engine (Hackathon 2.0)")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
-# =========================
-# POST JSON directly
-# =========================
-@app.post("/decision/json")
-async def decision_json(payload: Union[dict, List[dict]]):
-    """
-    Accepts a single record or list of records
-    """
-    if isinstance(payload, list):
-        results = explain_decision_batch(payload)
-    else:
-        results = explain_decision(payload)
-    return JSONResponse(results)
+db = SimpleDB()
 
-# =========================
-# POST CSV file
-# =========================
-@app.post("/decision/csv")
-async def decision_csv(file: UploadFile = File(...)):
-    """
-    Accepts CSV, converts to dicts, runs decision engine
-    """
-    content = await file.read()
-    text = content.decode("utf-8")
-    reader = csv.DictReader(io.StringIO(text))
-    records = []
-    for row in reader:
-        numeric_row = {}
-        for k, v in row.items():
-            try:
-                numeric_row[k] = float(v)
-            except ValueError:
-                numeric_row[k] = v
-        records.append(numeric_row)
-    results = explain_decision_batch(records)
-    return JSONResponse(results)
+# =====================================================
+# BACKGROUND TASKS
+# =====================================================
+async def process_override_explanation(app_id: str, prompt: str):
+    try:
+        explanation = await call_ai(prompt)
+        
+        # Read-Modify-Write DB
+        # Note: In a real app, use a real DB with row locking
+        all_apps = db._read_db()
+        for i, a in enumerate(all_apps):
+            if a["id"] == app_id:
+                all_apps[i]["override_explanation"] = explanation
+                break
+        db._write_db(all_apps)
+        print(f"DEBUG: Override explanation generated for {app_id}")
+    except Exception as e:
+        print(f"ERROR: Failed to generate override explanation: {e}")
 
-# =========================
-# POST Form Input
-# =========================
-@app.post("/decision/form")
-async def decision_form(
-    age: float = Form(...),
-    income: float = Form(...),
-    credit_score: float = Form(...),
-    existing_loans: float = Form(...),
-    employment_years: float = Form(...)
+# =====================================================
+# APPLICATIONS ENDPOINTS
+# =====================================================
+
+@app.post("/applications")
+async def create_application(
+    decision_type: str = Query(...),
+    payload: Dict[str, Any] = Body(...)
 ):
     """
-    Accepts standard form fields
+    Submit a new application for AI review.
     """
-    record = {
-        "age": age,
-        "income": income,
-        "credit_score": credit_score,
-        "existing_loans": existing_loans,
-        "employment_years": employment_years
+    try:
+        dtype = DecisionType(decision_type)
+    except ValueError:
+        raise HTTPException(status_code=400, detail=f"Invalid decision_type. Must be one of {[e.value for e in DecisionType]}")
+    
+    # 1. Run AI Decision
+    # Add timestamp to payload if not present (helps with ordering)
+    if "created_at" not in payload:
+        payload["created_at"] = datetime.now(timezone.utc).isoformat()
+        
+    # Generate a friendly ID like APP-1234
+    short_id = f"APP-{random.randint(1000, 9999)}"
+    
+    # 2. Call AI
+    result = await ai_decision(dtype, payload)
+    
+    # 3. Construct Application Record
+    application = {
+        "id": short_id,
+        "domain": decision_type,
+        "data": payload,
+        "status": "approved" if result["decision"]["status"].upper() == "APPROVED" else "rejected", 
+        "ai_result": result,
+        "timestamp": datetime.now(timezone.utc).isoformat()
     }
-    result = explain_decision(record)
-    return JSONResponse(result)
+    
+    # For user workflow, usually goes to pending human review if not auto-approved
+    # But user wants "Perfect". Let's say: if rejected, it stays rejected unless human overrides. 
+    # If approved, it's approved.
+    # Frontend logic has tabs: "Pending Review" and "History".
+    # Pending usually means "Needs Human Action". 
+    # Let's map ALL to "pending_human" initially so they show up.
+    application["status"] = "pending_human"
+    
+    # Save to DB
+    saved_app = db.save_application(application)
+    
+    return saved_app
 
-#Zep Code
+@app.get("/applications")
+async def list_applications(status: Optional[str] = None):
+    apps = db._read_db() # Accessing internal method for speed/simplicity
+    if status:
+        # Filter logic
+        if status == "pending":
+            return [a for a in apps if a.get("status") in ["pending_human", "pending_ai"]]
+        elif status == "history":
+             return [a for a in apps if a.get("status") not in ["pending_human", "pending_ai"]]
+        else:
+            return [a for a in apps if a.get("status") == status]
+            
+    # Return all, sorted by timestamp desc
+    apps.sort(key=lambda x: x.get("timestamp", ""), reverse=True)
+    return apps
 
-ALLOWED_DOMAINS = {"loan", "job", "credit", "insurance"}
+@app.get("/applications/{app_id}")
+async def get_application(app_id: str):
+    app_record = db.get_application(app_id)
+    if not app_record:
+        raise HTTPException(status_code=404, detail="Application not found")
+    return app_record
 
-@app.post("/inquiry")
-async def inquiry(payload: dict):
-    domain = payload.get("domain")
-    data = payload.get("data")
+@app.post("/applications/{app_id}/review")
+async def review_application(
+    app_id: str,
+    background_tasks: BackgroundTasks,
+    decision: str = Query(..., regex="^(approved|rejected)$"),
+    comment: Optional[str] = Query(None)
+):
+    app_record = db.get_application(app_id)
+    if not app_record:
+        raise HTTPException(status_code=404, detail="Application not found")
+        
+    # Valid decision
+    app_record["status"] = decision # approved or rejected
+    app_record["reviewer_comment"] = comment
+    app_record["reviewed_at"] = datetime.now(timezone.utc).isoformat()
+    app_record["final_decision"] = decision
+    
+    # Save immediate state first
+    all_apps = db._read_db()
+    for i, a in enumerate(all_apps):
+        if a["id"] == app_id:
+            all_apps[i] = app_record
+            break
+    db._write_db(all_apps)
+    
+    # AI Override Explanation Check
+    # If human decision differs from AI decision
+    ai_status = app_record.get("ai_result", {}).get("decision", {}).get("status", "").lower()
+    human_status = decision.lower()
+    
+    if ai_status and ai_status != human_status:
+        # Mark as override immediately
+        app_record["is_override"] = True
+        
+        # Re-save "is_override" flag
+        all_apps = db._read_db()
+        for i, a in enumerate(all_apps):
+            if a["id"] == app_id:
+                all_apps[i] = app_record
+                break
+        db._write_db(all_apps)
 
-    # ✅ Validation
-    if not domain or not data:
-        return JSONResponse(
-            status_code=400,
-            content={"error": "Missing domain or data"}
-        )
-    if domain not in ALLOWED_DOMAINS:
-        return JSONResponse(
-            status_code=400,
-            content={"error": f"Invalid domain '{domain}'"}
-        )
+        # Generate explanation in background
+        try:
+            dtype = DecisionType(app_record["domain"])
+            prompt = build_override_prompt(
+                dtype, 
+                app_record["data"],
+                ai_status,
+                human_status,
+                comment
+            )
+            # Add to background tasks
+            background_tasks.add_task(process_override_explanation, app_id, prompt)
+            
+        except Exception as e:
+            print(f"Error preparing override explanation task: {e}")
+            
+    # Update DB - effectively we need to replace the record
+    # SimpleDB doesn't have update, so we read-modify-write manually
+    # db.save_application appends... we need an update method.
+    # Let's implement a quick update in this logic
+    all_apps = db._read_db()
+    for i, a in enumerate(all_apps):
+        if a["id"] == app_id:
+            all_apps[i] = app_record
+            break
+    db._write_db(all_apps)
+    
+    return app_record
 
-    inquiry_id = f"inq_{uuid4().hex[:8]}"
-    record = {
-        "id": inquiry_id,
-        "domain": domain,
-        "data": data,
-        "status": "received",
-        "timestamp": now_utc()
-    }
+@app.put("/applications/{app_id}/explanation")
+async def update_explanation(
+    app_id: str,
+    payload: Dict[str, str] = Body(...)
+):
+    app_record = db.get_application(app_id)
+    if not app_record:
+        raise HTTPException(status_code=404, detail="Application not found")
+        
+    explanation_text = payload.get("explanation")
+    if not explanation_text:
+        raise HTTPException(status_code=400, detail="Missing explanation text")
 
-    save_inquiry(record)
+    # Update explanation
+    app_record["agent_explanation"] = explanation_text
+    app_record["explanation_edited"] = True
+    
+    # Update DB
+    all_apps = db._read_db()
+    for i, a in enumerate(all_apps):
+        if a["id"] == app_id:
+            all_apps[i] = app_record
+            break
+    db._write_db(all_apps)
+    
+    return app_record
 
-    return JSONResponse({
-        "message": "Inquiry received",
-        "inquiry_id": inquiry_id
-    })
+# =====================================================
+# POLICIES ENDPOINTS
+# =====================================================
 
-DATA_FILE = "inquiries.json"
+@app.get("/policies")
+async def get_policies(domain: Optional[str] = None):
+    return policy_memory.get_policies(domain)
 
-def now_utc():
-    return datetime.now(timezone.utc).isoformat()
+@app.post("/policies")
+async def add_policy(domain: str = Query(...), policy_text: str = Query(...)):
+    try:
+        return policy_memory.add_policy(domain, policy_text)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
-def save_inquiry(record):
-    data = []
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            data = json.load(f)
+@app.delete("/policies/{domain}/{policy_id}")
+async def delete_policy(domain: str, policy_id: str):
+    success = policy_memory.remove_policy(domain, policy_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Policy not found")
+    return {"status": "success"}
 
-    data.append(record)
+# =====================================================
+# UTILS
+# =====================================================
 
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+@app.get("/health")
+async def health():
+    return {"status": "ok", "timestamp": datetime.now(timezone.utc).isoformat()}

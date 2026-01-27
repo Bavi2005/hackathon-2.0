@@ -3,6 +3,24 @@
     {
       "type": "loan",
       "decision": "REJECTED",
+      "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount.",
+      "timestamp": "2026-01-27T18:00:37.127708+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-01-27T17:42:12.203271+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-01-27T17:29:50.596063+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete",
       "timestamp": "2026-01-27T16:19:16.072609+00:00"
     },

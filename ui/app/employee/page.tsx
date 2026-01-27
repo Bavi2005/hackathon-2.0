@@ -8,6 +8,16 @@ import {
 import Link from 'next/link';
 import { getApplications, reviewApplication, updateExplanation, Application } from '../../lib/api';
 
+// Constants
+const AGREE_WITH_AI_COMMENT = 'Agreed with AI recommendation';
+
+// Utility function to format field names
+const formatFieldName = (key: string): string => {
+    return key.replace(/_/g, ' ').split(' ').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+};
+
 export default function EmployeeDashboard() {
     const [activeTab, setActiveTab] = useState<'pending' | 'history'>('pending');
     const [applications, setApplications] = useState<Application[]>([]);
@@ -55,7 +65,7 @@ export default function EmployeeDashboard() {
             // Instant approval/rejection - agrees with AI
             setProcessingId(selectedApp.id);
             try {
-                await reviewApplication(selectedApp.id, decision, 'Agreed with AI recommendation');
+                await reviewApplication(selectedApp.id, decision, AGREE_WITH_AI_COMMENT);
                 setApplications(prev => prev.filter(app => app.id !== selectedApp.id));
                 setSelectedApp(null);
             } catch (err) {
@@ -298,7 +308,7 @@ function ApplicationRow({
                         <div className="bg-slate-950 rounded-xl border border-slate-800 p-4 grid grid-cols-2 gap-3">
                             {Object.entries(app.data).map(([key, value]) => (
                                 <div key={key} className="flex justify-between py-2 border-b border-slate-900 last:border-0">
-                                    <span className="text-slate-400 capitalize text-sm">{key.replace(/_/g, ' ')}</span>
+                                    <span className="text-slate-400 text-sm">{formatFieldName(key)}</span>
                                     <span className="font-medium text-slate-200 text-sm">{String(value)}</span>
                                 </div>
                             ))}

@@ -227,7 +227,7 @@ INPUT (JSON):
 OUTPUT (STRICT JSON ONLY):
 {{
   "recommended_decision": "APPROVED or REJECTED",
-  "confidence": 0.0-1.0,
+  "confidence": 0.85,
   "reasoning": "DETAILED explanation for your recommendation (min 150 words). Discuss key factors, risk assessment, policy compliance, and justification.",
   "alternative_reasoning": "DETAILED explanation for why the OPPOSITE decision could be justified (min 150 words). Be thorough and convincing.",
   "counterfactuals": ["Step 1: ...", "Step 2: ...", "Step 3: ..."],
@@ -236,8 +236,8 @@ OUTPUT (STRICT JSON ONLY):
     "concerns": "One sentence summary"
   }},
   "key_metrics": {{
-    "risk_score": 0-100,
-    "approval_probability": 0.0-1.0,
+    "risk_score": 45,
+    "approval_probability": 0.75,
     "critical_factors": ["factor1", "factor2"]
   }}
 }}
@@ -293,7 +293,7 @@ def extract_json(text: str) -> Dict[str, Any]:
     patterns = [
         r"```json\s*(\{.*?\})\s*```",  # Markdown JSON code block (try first)
         r"```\s*(\{.*?\})\s*```",  # Generic code block
-        r"\{.*\}",  # Standard pattern (last resort - greedy)
+        r"\{.*?\}",  # Standard pattern (non-greedy for consistency)
     ]
     
     for pattern in patterns:

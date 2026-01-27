@@ -38,10 +38,18 @@ export type AiResultType = {
 	};
 };
 
+export type OverrideExplanation = {
+	summary: string;
+	detailed_reasoning: string;
+	next_steps: string[];
+	conditions: string[];
+	override_context: string;
+};
+
 export type Application = {
 	id: string;
 	domain: string;
-	data: any;
+	data: any;  // Generic data object - varies by application type
 	status: string;
 	ai_result?: AiResultType;
 	timestamp: string;
@@ -49,5 +57,5 @@ export type Application = {
 	reviewer_comment?: string;
 	reviewed_at?: string;
 	is_override?: boolean;
-	override_explanation?: any;
+	override_explanation?: OverrideExplanation;
 };

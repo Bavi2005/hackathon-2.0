@@ -1,3 +1,22 @@
 {
-  "decisions": []
+  "decisions": [
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete",
+      "timestamp": "2026-01-27T16:19:16.072609+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete",
+      "timestamp": "2026-01-27T16:11:11.024257+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Your existing debt is too high for this loan amount.",
+      "timestamp": "2026-01-27T16:08:58.856820+00:00"
+    }
+  ]
 }

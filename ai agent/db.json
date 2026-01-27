@@ -14,7 +14,7 @@
       "loan_amount": "20000",
       "loan_purpose": "Vehicle"
     },
-    "status": "pending_human",
+    "status": "completed",
     "timestamp": "2026-01-13T17:59:15.808643+00:00",
     "ai_result": {
       "decision_type": "loan",
@@ -53,6 +53,29 @@
         "engine": "universal-xai-http",
         "timestamp": "2026-01-13T17:59:59.842239+00:00"
       }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
+    "reviewed_at": "2026-01-27T16:20:55.208216+00:00",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete"
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      }
     }
   },
   {
@@ -70,7 +93,7 @@
       "loan_amount": "15000",
       "loan_purpose": "Vehicle"
     },
-    "status": "pending_human",
+    "status": "completed",
     "timestamp": "2026-01-13T18:01:35.714508+00:00",
     "ai_result": {
       "decision_type": "loan",
@@ -106,6 +129,29 @@
       "audit": {
         "engine": "universal-xai-http",
         "timestamp": "2026-01-13T18:02:07.759054+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
+    "reviewed_at": "2026-01-27T16:25:25.269114+00:00",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete"
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
       }
     }
   },
@@ -206,6 +252,83 @@
       "audit": {
         "engine": "universal-xai-http",
         "timestamp": "2026-01-13T18:09:26.480188+00:00"
+      }
+    }
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "age": 27,
+      "gender": "M",
+      "marital_status": "Single",
+      "employment_years": 6,
+      "employment_type": "Permanent",
+      "monthly_income": 15000,
+      "existing_debt": 15005,
+      "credit_score": 499,
+      "loan_amount": 850000,
+      "loan_purpose": "Vehicle"
+    },
+    "status": "completed",
+    "id": "c69c759a",
+    "timestamp": "2026-01-27T16:09:10.203764+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 27,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 6,
+        "employment_type": "Permanent",
+        "monthly_income": 15000,
+        "existing_debt": 15005,
+        "credit_score": 499,
+        "loan_amount": 850000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete"
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-27T16:11:11.025388+00:00"
+      }
+    },
+    "final_decision": "approved",
+    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
+    "reviewed_at": "2026-01-27T16:27:28.095053+00:00",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete"
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "None"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
       }
     }
   }

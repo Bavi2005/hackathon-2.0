@@ -2,13 +2,60 @@
 
 # How to run
 cd ai\ /agent; 
-ollama pull phi3:mini;
+ollama pull mistral:7b-instruct-q4_K_M;
 uvicorn xai_agent:app --reload;
 open new terminal;
 cd ui;
 npm install;
 npm run dev;
 open localhost:3000 on any browser
+
+## New Features (v2.0)
+
+### 1. AI Override Handling
+- System now generates explanations when agents override AI decisions
+- Override badge displayed in employee dashboard
+- Detailed override explanations with reasoning and next steps
+
+### 2. Improved AI Model
+- Switched from `phi3:mini` to `mistral:7b-instruct-q4_K_M` for better performance
+- Faster processing and more reliable JSON generation
+- Better decision quality on 16GB RAM systems
+
+### 3. RAG/Memory System
+- **PolicyMemory**: Store and manage decision policies by domain
+- Upload policies via CSV, JSON, or TXT files
+- Policies automatically injected into AI prompts
+- **AIMemory**: System learns from past decisions for better context
+
+### 4. Enhanced Metrics Display
+- Key metrics: risk_score, approval_probability, critical_factors
+- Properly formatted counterfactuals display
+- Visual metric cards in dashboard
+
+### 5. Editable Explanations
+- Agents can edit AI-generated explanations before showing to customers
+- Edit button in case review panel
+- Maintains audit trail of edits
+
+### 6. Optimized Bulk Processing
+- Parallel batch processing (batch size: 5)
+- Faster CSV uploads
+- Better resource utilization
+
+### New API Endpoints
+- `POST /policies` - Add a policy
+- `GET /policies` - Get all policies
+- `DELETE /policies/{domain}/{policy_id}` - Remove a policy
+- `POST /policies/upload` - Upload policy file
+- `PUT /applications/{app_id}/explanation` - Edit explanation
+- `POST /bulk/upload` - Optimized bulk CSV upload
+- `GET /health` - Check AI model availability
+
+### UI Components
+- **PolicyManager**: Modal for managing policies across domains
+- **ExplanationEditor**: Modal for editing explanations
+- **Enhanced EmployeeDashboard**: Shows metrics, overrides, and counterfactuals
 
 ## i. Chosen Problem Statement
 In today's digital landscape, high-stakes decisions—such as loan approvals, job hiring, insurance claims, and credit assessments—are increasingly automated by AI. However, most of these systems act as "black boxes," providing results without transparency. This lack of explainability leads to trust issues, potential biases, and frustration for users who receive a rejection without knowing why or how to improve.

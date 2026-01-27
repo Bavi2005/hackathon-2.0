@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X } from 'lucide-react';
+import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit } from 'lucide-react';
 import { CaseData } from '../lib/types';
 import { CATEGORIES, CATEGORY_CONFIG } from '../lib/constants';
 import DonutChart from './DonutChart';
 import { api } from '../lib/api';
+import PolicyManager from './PolicyManager';
+import ExplanationEditor from './ExplanationEditor';
 
 interface EmployeeDashboardProps {
 	onBack: () => void;
@@ -19,6 +21,8 @@ type CategoryState = {
 
 export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	const [showPolicyManager, setShowPolicyManager] = useState(false);
+	const [showExplanationEditor, setShowExplanationEditor] = useState(false);
 
 	// Per-category state persistence
 	const [categoryStates, setCategoryStates] = useState<Record<string, CategoryState>>({});
@@ -192,6 +196,15 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 				{/* Filter & Search Bar */}
 				<div className="flex items-center gap-4">
+					{/* Manage Policies Button */}
+					<button
+						onClick={() => setShowPolicyManager(true)}
+						className="px-4 py-2 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-500 font-bold rounded-xl transition-all flex items-center gap-2"
+					>
+						<Settings size={18} />
+						Manage Policies
+					</button>
+					
 					<div className="flex bg-[#1a100e] p-1 rounded-lg border border-amber-900/30">
 						{['Pending', 'All', 'Approved', 'Denied'].map((f) => {
 							const isActive = filter === f;
@@ -321,6 +334,12 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 									<div className="flex gap-4 items-center">
 										<span className="text-amber-500 font-mono">{activeCase.decision_id}</span>
 										<span className="bg-amber-900/50 text-amber-200 text-[10px] uppercase font-bold px-2 py-1 rounded">{activeCase.domain}</span>
+										{/* Override Badge */}
+										{(activeCase as any).is_override && (
+											<span className="bg-orange-500/20 border border-orange-500 text-orange-500 text-[10px] uppercase font-bold px-3 py-1 rounded-full animate-pulse">
+												⚠ Override
+											</span>
+										)}
 									</div>
 								</div>
 
@@ -361,23 +380,97 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 							<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-auto">
 
 								{/* Features (Takes up 2 cols) */}
-								<div className="lg:col-span-2 grid grid-cols-2 gap-4 content-start">
-									{Object.entries(activeCase.input_features).slice(0, 8).map(([key, val]) => (
-										<div key={key} className="bg-[#1a100e] p-5 rounded-2xl border border-amber-900/30 hover:border-amber-500/30 transition-colors">
-											<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">{key.replace(/_/g, ' ')}</div>
-											<div className="text-base font-medium text-amber-100 truncate" title={String(val)}>{String(val)}</div>
+								<div className="lg:col-span-2 space-y-6">
+									{/* Key Metrics Section */}
+									{(activeCase as any).ai_result?.key_metrics && (
+										<div>
+											<h3 className="text-xs font-black uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2">
+												📊 Key Metrics
+											</h3>
+											<div className="grid grid-cols-3 gap-4">
+												<div className="bg-[#1a100e] p-4 rounded-2xl border border-amber-900/30">
+													<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">Risk Score</div>
+													<div className="text-2xl font-black text-amber-100">
+														{(activeCase as any).ai_result?.key_metrics?.risk_score || 'N/A'}
+													</div>
+												</div>
+												<div className="bg-[#1a100e] p-4 rounded-2xl border border-amber-900/30">
+													<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">Approval Probability</div>
+													<div className="text-2xl font-black text-amber-100">
+														{((activeCase as any).ai_result?.key_metrics?.approval_probability * 100).toFixed(0) || 'N/A'}%
+													</div>
+												</div>
+												<div className="bg-[#1a100e] p-4 rounded-2xl border border-amber-900/30">
+													<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">Critical Factors</div>
+													<div className="text-sm font-medium text-amber-100">
+														{(activeCase as any).ai_result?.key_metrics?.critical_factors?.length || 0}
+													</div>
+												</div>
+											</div>
+											{(activeCase as any).ai_result?.key_metrics?.critical_factors?.length > 0 && (
+												<div className="mt-3 bg-[#1a100e]/50 p-4 rounded-xl border border-amber-900/20">
+													<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-2">Critical Factors:</div>
+													<div className="flex flex-wrap gap-2">
+														{(activeCase as any).ai_result.key_metrics.critical_factors.map((factor: string, i: number) => (
+															<span key={i} className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs rounded-full">
+																{factor}
+															</span>
+														))}
+													</div>
+												</div>
+											)}
 										</div>
-									))}
+									)}
+									
+									{/* Application Features */}
+									<div className="grid grid-cols-2 gap-4">
+										{Object.entries(activeCase.input_features).slice(0, 8).map(([key, val]) => (
+											<div key={key} className="bg-[#1a100e] p-5 rounded-2xl border border-amber-900/30 hover:border-amber-500/30 transition-colors">
+												<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">{key.replace(/_/g, ' ')}</div>
+												<div className="text-base font-medium text-amber-100 truncate" title={String(val)}>{String(val)}</div>
+											</div>
+										))}
+									</div>
 								</div>
 
 								{/* Summary Panel (Takes up 1 col, simpler layout) */}
-								<div className="lg:col-span-1">
-									<h3 className="text-xs font-black uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2"><AlertCircle size={14} /> AI Explanation</h3>
-									<div className="bg-[#291d1a] rounded-3xl p-6 border border-amber-900/40 shadow-xl">
-										<p className="text-sm text-gray-300 leading-relaxed italic mb-6">"{activeCase.explanation.summary}"</p>
-										<div className="pt-4 border-t border-amber-900/30">
-											<p className="text-[10px] text-amber-400 uppercase font-black mb-2">Counterfactual</p>
-											<p className="text-xs text-amber-200/50 leading-normal">{activeCase.counterfactual}</p>
+								<div className="lg:col-span-1 space-y-6">
+									<div>
+										<div className="flex items-center justify-between mb-4">
+											<h3 className="text-xs font-black uppercase tracking-widest text-amber-500 flex items-center gap-2">
+												<AlertCircle size={14} /> AI Explanation
+											</h3>
+											<button
+												onClick={() => setShowExplanationEditor(true)}
+												className="p-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-1 text-xs font-bold"
+											>
+												<Edit size={14} /> Edit
+											</button>
+										</div>
+										<div className="bg-[#291d1a] rounded-3xl p-6 border border-amber-900/40 shadow-xl">
+											<p className="text-sm text-gray-300 leading-relaxed italic mb-6">"{activeCase.explanation.summary}"</p>
+											
+											{/* Counterfactuals Display */}
+											{(activeCase as any).ai_result?.counterfactuals && (activeCase as any).ai_result.counterfactuals.length > 0 && (
+												<div className="pt-4 border-t border-amber-900/30">
+													<p className="text-[10px] text-amber-400 uppercase font-black mb-3">Counterfactuals</p>
+													<div className="space-y-2">
+														{(activeCase as any).ai_result.counterfactuals.slice(0, 3).map((cf: any, i: number) => (
+															<div key={i} className="text-xs text-amber-200/70 leading-relaxed bg-amber-500/5 p-2 rounded">
+																• {typeof cf === 'string' ? cf : JSON.stringify(cf)}
+															</div>
+														))}
+													</div>
+												</div>
+											)}
+											
+											{/* Fallback if no structured counterfactuals */}
+											{!(activeCase as any).ai_result?.counterfactuals?.length && activeCase.counterfactual && activeCase.counterfactual !== 'N/A' && (
+												<div className="pt-4 border-t border-amber-900/30">
+													<p className="text-[10px] text-amber-400 uppercase font-black mb-2">Counterfactual</p>
+													<p className="text-xs text-amber-200/50 leading-normal">{activeCase.counterfactual}</p>
+												</div>
+											)}
 										</div>
 									</div>
 								</div>
@@ -392,6 +485,24 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 					)}
 				</div>
 			</div>
+			
+			{/* Modals */}
+			{showPolicyManager && (
+				<PolicyManager onClose={() => setShowPolicyManager(false)} />
+			)}
+			
+			{showExplanationEditor && activeCase && (
+				<ExplanationEditor
+					applicationId={activeCase.decision_id}
+					currentExplanation={activeCase.explanation.summary}
+					isOverride={(activeCase as any).is_override}
+					onClose={() => setShowExplanationEditor(false)}
+					onSave={async () => {
+						const newData = await api.getApplications();
+						setRealData(newData);
+					}}
+				/>
+			)}
 		</div>
 	);
 }

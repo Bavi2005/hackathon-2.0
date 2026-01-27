@@ -9,6 +9,7 @@ import asyncio
 import httpx
 import re
 import uuid
+import os
 from io import BytesIO
 
 # =====================================================
@@ -27,13 +28,17 @@ app.add_middleware(
 # CONFIG (RAM-SAFE)
 # =====================================================
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "phi3:mini"
+MODEL_NAME = "mistral:7b-instruct-q4_K_M"
 
 MAX_CSV_ROWS = 50
-MAX_CONCURRENCY = 1
+MAX_CONCURRENCY = 5  # Increased for parallel batch processing
 REQUEST_TIMEOUT = 120.0
 
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
+
+# File paths
+POLICIES_FILE = "../data/policies.json"
+AI_MEMORY_FILE = "../data/ai_memory.json"
 
 # =====================================================
 # ENUM (Swagger-stable)
@@ -45,9 +50,156 @@ class DecisionType(str, Enum):
     job = "job"
 
 # =====================================================
+# POLICY MEMORY (RAG-like)
+# =====================================================
+class PolicyMemory:
+    def __init__(self, file_path: str = POLICIES_FILE):
+        self.file_path = file_path
+        self._ensure_file()
+    
+    def _ensure_file(self):
+        if not os.path.exists(self.file_path):
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            with open(self.file_path, "w") as f:
+                json.dump({
+                    "loan": [],
+                    "credit": [],
+                    "insurance": [],
+                    "job": [],
+                    "global": []
+                }, f, indent=2)
+    
+    def _read_policies(self) -> Dict[str, List[Dict[str, Any]]]:
+        try:
+            with open(self.file_path, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            return {"loan": [], "credit": [], "insurance": [], "job": [], "global": []}
+    
+    def _write_policies(self, policies: Dict[str, List[Dict[str, Any]]]):
+        with open(self.file_path, "w") as f:
+            json.dump(policies, f, indent=2)
+    
+    def add_policy(self, domain: str, policy_text: str) -> Dict[str, Any]:
+        policies = self._read_policies()
+        if domain not in policies:
+            raise ValueError(f"Invalid domain: {domain}")
+        
+        policy_entry = {
+            "id": str(uuid.uuid4())[:8],
+            "text": policy_text,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        policies[domain].append(policy_entry)
+        self._write_policies(policies)
+        return policy_entry
+    
+    def get_policies(self, domain: Optional[str] = None) -> Dict[str, List[Dict[str, Any]]]:
+        policies = self._read_policies()
+        if domain:
+            return {domain: policies.get(domain, [])}
+        return policies
+    
+    def remove_policy(self, domain: str, policy_id: str) -> bool:
+        policies = self._read_policies()
+        if domain not in policies:
+            return False
+        
+        original_length = len(policies[domain])
+        policies[domain] = [p for p in policies[domain] if p["id"] != policy_id]
+        
+        if len(policies[domain]) < original_length:
+            self._write_policies(policies)
+            return True
+        return False
+    
+    def get_relevant_policies(self, domain: str) -> str:
+        """Get formatted policies for AI prompt injection"""
+        policies = self._read_policies()
+        domain_policies = policies.get(domain, [])
+        global_policies = policies.get("global", [])
+        
+        all_policies = global_policies + domain_policies
+        
+        if not all_policies:
+            return ""
+        
+        policy_text = "\n\nAPPLICABLE POLICIES AND RULES:\n"
+        for i, policy in enumerate(all_policies, 1):
+            policy_text += f"{i}. {policy['text']}\n"
+        
+        return policy_text
+
+# =====================================================
+# AI MEMORY (Decision History)
+# =====================================================
+class AIMemory:
+    def __init__(self, file_path: str = AI_MEMORY_FILE, max_decisions: int = 50):
+        self.file_path = file_path
+        self.max_decisions = max_decisions
+        self._ensure_file()
+    
+    def _ensure_file(self):
+        if not os.path.exists(self.file_path):
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            with open(self.file_path, "w") as f:
+                json.dump({"decisions": []}, f, indent=2)
+    
+    def _read_memory(self) -> Dict[str, List[Dict[str, Any]]]:
+        try:
+            with open(self.file_path, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            return {"decisions": []}
+    
+    def _write_memory(self, memory: Dict[str, List[Dict[str, Any]]]):
+        with open(self.file_path, "w") as f:
+            json.dump(memory, f, indent=2)
+    
+    def add_decision(self, decision_type: str, decision: str, reasoning: str):
+        memory = self._read_memory()
+        
+        decision_entry = {
+            "type": decision_type,
+            "decision": decision,
+            "reasoning": reasoning[:200],  # Keep it short
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+        
+        memory["decisions"].insert(0, decision_entry)
+        
+        # Keep only recent decisions
+        if len(memory["decisions"]) > self.max_decisions:
+            memory["decisions"] = memory["decisions"][:self.max_decisions]
+        
+        self._write_memory(memory)
+    
+    def get_context(self, decision_type: str, limit: int = 5) -> str:
+        """Get recent decision context for AI prompt"""
+        memory = self._read_memory()
+        decisions = [d for d in memory["decisions"] if d["type"] == decision_type][:limit]
+        
+        if not decisions:
+            return ""
+        
+        context = "\n\nRECENT SIMILAR DECISIONS:\n"
+        for i, dec in enumerate(decisions, 1):
+            context += f"{i}. {dec['decision']}: {dec['reasoning']}\n"
+        
+        return context
+
+# Initialize memory systems
+policy_memory = PolicyMemory()
+ai_memory = AIMemory()
+
+# =====================================================
 # PROMPT
 # =====================================================
 def build_prompt(decision_type: DecisionType, applicant: Dict[str, Any]) -> str:
+    # Get relevant policies and decision history
+    policies = policy_memory.get_relevant_policies(decision_type.value)
+    history = ai_memory.get_context(decision_type.value)
+    
     return f"""
 SYSTEM:
 You are a deterministic decision engine.
@@ -60,6 +212,8 @@ Evaluate a {decision_type.value} application.
 
 INPUT (JSON):
 {json.dumps(applicant, indent=2)}
+{policies}
+{history}
 
 OUTPUT (STRICT JSON ONLY):
 {{
@@ -72,7 +226,54 @@ OUTPUT (STRICT JSON ONLY):
   "fairness": {{
     "assessment": "Fair or Potentially Unfair",
     "concerns": "None"
+  }},
+  "key_metrics": {{
+    "risk_score": 0-100,
+    "approval_probability": 0.0-1.0,
+    "critical_factors": ["factor1", "factor2"]
   }}
+}}
+"""
+
+# =====================================================
+# OVERRIDE PROMPT
+# =====================================================
+def build_override_prompt(
+    decision_type: DecisionType,
+    applicant: Dict[str, Any],
+    ai_recommendation: str,
+    agent_decision: str,
+    agent_comment: Optional[str] = None
+) -> str:
+    return f"""
+SYSTEM:
+You are an explainable AI system helping to explain why a human agent overrode your recommendation.
+You MUST output JSON only.
+
+CONTEXT:
+- Application Type: {decision_type.value}
+- Your AI Recommendation: {ai_recommendation}
+- Agent's Final Decision: {agent_decision}
+- Agent's Comment: {agent_comment or "None provided"}
+
+APPLICANT DATA:
+{json.dumps(applicant, indent=2)}
+
+TASK:
+Generate a customer-friendly explanation for why the agent overrode your recommendation.
+Include:
+1. Summary of the override
+2. Reasoning for the agent's decision
+3. Next steps for the customer
+4. Conditions or requirements if applicable
+
+OUTPUT (STRICT JSON ONLY):
+{{
+  "summary": "Brief explanation of the override decision",
+  "detailed_reasoning": "Comprehensive explanation",
+  "next_steps": ["step1", "step2"],
+  "conditions": ["condition1", "condition2"],
+  "override_context": "Why the human decision differed from AI"
 }}
 """
 
@@ -80,35 +281,40 @@ OUTPUT (STRICT JSON ONLY):
 # JSON EXTRACTION (CRASH-PROOF)
 # =====================================================
 def extract_json(text: str) -> Dict[str, Any]:
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if not match:
-        return {
-            "decision": {
-                "status": "REJECTED",
-                "confidence": 0.5,
-                "reasoning": "Model output invalid or incomplete"
-            },
-            "counterfactuals": [],
-            "fairness": {
-                "assessment": "Fair",
-                "concerns": "None"
-            }
+    # Try multiple regex patterns for robustness
+    patterns = [
+        r"\{.*\}",  # Standard pattern
+        r"```json\s*(\{.*?\})\s*```",  # Markdown code block
+        r"```\s*(\{.*?\})\s*```",  # Generic code block
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, text, re.DOTALL)
+        if match:
+            try:
+                json_str = match.group(1) if len(match.groups()) > 0 else match.group()
+                return json.loads(json_str)
+            except json.JSONDecodeError:
+                continue
+    
+    # Fallback response
+    return {
+        "decision": {
+            "status": "REJECTED",
+            "confidence": 0.5,
+            "reasoning": "Model output invalid or incomplete"
+        },
+        "counterfactuals": [],
+        "fairness": {
+            "assessment": "Fair",
+            "concerns": "None"
+        },
+        "key_metrics": {
+            "risk_score": 50,
+            "approval_probability": 0.0,
+            "critical_factors": ["Invalid AI response"]
         }
-    try:
-        return json.loads(match.group())
-    except json.JSONDecodeError:
-        return {
-            "decision": {
-                "status": "REJECTED",
-                "confidence": 0.5,
-                "reasoning": "Malformed model response"
-            },
-            "counterfactuals": [],
-            "fairness": {
-                "assessment": "Fair",
-                "concerns": "None"
-            }
-        }
+    }
 
 # =====================================================
 # OLLAMA CALL (NEVER CRASHES)
@@ -132,6 +338,11 @@ async def call_ai(prompt: str) -> Dict[str, Any]:
 # =====================================================
 async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
     ai_output = await call_ai(build_prompt(decision_type, applicant))
+    
+    # Store decision in memory for future context
+    decision_status = ai_output["decision"]["status"]
+    decision_reasoning = ai_output["decision"]["reasoning"]
+    ai_memory.add_decision(decision_type.value, decision_status, decision_reasoning)
 
     return {
         "decision_type": decision_type.value,
@@ -139,6 +350,11 @@ async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
         "decision": ai_output["decision"],
         "counterfactuals": ai_output.get("counterfactuals", []),
         "fairness": ai_output["fairness"],
+        "key_metrics": ai_output.get("key_metrics", {
+            "risk_score": 50,
+            "approval_probability": 0.5,
+            "critical_factors": []
+        }),
         "audit": {
             "engine": "universal-xai-http",
             "timestamp": datetime.now(timezone.utc).isoformat()
@@ -146,12 +362,20 @@ async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
     }
 
 # =====================================================
-# BATCH (SEQUENTIAL, SAFE)
+# BATCH (PARALLEL, OPTIMIZED)
 # =====================================================
 async def process_batch(decision_type: DecisionType, applicants: List[Dict[str, Any]]):
+    # Process in parallel batches of 5
+    batch_size = 5
     results = []
-    for applicant in applicants:
-        results.append(await ai_decision(decision_type, applicant))
+    
+    for i in range(0, len(applicants), batch_size):
+        batch = applicants[i:i + batch_size]
+        batch_results = await asyncio.gather(
+            *[ai_decision(decision_type, applicant) for applicant in batch]
+        )
+        results.extend(batch_results)
+    
     return results
 
 # =====================================================
@@ -279,15 +503,221 @@ async def review_application(
     if not app:
         raise HTTPException(404, "Application not found")
     
+    # Detect override scenario
+    ai_decision = app.get("ai_result", {}).get("decision", {}).get("status", "").upper()
+    agent_decision = decision.upper()
+    
+    is_override = False
+    override_explanation = None
+    
+    # Case 3: AI says REJECTED but agent approves
+    # Case 4: AI says APPROVED but agent rejects
+    if (ai_decision == "REJECTED" and agent_decision == "APPROVED") or \
+       (ai_decision == "APPROVED" and agent_decision == "REJECTED"):
+        is_override = True
+        
+        # Generate override explanation
+        try:
+            decision_type = DecisionType(app["domain"])
+            override_prompt = build_override_prompt(
+                decision_type,
+                app["data"],
+                ai_decision,
+                agent_decision,
+                comment
+            )
+            override_result = await call_ai(override_prompt)
+            override_explanation = override_result
+        except Exception as e:
+            # Fallback if AI fails
+            override_explanation = {
+                "summary": f"Agent overrode AI recommendation from {ai_decision} to {agent_decision}",
+                "detailed_reasoning": comment or "Agent determined a different decision was appropriate",
+                "next_steps": ["Contact support for more details"],
+                "conditions": [],
+                "override_context": "Human review superseded AI analysis"
+            }
+    
     updates = {
         "status": ApplicationStatus.COMPLETED.value,
         "final_decision": decision,
         "reviewer_comment": comment,
-        "reviewed_at": datetime.now(timezone.utc).isoformat()
+        "reviewed_at": datetime.now(timezone.utc).isoformat(),
+        "is_override": is_override,
+        "override_explanation": override_explanation
     }
     
     updated_app = db.update_application(app_id, updates)
     return updated_app
+
+# =====================================================
+# POLICY MANAGEMENT ENDPOINTS
+# =====================================================
+@app.post("/policies")
+async def add_policy(domain: str = Query(...), policy_text: str = Query(...)):
+    """Add a new policy to the specified domain"""
+    try:
+        policy = policy_memory.add_policy(domain, policy_text)
+        return {"success": True, "policy": policy}
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+@app.get("/policies")
+async def get_policies(domain: Optional[str] = None):
+    """Get all policies or policies for a specific domain"""
+    return policy_memory.get_policies(domain)
+
+@app.delete("/policies/{domain}/{policy_id}")
+async def delete_policy(domain: str, policy_id: str):
+    """Remove a policy from the specified domain"""
+    success = policy_memory.remove_policy(domain, policy_id)
+    if not success:
+        raise HTTPException(404, "Policy not found")
+    return {"success": True, "message": "Policy deleted"}
+
+@app.post("/policies/upload")
+async def upload_policy_file(
+    domain: str = Query(...),
+    file: UploadFile = File(...)
+):
+    """Upload policy file (CSV, JSON, TXT)"""
+    try:
+        content = await file.read()
+        text_content = content.decode('utf-8')
+        
+        # Parse based on file type
+        if file.filename.endswith('.json'):
+            data = json.loads(text_content)
+            # If it's a list of policies
+            if isinstance(data, list):
+                policies = []
+                for policy_text in data:
+                    if isinstance(policy_text, str):
+                        policies.append(policy_memory.add_policy(domain, policy_text))
+                    elif isinstance(policy_text, dict) and 'text' in policy_text:
+                        policies.append(policy_memory.add_policy(domain, policy_text['text']))
+                return {"success": True, "count": len(policies), "policies": policies}
+            else:
+                raise HTTPException(400, "JSON must be a list of policy strings or objects")
+        
+        elif file.filename.endswith('.csv'):
+            # Assume CSV has a 'policy' column
+            df = pd.read_csv(BytesIO(content))
+            if 'policy' not in df.columns:
+                raise HTTPException(400, "CSV must have a 'policy' column")
+            policies = []
+            for policy_text in df['policy']:
+                policies.append(policy_memory.add_policy(domain, str(policy_text)))
+            return {"success": True, "count": len(policies), "policies": policies}
+        
+        elif file.filename.endswith('.txt'):
+            # Each line is a policy
+            policies = []
+            for line in text_content.split('\n'):
+                line = line.strip()
+                if line:
+                    policies.append(policy_memory.add_policy(domain, line))
+            return {"success": True, "count": len(policies), "policies": policies}
+        
+        else:
+            raise HTTPException(400, "Unsupported file type. Use .json, .csv, or .txt")
+    
+    except Exception as e:
+        raise HTTPException(400, f"Error processing file: {str(e)}")
+
+# =====================================================
+# EXPLANATION EDITOR ENDPOINT
+# =====================================================
+@app.put("/applications/{app_id}/explanation")
+async def update_explanation(
+    app_id: str,
+    payload: Dict[str, Any]
+):
+    """Allow agents to edit AI-generated explanations"""
+    app = db.get_application(app_id)
+    if not app:
+        raise HTTPException(404, "Application not found")
+    
+    updates = {
+        "agent_explanation": payload.get("explanation"),
+        "explanation_edited": True,
+        "explanation_edited_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    updated_app = db.update_application(app_id, updates)
+    return updated_app
+
+# =====================================================
+# BULK UPLOAD ENDPOINT (OPTIMIZED)
+# =====================================================
+@app.post("/bulk/upload")
+async def bulk_upload(
+    decision_type: DecisionType = Query(...),
+    file: UploadFile = File(...)
+):
+    """Optimized bulk CSV upload with parallel processing"""
+    try:
+        df = pd.read_csv(BytesIO(await file.read()))
+        
+        if len(df) > MAX_CSV_ROWS:
+            raise HTTPException(400, f"Max {MAX_CSV_ROWS} records allowed")
+        
+        applicants = df.to_dict(orient="records")
+        
+        # Process in parallel batches
+        results = await process_batch(decision_type, applicants)
+        
+        # Save to database
+        saved_apps = []
+        for i, result in enumerate(results):
+            app_entry = {
+                "domain": decision_type.value,
+                "data": applicants[i],
+                "status": ApplicationStatus.PENDING_HUMAN.value,
+                "ai_result": result
+            }
+            saved_apps.append(db.save_application(app_entry))
+        
+        return {
+            "success": True,
+            "count": len(saved_apps),
+            "applications": saved_apps
+        }
+    except Exception as e:
+        raise HTTPException(400, f"Error processing bulk upload: {str(e)}")
+
+# =====================================================
+# HEALTH CHECK ENDPOINT
+# =====================================================
+@app.get("/health")
+async def health_check():
+    """Check AI model availability"""
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(
+                OLLAMA_URL,
+                json={"model": MODEL_NAME, "prompt": "test", "stream": False}
+            )
+            if response.status_code == 200:
+                return {
+                    "status": "healthy",
+                    "model": MODEL_NAME,
+                    "available": True
+                }
+            else:
+                return {
+                    "status": "degraded",
+                    "model": MODEL_NAME,
+                    "available": False,
+                    "error": "Model not responding correctly"
+                }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "model": MODEL_NAME,
+            "available": False,
+            "error": str(e)
+        }
 
 # =====================================================
 # LEGACY/INQUIRY SUPPORT (Bridging api.py)

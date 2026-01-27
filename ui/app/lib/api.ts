@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CaseData, ApplicationType, AiResultType } from './types';
+import { CaseData, ApplicationType, Application } from './types';
 
 const API_BASE_URL = 'http://localhost:8000';
 
@@ -30,18 +30,63 @@ const transform = (app: any): CaseData => {
 				? `${aiReasoning}${reviewerComment ? ` | ${reviewerComment}` : ""}`
 				: `AI Suggestion: ${app.ai_result?.decision?.status || 'Processing'}. ${aiReasoning}`
 		},
-		counterfactual: app.ai_result?.counterfactuals ? JSON.stringify(app.ai_result.counterfactuals[0]) : "N/A"
+		counterfactual: app.ai_result?.counterfactuals ? JSON.stringify(app.ai_result.counterfactuals[0]) : "N/A",
+		applicant_name: app.data?.full_name || app.data?.applicant_name
 	};
+};
+
+export const submitApplication = async (type: ApplicationType, formData: any): Promise<any> => {
+	const response = await client.post('/applications', formData, {
+		params: { decision_type: type }
+	});
+	return response.data;
+};
+
+export const getApplications = async (status?: string): Promise<Application[]> => {
+	try {
+		const response = await client.get('/applications', {
+			params: status ? { status } : {}
+		});
+		return response.data;
+	} catch (e) {
+		console.error("API Error", e);
+		return [];
+	}
+};
+
+export const getApplication = async (id: string): Promise<Application | null> => {
+	try {
+		const response = await client.get(`/applications/${id}`);
+		return response.data;
+	} catch (e) {
+		return null;
+	}
+};
+
+export const reviewApplication = async (
+	id: string,
+	decision: 'approved' | 'rejected',
+	comment?: string
+): Promise<Application> => {
+	const response = await client.post(`/applications/${id}/review`, null, {
+		params: {
+			decision,
+			comment
+		}
+	});
+	return response.data;
+};
+
+export const updateExplanation = async (id: string, explanation: string): Promise<Application> => {
+	const response = await client.put(`/applications/${id}/explanation`, {
+		explanation
+	});
+	return response.data;
 };
 
 export const api = {
 	// 1. Submit Application (Customer)
-	submitApplication: async (type: ApplicationType, formData: any): Promise<string> => {
-		const response = await client.post('/applications', formData, {
-			params: { decision_type: type }
-		});
-		return response.data.id;
-	},
+	submitApplication,
 
 	// 2. Poll Status (Customer)
 	getApplicationStatus: async (id: string, category: string): Promise<CaseData | null> => {

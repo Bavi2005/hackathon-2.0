@@ -6,6 +6,7 @@ export type CaseData = {
 	model_output: { label: string; confidence: number | null; };
 	explanation: { summary: string; };
 	counterfactual: string;
+	applicant_name?: string;
 };
 
 export type PortalMode = 'customer' | 'employee' | null;
@@ -19,6 +20,34 @@ export type FormField = {
 };
 
 export type AiResultType = {
-	decision: string;
-	summary: string;
+	decision: {
+		status: string;
+		confidence: number;
+		reasoning: string;
+	};
+	alternative_reasoning?: string;
+	counterfactuals?: string[];
+	fairness?: {
+		assessment: string;
+		concerns: string;
+	};
+	key_metrics?: {
+		risk_score: number;
+		approval_probability: number;
+		critical_factors: string[];
+	};
+};
+
+export type Application = {
+	id: string;
+	domain: string;
+	data: any;
+	status: string;
+	ai_result?: AiResultType;
+	timestamp: string;
+	final_decision?: string;
+	reviewer_comment?: string;
+	reviewed_at?: string;
+	is_override?: boolean;
+	override_explanation?: any;
 };

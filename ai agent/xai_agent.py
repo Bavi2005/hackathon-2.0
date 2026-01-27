@@ -202,14 +202,22 @@ def build_prompt(decision_type: DecisionType, applicant: Dict[str, Any]) -> str:
     
     return f"""
 SYSTEM:
-You are a deterministic decision engine.
+You are a deterministic decision engine for {decision_type.value} applications.
 You MUST output JSON only.
 Never refuse. Never explain policies.
 If data is insufficient, reject conservatively.
 
+CRITICAL REQUIREMENT:
+You MUST provide reasoning for BOTH scenarios (approve AND deny) regardless of your recommendation.
+This allows instant responses when human reviewers override your decision.
+
 TASK:
-Evaluate a {decision_type.value} application.
-If REJECTED, provide 3-5 clear, simple, actionable steps (in simple English) the applicant can take to get approved in the "counterfactuals" list. Do NOT use technical jargon.
+Evaluate a {decision_type.value} application and provide:
+1. Your recommended decision (APPROVED or REJECTED)
+2. DETAILED reasoning for your recommendation (minimum 150 words, be thorough and convincing)
+3. DETAILED reasoning for the OPPOSITE decision (minimum 150 words, explain what would justify the alternative)
+4. If recommending REJECTION, provide 3-5 clear, actionable steps in simple English for approval
+5. If recommending APPROVAL, provide 3-5 risk mitigation steps or conditions
 
 INPUT (JSON):
 {json.dumps(applicant, indent=2)}
@@ -218,11 +226,10 @@ INPUT (JSON):
 
 OUTPUT (STRICT JSON ONLY):
 {{
-  "decision": {{
-    "status": "APPROVED or REJECTED",
-    "confidence": 0.0,
-    "reasoning": "Audit-grade explanation"
-  }},
+  "recommended_decision": "APPROVED or REJECTED",
+  "confidence": 0.0-1.0,
+  "reasoning": "DETAILED explanation for your recommendation (min 150 words). Discuss key factors, risk assessment, policy compliance, and justification.",
+  "alternative_reasoning": "DETAILED explanation for why the OPPOSITE decision could be justified (min 150 words). Be thorough and convincing.",
   "counterfactuals": ["Step 1: ...", "Step 2: ...", "Step 3: ..."],
   "fairness": {{
     "assessment": "Fair or Potentially Unfair",
@@ -282,11 +289,11 @@ OUTPUT (STRICT JSON ONLY):
 # JSON EXTRACTION (CRASH-PROOF)
 # =====================================================
 def extract_json(text: str) -> Dict[str, Any]:
-    # Try multiple regex patterns for robustness
+    # Try multiple regex patterns for robustness - improved to handle Markdown blocks better
     patterns = [
-        r"\{.*\}",  # Standard pattern
-        r"```json\s*(\{.*?\})\s*```",  # Markdown code block
+        r"```json\s*(\{.*?\})\s*```",  # Markdown JSON code block (try first)
         r"```\s*(\{.*?\})\s*```",  # Generic code block
+        r"\{.*\}",  # Standard pattern (last resort - greedy)
     ]
     
     for pattern in patterns:
@@ -294,18 +301,20 @@ def extract_json(text: str) -> Dict[str, Any]:
         if match:
             try:
                 json_str = match.group(1) if len(match.groups()) > 0 else match.group()
-                return json.loads(json_str)
+                parsed = json.loads(json_str)
+                # Validate that it has the expected structure
+                if "decision" in parsed or "recommended_decision" in parsed:
+                    return parsed
             except json.JSONDecodeError:
                 continue
     
     # Fallback response
     print(f"DEBUG: Parsing failed for text: {text[:200]}")
     return {
-        "decision": {
-            "status": "REJECTED",
-            "confidence": 0.5,
-            "reasoning": "Model output invalid or incomplete - System Error"
-        },
+        "recommended_decision": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error",
+        "alternative_reasoning": "Unable to generate alternative explanation due to parsing error.",
         "counterfactuals": [
             "Ensure all application fields are filled correctly.",
             "Verify income and employment details.",
@@ -354,17 +363,36 @@ async def call_ai(prompt: str) -> Dict[str, Any]:
 async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
     ai_output = await call_ai(build_prompt(decision_type, applicant))
     
+    # Handle both old and new response formats for backwards compatibility
+    if "decision" in ai_output:
+        # Old format
+        decision_status = ai_output["decision"]["status"]
+        decision_reasoning = ai_output["decision"]["reasoning"]
+        confidence = ai_output["decision"].get("confidence", 0.5)
+    else:
+        # New format
+        decision_status = ai_output.get("recommended_decision", "REJECTED")
+        decision_reasoning = ai_output.get("reasoning", "No reasoning provided")
+        confidence = ai_output.get("confidence", 0.5)
+    
     # Store decision in memory for future context
-    decision_status = ai_output["decision"]["status"]
-    decision_reasoning = ai_output["decision"]["reasoning"]
     ai_memory.add_decision(decision_type.value, decision_status, decision_reasoning)
 
+    # Return normalized structure with both reasoning paths
     return {
         "decision_type": decision_type.value,
         "applicant": applicant,
-        "decision": ai_output["decision"],
+        "decision": {
+            "status": decision_status,
+            "confidence": confidence,
+            "reasoning": decision_reasoning
+        },
+        "alternative_reasoning": ai_output.get("alternative_reasoning", "Alternative reasoning not available"),
         "counterfactuals": ai_output.get("counterfactuals", []),
-        "fairness": ai_output["fairness"],
+        "fairness": ai_output.get("fairness", {
+            "assessment": "Unknown",
+            "concerns": "Not assessed"
+        }),
         "key_metrics": ai_output.get("key_metrics", {
             "risk_score": 50,
             "approval_probability": 0.5,

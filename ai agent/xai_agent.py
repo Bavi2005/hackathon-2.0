@@ -11,6 +11,7 @@ import re
 import uuid
 import os
 from io import BytesIO
+from pypdf import PdfReader
 
 # =====================================================
 # APP
@@ -33,6 +34,7 @@ MODEL_NAME = "qwen2.5:1.5b"
 MAX_CSV_ROWS = 50
 MAX_CONCURRENCY = 5  # Increased for parallel batch processing
 REQUEST_TIMEOUT = 120.0
+MAX_FILE_SIZE_MB = 10  # Maximum file size in MB for uploads
 
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
@@ -249,21 +251,38 @@ explanation_store = ExplanationStore()
 # =====================================================
 # PROMPT
 # =====================================================
-def format_applicant_for_prompt(applicant: Dict[str, Any]) -> str:
-    """Compact JSON representation for fast, consistent prompts."""
-    try:
-        return json.dumps(applicant, separators=(",", ":"), ensure_ascii=False)
-    except TypeError:
-        # Fallback: coerce non-serializable types to string
-        safe_applicant = json.loads(json.dumps(applicant, default=str))
-        return json.dumps(safe_applicant, separators=(",", ":"), ensure_ascii=False)
+def format_as_text(data: Dict[str, Any]) -> str:
+    """
+    Convert dict data to a concise text format (key: value) for the AI prompt.
+    This reduces token usage and improves AI processing speed compared to JSON.
+    Handles nested dictionaries, lists, and None values properly.
+    """
+    lines = []
+    for key, value in data.items():
+        # Format the key to be more readable
+        readable_key = key.replace('_', ' ').title()
+        
+        # Handle different value types
+        if value is None:
+            formatted_value = "N/A"
+        elif isinstance(value, dict):
+            # For nested dicts, use JSON representation
+            formatted_value = json.dumps(value)
+        elif isinstance(value, list):
+            # For lists, join items with commas
+            formatted_value = ", ".join(str(item) for item in value)
+        else:
+            formatted_value = str(value)
+            
+        lines.append(f"{readable_key}: {formatted_value}")
+    return "\n".join(lines)
 
 
 def build_prompt(decision_type: DecisionType, applicant: Dict[str, Any]) -> str:
     # Get relevant policies and decision history
     policies = policy_memory.get_relevant_policies(decision_type.value)
     history = ai_memory.get_context(decision_type.value)
-    applicant_json = format_applicant_for_prompt(applicant)
+    applicant_text = format_as_text(applicant)
     
     return f"""
 SYSTEM:
@@ -284,8 +303,8 @@ Each counterfactual item must:
 If APPROVED, you may leave "counterfactuals" empty or use it for maintenance tips.
 Your reasoning text should be rich and specific (at least 4-6 sentences), but stay concise and focused on the applicant.
 
-INPUT (JSON):
-{applicant_json}
+INPUT (TEXT FORMAT):
+{applicant_text}
 {policies}
 {history}
 
@@ -785,22 +804,144 @@ async def update_explanation(
     return updated_app
 
 # =====================================================
-# BULK UPLOAD ENDPOINT (OPTIMIZED)
+# FILE PARSING HELPERS
+# =====================================================
+def safe_numeric_conversion(value: str) -> Any:
+    """
+    Safely convert a string to a number (int or float) if possible.
+    Returns the original string if conversion fails.
+    """
+    value = value.strip()
+    try:
+        # Try integer first
+        if '.' not in value:
+            return int(value)
+        # Try float - but validate it's a proper decimal number
+        parts = value.split('.')
+        if len(parts) == 2 and parts[0].lstrip('-').isdigit() and parts[1].isdigit():
+            return float(value)
+    except (ValueError, AttributeError):
+        pass
+    return value
+
+
+def parse_key_value_text(text: str) -> Dict[str, Any]:
+    """
+    Parse text containing 'key: value' lines into a dictionary.
+    Converts numeric values where appropriate.
+    """
+    parsed_data = {}
+    lines = text.strip().split('\n')
+    for line in lines:
+        line = line.strip()
+        if ':' in line:
+            parts = line.split(':', 1)
+            if len(parts) == 2:
+                key = parts[0].strip().lower().replace(' ', '_')
+                value = parts[1].strip()
+                # Convert to number if possible
+                parsed_data[key] = safe_numeric_conversion(value)
+    return parsed_data
+
+
+# =====================================================
+# BULK UPLOAD ENDPOINT (OPTIMIZED, MULTI-FORMAT)
 # =====================================================
 @app.post("/bulk/upload")
 async def bulk_upload(
     decision_type: DecisionType = Query(...),
     file: UploadFile = File(...)
 ):
-    """Optimized bulk CSV upload with parallel processing"""
+    """
+    Optimized bulk upload with parallel processing.
+    Supports: .csv, .json, .pdf, .txt files
+    """
     try:
         content = await file.read()
-        df = pd.read_csv(BytesIO(content))
-
-        if len(df) > MAX_CSV_ROWS:
-            raise HTTPException(400, f"Max {MAX_CSV_ROWS} records allowed")
-
-        applicants = df.to_dict(orient="records")
+        filename = file.filename.lower() if file.filename else ""
+        
+        # Security: Check file size
+        file_size_mb = len(content) / (1024 * 1024)
+        if file_size_mb > MAX_FILE_SIZE_MB:
+            raise HTTPException(400, f"File size ({file_size_mb:.1f}MB) exceeds maximum allowed ({MAX_FILE_SIZE_MB}MB)")
+        
+        applicants = []
+        
+        # Handle CSV files
+        if filename.endswith('.csv'):
+            df = pd.read_csv(BytesIO(content))
+            if len(df) > MAX_CSV_ROWS:
+                raise HTTPException(400, f"Max {MAX_CSV_ROWS} records allowed")
+            applicants = df.to_dict(orient="records")
+        
+        # Handle JSON files
+        elif filename.endswith('.json'):
+            text_content = content.decode('utf-8')
+            data = json.loads(text_content)
+            
+            # If it's a list, treat each item as an applicant
+            if isinstance(data, list):
+                applicants = data
+            # If it's a single dict, treat it as one applicant
+            elif isinstance(data, dict):
+                applicants = [data]
+            else:
+                raise HTTPException(400, "JSON must be a list or object")
+            
+            if len(applicants) > MAX_CSV_ROWS:
+                raise HTTPException(400, f"Max {MAX_CSV_ROWS} records allowed")
+        
+        # Handle PDF files
+        elif filename.endswith('.pdf'):
+            try:
+                # Extract text from PDF
+                pdf_reader = PdfReader(BytesIO(content))
+                
+                # Security: Limit number of pages to prevent memory exhaustion
+                max_pages = 50
+                if len(pdf_reader.pages) > max_pages:
+                    raise HTTPException(400, f"PDF has too many pages (max {max_pages})")
+                
+                text_content = ""
+                for page in pdf_reader.pages:
+                    text_content += page.extract_text() + "\n"
+                
+                # Use helper function to parse key-value data
+                parsed_data = parse_key_value_text(text_content)
+                
+                # If we found structured data, use it; otherwise pass as raw content
+                if parsed_data:
+                    applicants = [parsed_data]
+                else:
+                    # Truncate raw content to prevent excessive data
+                    max_content_length = 5000
+                    truncated_content = text_content[:max_content_length].strip()
+                    applicants = [{"raw_content": truncated_content}]
+                    
+            except Exception as e:
+                raise HTTPException(400, f"Error processing PDF: {str(e)}")
+        
+        # Handle TXT files
+        elif filename.endswith('.txt'):
+            text_content = content.decode('utf-8')
+            
+            # Use helper function to parse key-value data
+            parsed_data = parse_key_value_text(text_content)
+            
+            # If we found structured data, use it; otherwise pass as raw content
+            if parsed_data:
+                applicants = [parsed_data]
+            else:
+                # Truncate raw content to prevent excessive data
+                max_content_length = 5000
+                truncated_content = text_content[:max_content_length].strip()
+                applicants = [{"raw_content": truncated_content}]
+        
+        else:
+            raise HTTPException(400, "Unsupported file type. Use .json, .csv, .pdf, or .txt")
+        
+        if not applicants:
+            raise HTTPException(400, "No valid applicant data found in file")
         
         # Process in parallel batches
         results = await process_batch(decision_type, applicants)
@@ -819,8 +960,11 @@ async def bulk_upload(
         return {
             "success": True,
             "count": len(saved_apps),
+            "file_type": filename.split('.')[-1] if '.' in filename else "unknown",
             "applications": saved_apps
         }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(400, f"Error processing bulk upload: {str(e)}")
 

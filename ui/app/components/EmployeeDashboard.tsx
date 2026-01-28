@@ -366,7 +366,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 					{activeCase ? (
 						<div className="flex flex-col h-full p-8 md:p-12">
 							{/* Detail Header */}
-							<div className="flex justify-between items-center mb-10">
+							<div className="flex justify-between items-center mb-6">
 								<div>
 									<h2 className="text-4xl font-black text-white mb-2">Decision #DETAILS</h2>
 									<div className="flex gap-4 items-center">
@@ -401,7 +401,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 							{/* PENDING ACTIONS */}
 							{activeCase.model_output.label === 'Pending' && (
-								<div className="mb-8 bg-amber-500/10 border border-amber-500/50 p-6 rounded-2xl flex items-center justify-between animate-pulse-slow">
+								<div className="mb-6 bg-amber-500/10 border border-amber-500/50 p-6 rounded-2xl flex items-center justify-between animate-pulse-slow">
 									<div>
 										<h3 className="text-xl font-bold text-amber-400 mb-1">Needs Review</h3>
 										<p className="text-amber-100/70 text-sm">This application is awaiting human decision.</p>
@@ -413,18 +413,67 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 								</div>
 							)}
 
+							{/* AI EXPLANATION - PROMINENT TOP SECTION */}
+							<div className="mb-8">
+								<div className="flex items-center justify-between mb-4">
+									<h3 className="text-2xl font-black uppercase tracking-wide text-amber-400 flex items-center gap-3">
+										<AlertCircle size={28} /> AI Explanation
+									</h3>
+									<button
+										onClick={() => setExplanationEditorState({
+											isOpen: true,
+											mode: 'edit',
+											initialText: activeCase.explanation.summary
+										})}
+										className="p-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-2 text-sm font-bold"
+									>
+										<Edit size={16} /> Edit Explanation
+									</button>
+								</div>
+								<div className="bg-gradient-to-br from-[#291d1a] to-[#1a100e] rounded-3xl p-8 border-2 border-amber-500/40 shadow-2xl">
+									<p className="text-lg text-gray-200 leading-relaxed mb-8 font-medium">"{activeCase.explanation.summary}"</p>
+									
+									{/* Counterfactuals Display - More Prominent */}
+									{(activeCase as any).ai_result?.counterfactuals && (activeCase as any).ai_result.counterfactuals.length > 0 && (
+										<div className="pt-6 border-t-2 border-amber-900/40">
+											<p className="text-base text-amber-300 uppercase font-black mb-4 flex items-center gap-2">
+												💡 Recommended Steps to Improve
+											</p>
+											<div className="space-y-3">
+												{(activeCase as any).ai_result.counterfactuals.slice(0, 5).map((cf: any, i: number) => (
+													<div key={i} className="text-base text-amber-100 leading-relaxed bg-amber-500/10 p-4 rounded-xl border border-amber-500/20 hover:bg-amber-500/15 transition-colors">
+														{typeof cf === 'string' ? cf : JSON.stringify(cf)}
+													</div>
+												))}
+											</div>
+										</div>
+									)}
+									
+									{/* Fallback if no structured counterfactuals */}
+									{!(activeCase as any).ai_result?.counterfactuals?.length && activeCase.counterfactual && activeCase.counterfactual !== 'N/A' && (
+										<div className="pt-6 border-t-2 border-amber-900/40">
+											<p className="text-base text-amber-300 uppercase font-black mb-3">Alternative Recommendation</p>
+											<p className="text-base text-amber-100 leading-relaxed">{activeCase.counterfactual}</p>
+										</div>
+									)}
+								</div>
+							</div>
 
-							{/* Main Content Grid */}
+							{/* Main Content Grid - SECONDARY POSITION */}
 							<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-auto">
 
 								{/* Features (Takes up 2 cols) */}
 								<div className="lg:col-span-2 space-y-6">
+									<h3 className="text-sm font-black uppercase tracking-widest text-amber-500/70 mb-4">
+										Application Data
+									</h3>
+									
 									{/* Key Metrics Section */}
 									{(activeCase as any).ai_result?.key_metrics && (
 										<div>
-											<h3 className="text-xs font-black uppercase tracking-widest text-amber-500 mb-4 flex items-center gap-2">
+											<h4 className="text-xs font-black uppercase tracking-widest text-amber-500/60 mb-4 flex items-center gap-2">
 												📊 Key Metrics
-											</h3>
+											</h4>
 											<div className="grid grid-cols-3 gap-4">
 												<div className="bg-[#1a100e] p-4 rounded-2xl border border-amber-900/30">
 													<div className="text-[10px] uppercase font-bold text-amber-500/60 mb-1">Risk Score</div>
@@ -471,50 +520,34 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 									</div>
 								</div>
 
-								{/* Summary Panel (Takes up 1 col, simpler layout) */}
+								{/* Summary Panel - Right sidebar */}
 								<div className="lg:col-span-1 space-y-6">
-									<div>
-										<div className="flex items-center justify-between mb-4">
-											<h3 className="text-xs font-black uppercase tracking-widest text-amber-500 flex items-center gap-2">
-												<AlertCircle size={14} /> AI Explanation
-											</h3>
-											<button
-												onClick={() => setExplanationEditorState({
-													isOpen: true,
-													mode: 'edit',
-													initialText: activeCase.explanation.summary
-												})}
-												className="p-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-1 text-xs font-bold"
-											>
-												<Edit size={14} /> Edit
-											</button>
-										</div>
-										<div className="bg-[#291d1a] rounded-3xl p-6 border border-amber-900/40 shadow-xl">
-											<p className="text-sm text-gray-300 leading-relaxed italic mb-6">"{activeCase.explanation.summary}"</p>
-											
-											{/* Counterfactuals Display */}
-											{(activeCase as any).ai_result?.counterfactuals && (activeCase as any).ai_result.counterfactuals.length > 0 && (
-												<div className="pt-4 border-t border-amber-900/30">
-													<p className="text-[10px] text-amber-400 uppercase font-black mb-3">Counterfactuals</p>
-													<div className="space-y-2">
-														{(activeCase as any).ai_result.counterfactuals.slice(0, 3).map((cf: any, i: number) => (
-															<div key={i} className="text-xs text-amber-200/70 leading-relaxed bg-amber-500/5 p-2 rounded">
-																• {typeof cf === 'string' ? cf : JSON.stringify(cf)}
-															</div>
-														))}
-													</div>
-												</div>
-											)}
-											
-											{/* Fallback if no structured counterfactuals */}
-											{!(activeCase as any).ai_result?.counterfactuals?.length && activeCase.counterfactual && activeCase.counterfactual !== 'N/A' && (
-												<div className="pt-4 border-t border-amber-900/30">
-													<p className="text-[10px] text-amber-400 uppercase font-black mb-2">Counterfactual</p>
-													<p className="text-xs text-amber-200/50 leading-normal">{activeCase.counterfactual}</p>
-												</div>
-											)}
+									<h3 className="text-sm font-black uppercase tracking-widest text-amber-500/70 mb-4">
+										Quick Summary
+									</h3>
+									<div className="bg-[#1a100e] p-5 rounded-2xl border border-amber-900/30">
+										<div className="text-xs uppercase font-bold text-amber-500/60 mb-2">Status</div>
+										<div className="text-xl font-black text-amber-100">{activeCase.model_output.label}</div>
+									</div>
+									<div className="bg-[#1a100e] p-5 rounded-2xl border border-amber-900/30">
+										<div className="text-xs uppercase font-bold text-amber-500/60 mb-2">Confidence</div>
+										<div className="text-xl font-black text-amber-100">
+											{Math.round((activeCase.model_output.confidence || 0) * 100)}%
 										</div>
 									</div>
+									{(activeCase as any).ai_result?.fairness && (
+										<div className="bg-[#1a100e] p-5 rounded-2xl border border-amber-900/30">
+											<div className="text-xs uppercase font-bold text-amber-500/60 mb-2">Fairness</div>
+											<div className="text-sm font-medium text-amber-100 mb-1">
+												{(activeCase as any).ai_result.fairness.assessment}
+											</div>
+											{(activeCase as any).ai_result.fairness.concerns && (
+												<div className="text-xs text-amber-300/60 mt-2">
+													{(activeCase as any).ai_result.fairness.concerns}
+												</div>
+											)}
+										</div>
+									)}
 								</div>
 							</div>
 

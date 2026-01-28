@@ -7,6 +7,7 @@ export type CaseData = {
 	explanation: { summary: string; };
 	counterfactual: string;
 	applicant_name?: string;
+	ai_result?: AiResultType;
 };
 
 export type PortalMode = 'customer' | 'employee' | null;

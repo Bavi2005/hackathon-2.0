@@ -22,7 +22,13 @@ type CategoryState = {
 export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [showPolicyManager, setShowPolicyManager] = useState(false);
-	const [showExplanationEditor, setShowExplanationEditor] = useState(false);
+	
+	const [explanationEditorState, setExplanationEditorState] = useState<{
+		isOpen: boolean;
+		mode: 'edit' | 'override';
+		initialText: string;
+		action?: 'Approved' | 'Denied';
+	}>({ isOpen: false, mode: 'edit', initialText: '' });
 
 	// Per-category state persistence
 	const [categoryStates, setCategoryStates] = useState<Record<string, CategoryState>>({});
@@ -77,18 +83,50 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 	const handleAction = async (action: 'Approved' | 'Denied') => {
 		if (!selectedCategory || !activeCase) return;
 
-		const explanation = action === 'Approved'
-			? "Manually approved by auditor based on provided evidence."
-			: "Manually denied by auditor due to policy mismatch.";
+		// INSTANT APPROVAL
+		if (action === 'Approved') {
+			let explanation = "Manually approved by auditor based on provided evidence.";
+			
+			// Use AI reasoning if available
+			if (activeCase.ai_result) {
+				if (activeCase.ai_result.decision.status.toLowerCase() === 'approved') {
+					explanation = activeCase.ai_result.decision.reasoning;
+				} else {
+					explanation = activeCase.ai_result.alternative_reasoning || explanation;
+				}
+			}
 
-		await api.updateApplicationStatus(activeCase.decision_id, selectedCategory, action, explanation);
+			await api.updateApplicationStatus(activeCase.decision_id, selectedCategory, action, explanation);
+			
+			// Force reload locally to reflect change instantly
+			const newData = await api.getApplications();
+			setRealData(newData);
 
-		// Force reload locally to reflect change instantly
-		const newData = await api.getApplications();
-		setRealData(newData);
+			const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
+			if (updatedCase) updateState({ activeCase: updatedCase });
+			return;
+		}
 
-		const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
-		if (updatedCase) updateState({ activeCase: updatedCase });
+		// DENY WITH OVERRIDE POPUP
+		if (action === 'Denied') {
+			let explanation = "Manually denied by auditor due to policy mismatch.";
+			
+			// Use AI reasoning if available
+			if (activeCase.ai_result) {
+				if (activeCase.ai_result.decision.status.toLowerCase() === 'rejected') {
+					explanation = activeCase.ai_result.decision.reasoning;
+				} else {
+					explanation = activeCase.ai_result.alternative_reasoning || explanation;
+				}
+			}
+
+			setExplanationEditorState({
+				isOpen: true,
+				mode: 'override',
+				initialText: explanation,
+				action: 'Denied'
+			});
+		}
 	};
 
 
@@ -441,7 +479,11 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 												<AlertCircle size={14} /> AI Explanation
 											</h3>
 											<button
-												onClick={() => setShowExplanationEditor(true)}
+												onClick={() => setExplanationEditorState({
+													isOpen: true,
+													mode: 'edit',
+													initialText: activeCase.explanation.summary
+												})}
 												className="p-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-1 text-xs font-bold"
 											>
 												<Edit size={14} /> Edit
@@ -491,15 +533,29 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 				<PolicyManager onClose={() => setShowPolicyManager(false)} />
 			)}
 			
-			{showExplanationEditor && activeCase && (
+			{explanationEditorState.isOpen && activeCase && (
 				<ExplanationEditor
 					applicationId={activeCase.decision_id}
-					currentExplanation={activeCase.explanation.summary}
-					isOverride={(activeCase as any).is_override}
-					onClose={() => setShowExplanationEditor(false)}
+					currentExplanation={explanationEditorState.initialText}
+					isOverride={explanationEditorState.mode === 'override' || (activeCase as any).is_override}
+					onClose={() => setExplanationEditorState(prev => ({ ...prev, isOpen: false }))}
+					onSubmit={explanationEditorState.mode === 'override' ? async (text) => {
+						if (explanationEditorState.action && selectedCategory) {
+							await api.updateApplicationStatus(
+								activeCase.decision_id, 
+								selectedCategory, 
+								explanationEditorState.action, 
+								text
+							);
+						}
+					} : undefined}
 					onSave={async () => {
 						const newData = await api.getApplications();
 						setRealData(newData);
+						if (selectedCategory) {
+							const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
+							if (updatedCase) updateState({ activeCase: updatedCase });
+						}
 					}}
 				/>
 			)}

@@ -8,6 +8,7 @@ interface ExplanationEditorProps {
     isOverride?: boolean;
     onClose: () => void;
     onSave: () => void;
+    onSubmit?: (text: string) => Promise<void>;
 }
 
 export default function ExplanationEditor({ 
@@ -15,7 +16,8 @@ export default function ExplanationEditor({
     currentExplanation, 
     isOverride = false,
     onClose,
-    onSave 
+    onSave,
+    onSubmit
 }: ExplanationEditorProps) {
     const [explanation, setExplanation] = useState(currentExplanation);
     const [loading, setLoading] = useState(false);
@@ -30,7 +32,11 @@ export default function ExplanationEditor({
         setLoading(true);
         setError(null);
         try {
-            await updateExplanation(applicationId, explanation.trim());
+            if (onSubmit) {
+                await onSubmit(explanation.trim());
+            } else {
+                await updateExplanation(applicationId, explanation.trim());
+            }
             onSave();
             onClose();
         } catch (err) {

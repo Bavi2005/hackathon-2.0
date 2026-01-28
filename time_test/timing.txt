@@ -1,0 +1,2 @@
+Single JSON Decision: 32.03 seconds
+Batch (5 records): 147.96 seconds (Avg 29.59s/item)

@@ -2,6 +2,24 @@
   "decisions": [
     {
       "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "The applicant meets all necessary criteria for a loan, including their high income and low existing debt.",
+      "timestamp": "2026-01-28T05:41:24.074928+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount.",
+      "timestamp": "2026-01-28T04:39:46.257127+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-01-27T18:53:43.843369+00:00"
+    },
+    {
+      "type": "loan",
       "decision": "REJECTED",
       "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount.",
       "timestamp": "2026-01-27T18:00:37.127708+00:00"

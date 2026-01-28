@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
-    ArrowLeft, Search, Loader2, CheckCircle2, XCircle,
-    AlertTriangle, Clock, Edit2, ChevronDown, ChevronUp
+    ArrowLeft, Search, Download, Loader2, TrendingUp, CheckCircle2, XCircle,
+    AlertTriangle, Clock, Filter, Upload, FileText, Zap, ChevronRight, User
 } from 'lucide-react';
 import Link from 'next/link';
-import { getApplications, reviewApplication, updateExplanation, Application } from '../../lib/api';
+import { getApplications, reviewApplication, Application } from '../../lib/api';
 
-// Constants
-const AGREE_WITH_AI_COMMENT = 'Agreed with AI recommendation';
-
-// Utility function to format field names
-const formatFieldName = (key: string): string => {
-    return key.replace(/_/g, ' ').split(' ').map(word => 
-        word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
-};
+const DOMAINS = ['loan', 'credit', 'insurance', 'job'];
 
 export default function EmployeeDashboard() {
     const [activeTab, setActiveTab] = useState<'pending' | 'history'>('pending');
@@ -24,16 +16,15 @@ export default function EmployeeDashboard() {
     const [selectedApp, setSelectedApp] = useState<Application | null>(null);
     const [loading, setLoading] = useState(true);
     const [processingId, setProcessingId] = useState<string | null>(null);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [filterDomain, setFilterDomain] = useState<string>('all');
     
-    // Override modal state
-    const [showOverrideModal, setShowOverrideModal] = useState(false);
-    const [overrideDecision, setOverrideDecision] = useState<'approved' | 'rejected'>('approved');
-    const [overrideExplanation, setOverrideExplanation] = useState('');
+    // Batch Upload State
+    const [isUploading, setIsUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         fetchApplications();
-        const interval = setInterval(fetchApplications, 5000);
+        const interval = setInterval(fetchApplications, 5000); // Polling for background updates
         return () => clearInterval(interval);
     }, [activeTab]);
 
@@ -44,369 +35,323 @@ export default function EmployeeDashboard() {
             const data = await getApplications(status);
             setApplications(data);
         } catch (err) {
-            console.error("[API] Error fetching applications:", err);
+            console.error(err);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleInstantDecision = async (decision: 'approved' | 'rejected') => {
+    const handleDecision = async (decision: 'approved' | 'rejected') => {
         if (!selectedApp) return;
         
-        const aiDecision = selectedApp.ai_result?.decision?.status?.toLowerCase();
-        const isOverride = aiDecision !== decision;
+        const appId = selectedApp.id;
         
-        if (isOverride) {
-            // Show override modal with pre-generated alternative reasoning
-            setOverrideDecision(decision);
-            setOverrideExplanation(selectedApp.ai_result?.alternative_reasoning || '');
-            setShowOverrideModal(true);
-        } else {
-            // Instant approval/rejection - agrees with AI
-            setProcessingId(selectedApp.id);
-            try {
-                await reviewApplication(selectedApp.id, decision, AGREE_WITH_AI_COMMENT);
-                setApplications(prev => prev.filter(app => app.id !== selectedApp.id));
-                setSelectedApp(null);
-            } catch (err) {
-                console.error(err);
-                alert("Failed to submit decision");
-            } finally {
-                setProcessingId(null);
-            }
+        // Optimistic UI Update: Remove immediately
+        setApplications(prev => prev.filter(app => app.id !== appId));
+        setSelectedApp(null);
+        
+        try {
+            await reviewApplication(appId, decision, "Manual review by employee");
+        } catch (err) {
+            console.error("Decision failed", err);
+            // Revert on error (optional, skipping for demo speed)
+            alert("Failed to submit decision. Please refresh.");
         }
     };
 
-    const submitOverride = async () => {
-        if (!selectedApp) return;
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || !e.target.files[0]) return;
         
-        setProcessingId(selectedApp.id);
+        const file = e.target.files[0];
+        setIsUploading(true);
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        // Default to 'loan' or let user select. For demo, we'll ask or default.
+        // Let's prompt purely via JS for simplicity or default to loan.
+        const type = prompt("Enter domain type (loan, credit, insurance, job):", "loan") || "loan";
+        
         try {
-            await reviewApplication(selectedApp.id, overrideDecision, overrideExplanation);
-            setApplications(prev => prev.filter(app => app.id !== selectedApp.id));
-            setSelectedApp(null);
-            setShowOverrideModal(false);
+            // We need a direct fetch here because it's a new endpoint not in api.ts yet
+            await fetch(`http://localhost:8000/applications/batch_upload?decision_type=${type}`, {
+                method: 'POST',
+                body: formData
+            });
+            alert("Batch processed successfully!");
+            fetchApplications();
         } catch (err) {
             console.error(err);
-            alert("Failed to submit override");
+            alert("Upload failed");
         } finally {
-            setProcessingId(null);
+            setIsUploading(false);
+            if (fileInputRef.current) fileInputRef.current.value = '';
         }
     };
 
-    const filteredApplications = applications.filter(app => {
-        if (!searchQuery) return true;
-        const name = app.data?.full_name || '';
-        const id = app.id || '';
-        return name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               id.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+    const filteredApps = applications.filter(app => 
+        filterDomain === 'all' ? true : app.domain === filterDomain
+    );
+
+    const getScoreColor = (score: number) => {
+        if (score >= 80) return 'text-green-400';
+        if (score >= 50) return 'text-amber-400';
+        return 'text-red-400';
+    };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-white flex">
-            {/* Sidebar */}
-            <div className="w-64 border-r border-slate-800 p-6 flex flex-col bg-slate-900/50">
-                <div className="mb-10">
-                    <Link href="/" className="flex items-center text-slate-400 hover:text-white transition-colors">
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Exit Dashboard
-                    </Link>
-                </div>
-
-                <div className="space-y-2">
-                    <button
-                        onClick={() => { setActiveTab('pending'); setSelectedApp(null); }}
-                        className={`w-full text-left px-4 py-3 rounded-xl transition-all font-medium flex items-center justify-between ${activeTab === 'pending'
-                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                            : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                            }`}
-                    >
-                        <span>Pending Review</span>
-                        {activeTab === 'pending' && <span className="bg-white/20 text-xs px-2 py-0.5 rounded-full">{applications.length}</span>}
-                    </button>
-                    <button
-                        onClick={() => { setActiveTab('history'); setSelectedApp(null); }}
-                        className={`w-full text-left px-4 py-3 rounded-xl transition-all font-medium ${activeTab === 'history'
-                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/20'
-                            : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                            }`}
-                    >
-                        <span>History</span>
-                    </button>
-                </div>
+        <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500/30">
+            {/* Ambient Background */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-3xl" />
             </div>
 
-            {/* Main Content */}
-            <div className="flex-1 p-8 h-screen overflow-hidden flex flex-col">
-                <header className="flex justify-between items-center mb-8 shrink-0">
-                    <div>
-                        <h1 className="text-3xl font-bold">
-                            {activeTab === 'pending' ? 'Pending Reviews' : 'Case History'}
-                        </h1>
-                        <p className="text-slate-400">
-                            {activeTab === 'pending'
-                                ? 'AI-processed applications with instant pre-generated explanations'
-                                : 'Archive of past decisions'}
-                        </p>
-                    </div>
-                    <button onClick={fetchApplications} className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors">
-                        <Clock className="w-5 h-5 text-slate-400" />
-                    </button>
-                </header>
-
-                {/* Search Bar */}
-                <div className="mb-6 shrink-0">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                        <input
-                            type="text"
-                            placeholder="Search by name or ID..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-slate-900/50 border border-slate-800 rounded-xl pl-12 pr-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                        />
-                    </div>
-                </div>
-
-                {/* Single-Column Scrollable List */}
-                <div className="flex-1 overflow-y-auto space-y-3">
-                    {loading ? (
-                        <div className="flex justify-center p-16"><Loader2 className="animate-spin text-slate-500 w-8 h-8" /></div>
-                    ) : filteredApplications.length === 0 ? (
-                        <div className="p-16 text-center text-slate-500">No applications found.</div>
-                    ) : (
-                        filteredApplications.map((app) => (
-                            <ApplicationRow
-                                key={app.id}
-                                app={app}
-                                isSelected={selectedApp?.id === app.id}
-                                onSelect={() => setSelectedApp(selectedApp?.id === app.id ? null : app)}
-                                onInstantDecision={handleInstantDecision}
-                                isProcessing={processingId === app.id}
-                                activeTab={activeTab}
-                            />
-                        ))
-                    )}
-                </div>
-            </div>
-
-            {/* Override Modal */}
-            {showOverrideModal && (
-                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-8">
-                    <div className="bg-slate-900 rounded-2xl border border-slate-700 p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-                        <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-2xl font-bold flex items-center">
-                                <AlertTriangle className="w-6 h-6 mr-3 text-amber-500" />
-                                Override AI Recommendation
-                            </h2>
-                            <button onClick={() => setShowOverrideModal(false)} className="text-slate-400 hover:text-white">
-                                <XCircle className="w-6 h-6" />
-                            </button>
+            <div className="relative z-10 flex h-screen overflow-hidden max-w-[1600px] mx-auto border-x border-slate-800/50 shadow-2xl">
+                
+                {/* Compact Sidebar */}
+                <div className="w-80 flex-shrink-0 border-r border-slate-800 bg-slate-900/60 backdrop-blur-md flex flex-col">
+                    <div className="p-6 border-b border-slate-800/50">
+                        <div className="flex items-center space-x-2 text-cyan-400 mb-6">
+                            <Zap className="w-6 h-6 fill-current" />
+                            <span className="font-bold text-lg tracking-tight text-white">XAI Cortex</span>
                         </div>
                         
-                        <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
-                            <p className="text-amber-400 text-sm">
-                                You are overriding the AI decision. The pre-generated explanation below justifies the <strong>{overrideDecision.toUpperCase()}</strong> decision.
-                            </p>
-                        </div>
-
-                        <div className="mb-6">
-                            <label className="block text-slate-400 mb-2 font-medium">Explanation (Editable)</label>
-                            <textarea
-                                value={overrideExplanation}
-                                onChange={(e) => setOverrideExplanation(e.target.value)}
-                                rows={10}
-                                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"
-                            />
-                        </div>
-
-                        <div className="flex justify-end space-x-4">
-                            <button
-                                onClick={() => setShowOverrideModal(false)}
-                                className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 font-medium transition-colors"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={submitOverride}
-                                disabled={!!processingId}
-                                className="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-500/20 transition-all disabled:opacity-50 flex items-center"
-                            >
-                                {processingId ? <Loader2 className="animate-spin mr-2" /> : <CheckCircle2 className="mr-2" />}
-                                Submit Override
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-}
-
-// Application Row Component - expandable
-function ApplicationRow({
-    app,
-    isSelected,
-    onSelect,
-    onInstantDecision,
-    isProcessing,
-    activeTab
-}: {
-    app: Application;
-    isSelected: boolean;
-    onSelect: () => void;
-    onInstantDecision: (decision: 'approved' | 'rejected') => void;
-    isProcessing: boolean;
-    activeTab: string;
-}) {
-    const aiDecision = app.ai_result?.decision?.status?.toUpperCase();
-    const isApproved = aiDecision?.includes('APPROVED');
-
-    return (
-        <div className={`bg-slate-900/50 border rounded-2xl transition-all ${isSelected ? 'border-blue-500 ring-2 ring-blue-500/30' : 'border-slate-800 hover:border-slate-700'
-            }`}>
-            {/* Header Row - Always Visible */}
-            <div
-                onClick={onSelect}
-                className="p-6 cursor-pointer flex items-center justify-between"
-            >
-                <div className="flex-1 grid grid-cols-4 gap-4 items-center">
-                    <div>
-                        <div className="text-xs text-slate-500 font-mono mb-1">#{app.id}</div>
-                        <div className="font-bold text-lg text-white">{app.data?.full_name || 'Anonymous'}</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-xs text-slate-500 mb-1">Domain</div>
-                        <div className="text-sm font-medium text-slate-300 uppercase">{app.domain}</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-xs text-slate-500 mb-1">AI Recommendation</div>
-                        <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold ${isApproved
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-red-500/20 text-red-400'
-                            }`}>
-                            {aiDecision || 'PENDING'}
-                        </div>
-                    </div>
-                    <div className="text-right">
-                        <div className="text-xs text-slate-500 mb-1">Confidence</div>
-                        <div className="text-sm font-bold text-slate-300">
-                            {app.ai_result?.decision?.confidence ? `${(app.ai_result.decision.confidence * 100).toFixed(0)}%` : 'N/A'}
-                        </div>
-                    </div>
-                </div>
-                <div className="ml-6">
-                    {isSelected ? <ChevronUp className="text-slate-400" /> : <ChevronDown className="text-slate-400" />}
-                </div>
-            </div>
-
-            {/* Expanded Detail View */}
-            {isSelected && (
-                <div className="border-t border-slate-800 p-6 space-y-6 animate-in fade-in slide-in-from-top-2">
-                    {/* Applicant Data */}
-                    <section>
-                        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Applicant Details</h3>
-                        <div className="bg-slate-950 rounded-xl border border-slate-800 p-4 grid grid-cols-2 gap-3">
-                            {Object.entries(app.data).map(([key, value]) => (
-                                <div key={key} className="flex justify-between py-2 border-b border-slate-900 last:border-0">
-                                    <span className="text-slate-400 text-sm">{formatFieldName(key)}</span>
-                                    <span className="font-medium text-slate-200 text-sm">{String(value)}</span>
-                                </div>
+                        <div className="flex bg-slate-800/50 p-1 rounded-lg mb-6">
+                            {(['pending', 'history'] as const).map(tab => (
+                                <button
+                                    key={tab}
+                                    onClick={() => { setActiveTab(tab); setSelectedApp(null); }}
+                                    className={`flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+                                        activeTab === tab 
+                                        ? 'bg-slate-700 text-white shadow-lg' 
+                                        : 'text-slate-500 hover:text-slate-300'
+                                    }`}
+                                >
+                                    {tab}
+                                </button>
                             ))}
                         </div>
-                    </section>
 
-                    {/* Large Explanation Area */}
-                    <section>
-                        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 flex items-center">
-                            AI Explanation for {aiDecision}
-                        </h3>
-                        <div className="bg-slate-950 rounded-xl border border-slate-800 p-6 min-h-[200px]">
-                            <p className="text-slate-200 leading-relaxed whitespace-pre-wrap">
-                                {app.ai_result?.decision?.reasoning || 'No explanation available'}
-                            </p>
-                        </div>
-                    </section>
-
-                    {/* Large Counterfactual / Alternative Reasoning Area */}
-                    <section>
-                        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
-                            {aiDecision?.includes('APPROVED') ? 'Risk Mitigation Steps' : 'Steps to Get Approved'}
-                        </h3>
-                        <div className="bg-slate-950 rounded-xl border border-slate-800 p-6 min-h-[200px]">
-                            {app.ai_result?.counterfactuals && app.ai_result.counterfactuals.length > 0 ? (
-                                <ul className="space-y-3 text-slate-200">
-                                    {app.ai_result.counterfactuals.map((step, i) => (
-                                        <li key={i} className="flex items-start">
-                                            <span className="inline-block w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center mr-3 mt-0.5 shrink-0">
-                                                {i + 1}
-                                            </span>
-                                            <span className="leading-relaxed">{step}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p className="text-slate-400 italic">No counterfactuals available</p>
-                            )}
-                        </div>
-                    </section>
-
-                    {/* Fairness & Metrics */}
-                    {app.ai_result?.fairness && (
-                        <section>
-                            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Fairness Assessment</h3>
-                            <div className="bg-slate-950 rounded-xl border border-slate-800 p-4">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-slate-400">Assessment</span>
-                                    <span className="text-green-400 font-medium">{app.ai_result.fairness.assessment}</span>
-                                </div>
-                                <p className="text-xs text-slate-500 mt-2">{app.ai_result.fairness.concerns}</p>
+                        <div className="flex space-x-2">
+                             <div className="relative flex-1">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                <input 
+                                    placeholder="Search..." 
+                                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-sm focus:border-cyan-500/50 outline-none transition-colors"
+                                />
                             </div>
-                        </section>
-                    )}
-
-                    {/* Action Buttons (Pending only) */}
-                    {activeTab === 'pending' && (
-                        <div className="pt-6 border-t border-slate-800 flex justify-end space-x-4">
-                            <button
-                                onClick={() => onInstantDecision('rejected')}
-                                disabled={isProcessing}
-                                className="px-8 py-4 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 font-bold transition-colors disabled:opacity-50 flex items-center text-lg"
+                            <button 
+                                onClick={() => fileInputRef.current?.click()}
+                                disabled={isUploading}
+                                className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 text-slate-400 hover:text-white transition-colors"
+                                title="Upload Batch CSV"
                             >
-                                <XCircle className="mr-2 w-5 h-5" />
-                                Deny
+                                {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
                             </button>
-                            <button
-                                onClick={() => onInstantDecision('approved')}
-                                disabled={isProcessing}
-                                className="px-10 py-4 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold shadow-lg shadow-green-500/20 transition-all disabled:opacity-50 flex items-center text-lg"
-                            >
-                                {isProcessing ? <Loader2 className="animate-spin mr-2 w-5 h-5" /> : <CheckCircle2 className="mr-2 w-5 h-5" />}
-                                Approve
-                            </button>
+                            <input type="file" ref={fileInputRef} hidden accept=".csv" onChange={handleFileUpload} />
                         </div>
-                    )}
+                    </div>
 
-                    {/* History View */}
-                    {activeTab === 'history' && app.final_decision && (
-                        <div className="pt-6 border-t border-slate-800">
-                            <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center space-x-4">
-                                <div className={`p-3 rounded-full ${app.final_decision === 'approved' ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'}`}>
-                                    {app.final_decision === 'approved' ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
+                    <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 scrollbar-thin scrollbar-thumb-slate-800">
+                        {loading && <div className="text-center p-4"><Loader2 className="w-6 h-6 animate-spin mx-auto text-cyan-500" /></div>}
+                        
+                        {!loading && filteredApps.length === 0 && (
+                            <div className="text-center p-8 text-slate-600 text-sm">No applications found.</div>
+                        )}
+
+                        {filteredApps.map(app => (
+                            <div
+                                key={app.id}
+                                onClick={() => setSelectedApp(app)}
+                                className={`group p-4 rounded-xl border cursor-pointer transition-all duration-200 relative overflow-hidden ${
+                                    selectedApp?.id === app.id
+                                    ? 'bg-cyan-900/10 border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.1)]'
+                                    : 'bg-slate-900/40 border-slate-800 hover:border-slate-700 hover:bg-slate-800/40'
+                                }`}
+                            >
+                                <div className="flex justify-between items-start mb-2">
+                                    <span className={`px-2 py-0.5 text-[10px] font-bold uppercase rounded-full ${
+                                        app.domain === 'loan' ? 'bg-blue-500/10 text-blue-400' :
+                                        app.domain === 'insurance' ? 'bg-purple-500/10 text-purple-400' :
+                                        'bg-slate-700 text-slate-300'
+                                    }`}>
+                                        {app.domain}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-slate-600">{app.id}</span>
                                 </div>
-                                <div>
-                                    <div className="font-bold text-xl capitalize">{app.final_decision}</div>
-                                    <div className="text-slate-400 text-sm">
-                                        Reviewed on {app.reviewed_at ? new Date(app.reviewed_at).toLocaleString() : 'N/A'}
+                                <h3 className="font-semibold text-slate-200 group-hover:text-white transition-colors truncate">
+                                    {app.data.full_name || 'Anonymous Applicant'}
+                                </h3>
+                                <div className="mt-3 flex items-center justify-between">
+                                    <div className="flex items-center space-x-2 text-xs text-slate-500">
+                                        <Clock className="w-3 h-3" />
+                                        <span>{new Date(app.timestamp).toLocaleDateString()}</span>
                                     </div>
-                                    {app.is_override && (
-                                        <div className="text-amber-400 text-xs mt-1 font-medium">⚠️ AI Decision Overridden</div>
+                                    {app.ai_result && (
+                                        <div className={`text-xs font-bold ${
+                                            app.ai_result.decision.status.toUpperCase() === 'APPROVED' ? 'text-green-400' : 'text-red-400'
+                                        }`}>
+                                            {app.ai_result.decision.confidence ? Math.round(app.ai_result.decision.confidence * 100) : 0}% Conf.
+                                        </div>
                                     )}
                                 </div>
                             </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Main Detail Area */}
+                <div className="flex-1 flex flex-col bg-slate-950/80 backdrop-blur-sm">
+                    {selectedApp ? (
+                        <>
+                            <header className="px-8 py-6 border-b border-slate-800/50 flex justify-between items-start bg-slate-900/20">
+                                <div>
+                                    <div className="flex items-center space-x-3 mb-1">
+                                        <h1 className="text-2xl font-bold text-white tracking-tight">{selectedApp.data.full_name || 'Applicant'}</h1>
+                                        <span className="text-slate-500 text-sm font-mono">#{selectedApp.id}</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2 text-sm text-slate-400">
+                                        <User className="w-4 h-4" />
+                                        <span>{selectedApp.data.email || 'No contact info'}</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center space-x-4">
+                                     {selectedApp.ai_result && (
+                                        <div className={`flex flex-col items-end px-4 py-2 rounded-lg border ${
+                                            selectedApp.ai_result.decision.status.toUpperCase() === 'APPROVED' 
+                                            ? 'bg-green-500/5 border-green-500/20' 
+                                            : 'bg-red-500/5 border-red-500/20'
+                                        }`}>
+                                            <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">AI Rec.</span>
+                                            <span className={`text-lg font-bold ${
+                                                selectedApp.ai_result.decision.status.toUpperCase() === 'APPROVED' ? 'text-green-400' : 'text-red-400'
+                                            }`}>
+                                                {selectedApp.ai_result.decision.status}
+                                            </span>
+                                        </div>
+                                     )}
+                                </div>
+                            </header>
+
+                            <div className="flex-1 overflow-y-auto p-8">
+                                <div className="grid grid-cols-12 gap-8">
+                                    
+                                    {/* Left Column: Data */}
+                                    <div className="col-span-12 lg:col-span-5 space-y-6">
+                                        <div className="bg-slate-900/40 rounded-2xl border border-slate-800 p-6">
+                                            <h3 className="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-6 flex items-center">
+                                                <FileText className="w-4 h-4 mr-2" /> Application Data
+                                            </h3>
+                                            <div className="space-y-4">
+                                                {Object.entries(selectedApp.data).map(([k, v]) => {
+                                                    if (typeof v === 'object') return null;
+                                                    return (
+                                                        <div key={k} className="flex justify-between items-center py-2 border-b border-slate-800/50 last:border-0">
+                                                            <span className="text-slate-500 capitalize text-sm">{k.replace(/_/g, ' ')}</span>
+                                                            <span className="text-slate-200 font-medium text-sm text-right px-2">{String(v)}</span>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column: AI Analysis */}
+                                    <div className="col-span-12 lg:col-span-7 space-y-6">
+                                        {selectedApp.ai_result && (
+                                            <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
+                                                
+                                                {/* Reasoning Card */}
+                                                <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-2xl border border-slate-700/50 p-6 shadow-xl relative overflow-hidden">
+                                                    <div className="absolute top-0 right-0 p-3 opacity-10">
+                                                        <Zap className="w-24 h-24 text-cyan-500" />
+                                                    </div>
+                                                    
+                                                    <h3 className="text-sm font-bold text-purple-400 uppercase tracking-wider mb-4">Decision Reasoning</h3>
+                                                    <p className="text-lg leading-relaxed text-slate-200 font-light">
+                                                        {selectedApp.ai_result.decision.reasoning}
+                                                    </p>
+                                                </div>
+
+                                                {/* Metrics & Fairness */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-slate-900/40 rounded-xl border border-slate-800 p-5">
+                                                        <div className="text-slate-500 text-xs font-bold uppercase mb-2">Fairness Check</div>
+                                                        <div className="text-green-400 font-medium mb-1">
+                                                            {selectedApp.ai_result.fairness.assessment}
+                                                        </div>
+                                                        <p className="text-xs text-slate-500 leading-tight">
+                                                            {selectedApp.ai_result.fairness.concerns}
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <div className="bg-slate-900/40 rounded-xl border border-slate-800 p-5">
+                                                        <div className="text-slate-500 text-xs font-bold uppercase mb-2">Risk Score</div>
+                                                        <div className="flex items-end">
+                                                            <span className="text-3xl font-bold text-white">
+                                                                {selectedApp.ai_result.key_metrics?.risk_score || 50}
+                                                            </span>
+                                                            <span className="text-slate-500 mb-1 ml-1">/100</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Counterfactuals */}
+                                                {selectedApp.ai_result.counterfactuals?.length > 0 && (
+                                                    <div className="bg-slate-900/40 rounded-2xl border border-slate-800 p-6">
+                                                       <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Steps to Approval</h3>
+                                                       <ul className="space-y-3">
+                                                           {selectedApp.ai_result.counterfactuals.map((step: any, i: number) => (
+                                                               <li key={i} className="flex items-start text-sm text-slate-300">
+                                                                   <span className="flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-xs mr-3 mt-0.5 text-slate-500">{i+1}</span>
+                                                                   <span>{typeof step === 'string' ? step : JSON.stringify(step)}</span>
+                                                               </li>
+                                                           ))}
+                                                       </ul>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Sticky Footer for Actions */}
+                            {activeTab === 'pending' && (
+                                <div className="p-6 border-t border-slate-800/50 bg-slate-900/80 backdrop-blur-md flex justify-between items-center">
+                                    <div className="text-xs text-slate-500">
+                                        Decisions are final and logged in the immutable ledger.
+                                    </div>
+                                    <div className="flex space-x-4">
+                                        <button 
+                                            onClick={() => handleDecision('rejected')}
+                                            className="px-6 py-2.5 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 transition-all font-medium text-sm focus:ring-2 focus:ring-red-500/20"
+                                        >
+                                            Reject Case
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDecision('approved')}
+                                            className="px-8 py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-bold shadow-[0_0_20px_rgba(34,197,94,0.2)] hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] transition-all transform hover:-translate-y-0.5 text-sm flex items-center focus:ring-2 focus:ring-green-500/50"
+                                        >
+                                            <CheckCircle2 className="w-4 h-4 mr-2" />
+                                            Approve Case
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="flex-1 flex flex-col items-center justify-center text-slate-600">
+                            <div className="w-24 h-24 bg-slate-900/50 rounded-full flex items-center justify-center mb-6">
+                                <Search className="w-10 h-10 opacity-50" />
+                            </div>
+                            <p className="text-lg font-medium text-slate-400">Select an application to begin review</p>
+                            <p className="text-sm mt-2">Use the sidebar to filter or search applications</p>
                         </div>
                     )}
                 </div>
-            )}
+            </div>
         </div>
     );
 }

@@ -4,6 +4,8 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
 import random
 import uuid
+import pandas as pd
+from io import BytesIO
 
 # Import logic from xai_agent
 # Note: This implies xai_agent.py is in the same directory
@@ -248,3 +250,60 @@ async def delete_policy(domain: str, policy_id: str):
 @app.get("/health")
 async def health():
     return {"status": "ok", "timestamp": datetime.now(timezone.utc).isoformat()}
+
+@app.post("/applications/batch_upload")
+async def batch_upload(
+    decision_type: str = Query(...),
+    file: UploadFile = File(...)
+):
+    try:
+        dtype = DecisionType(decision_type)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid decision type")
+
+    contents = await file.read()
+    try:
+        # Check if CSV
+        df = pd.read_csv(BytesIO(contents))
+        records = df.to_dict(orient="records")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid CSV: {str(e)}")
+    
+    processed_count = 0
+    
+    # Process max 10 for demo speed
+    for row in records[:10]:
+        # Filter NaNs
+        payload = {k: v for k, v in row.items() if pd.notna(v)}
+        
+        # Normailze fields
+        if "full_name" not in payload:
+            for k in ["name", "applicant_name", "customer_name"]:
+                if k in payload:
+                    payload["full_name"] = payload[k]
+                    break
+        
+        # Create ID
+        short_id = f"APP-{random.randint(10000, 99999)}"
+        
+        # Run AI (awaiting sequentially for simplicity/stability)
+        try:
+            result = await ai_decision(dtype, payload)
+            status = "pending_human"
+        except Exception as e:
+            print(f"Batch AI Error: {e}")
+            status = "error"
+            result = None
+            
+        app_entry = {
+            "id": short_id,
+            "domain": decision_type,
+            "data": payload,
+            "status": status,
+            "ai_result": result,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+        db.save_application(app_entry)
+        processed_count += 1
+        
+    return {"message": "Batch processing completed", "count": processed_count}

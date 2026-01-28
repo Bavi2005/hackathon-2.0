@@ -39,6 +39,7 @@ semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 # File paths
 POLICIES_FILE = "../data/policies.json"
 AI_MEMORY_FILE = "../data/ai_memory.json"
+EXPLANATIONS_FILE = "../data/explanations.json"
 
 # =====================================================
 # ENUM (Swagger-stable)
@@ -162,7 +163,8 @@ class AIMemory:
         decision_entry = {
             "type": decision_type,
             "decision": decision,
-            "reasoning": reasoning[:200],  # Keep it short
+            # Store full reasoning; we'll truncate only when building context
+            "reasoning": reasoning,
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
         
@@ -184,7 +186,8 @@ class AIMemory:
         
         context = "\n\nRECENT SIMILAR DECISIONS:\n"
         for i, dec in enumerate(decisions, 1):
-            context += f"{i}. {dec['decision']}: {dec['reasoning']}\n"
+            snippet = dec["reasoning"][:400] if dec.get("reasoning") else ""
+            context += f"{i}. {dec['decision']}: {snippet}\n"
         
         return context
 
@@ -193,51 +196,114 @@ policy_memory = PolicyMemory()
 ai_memory = AIMemory()
 
 # =====================================================
+# EXPLANATION STORE (Full AI Outputs)
+# =====================================================
+class ExplanationStore:
+    def __init__(self, file_path: str = EXPLANATIONS_FILE, max_entries: int = 200):
+        self.file_path = file_path
+        self.max_entries = max_entries
+        self._ensure_file()
+
+    def _ensure_file(self):
+        if not os.path.exists(self.file_path):
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            with open(self.file_path, "w") as f:
+                json.dump({"explanations": []}, f, indent=2)
+
+    def _read_store(self) -> Dict[str, List[Dict[str, Any]]]:
+        try:
+            with open(self.file_path, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            return {"explanations": []}
+
+    def _write_store(self, data: Dict[str, List[Dict[str, Any]]]):
+        with open(self.file_path, "w") as f:
+            json.dump(data, f, indent=2)
+
+    def add_explanation(self, decision_type: str, applicant: Dict[str, Any], ai_output: Dict[str, Any]) -> Dict[str, Any]:
+        data = self._read_store()
+
+        entry = {
+            "id": str(uuid.uuid4())[:8],
+            "type": decision_type,
+            "applicant": applicant,
+            "decision": ai_output.get("decision", {}),
+            "counterfactuals": ai_output.get("counterfactuals", []),
+            "fairness": ai_output.get("fairness", {}),
+            "key_metrics": ai_output.get("key_metrics", {}),
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+
+        data["explanations"].insert(0, entry)
+
+        if len(data["explanations"]) > self.max_entries:
+            data["explanations"] = data["explanations"][: self.max_entries]
+
+        self._write_store(data)
+        return entry
+
+
+explanation_store = ExplanationStore()
+
+# =====================================================
 # PROMPT
 # =====================================================
+def format_applicant_for_prompt(applicant: Dict[str, Any]) -> str:
+    """Compact JSON representation for fast, consistent prompts."""
+    try:
+        return json.dumps(applicant, separators=(",", ":"), ensure_ascii=False)
+    except TypeError:
+        # Fallback: coerce non-serializable types to string
+        safe_applicant = json.loads(json.dumps(applicant, default=str))
+        return json.dumps(safe_applicant, separators=(",", ":"), ensure_ascii=False)
+
+
 def build_prompt(decision_type: DecisionType, applicant: Dict[str, Any]) -> str:
     # Get relevant policies and decision history
     policies = policy_memory.get_relevant_policies(decision_type.value)
     history = ai_memory.get_context(decision_type.value)
+    applicant_json = format_applicant_for_prompt(applicant)
     
     return f"""
 SYSTEM:
-You are a deterministic decision engine for {decision_type.value} applications.
-You MUST output JSON only.
-Never refuse. Never explain policies.
+You are a deterministic decision engine.
+You MUST output JSON only and strictly follow the schema.
+Never refuse. Never explain internal policies directly.
 If data is insufficient, reject conservatively.
 
-CRITICAL REQUIREMENT:
-You MUST provide reasoning for BOTH scenarios (approve AND deny) regardless of your recommendation.
-This allows instant responses when human reviewers override your decision.
-
 TASK:
-Evaluate a {decision_type.value} application and provide:
-1. Your recommended decision (APPROVED or REJECTED)
-2. DETAILED reasoning for your recommendation (minimum 150 words, be thorough and convincing)
-3. DETAILED reasoning for the OPPOSITE decision (minimum 150 words, explain what would justify the alternative)
-4. If recommending REJECTION, provide 3-5 clear, actionable steps in simple English for approval
-5. If recommending APPROVAL, provide 3-5 risk mitigation steps or conditions
+Evaluate a {decision_type.value} application.
+Write a detailed, customer-friendly, multi-paragraph explanation in very simple English.
+If REJECTED, you MUST output between 3 and 5 clear, simple, actionable steps in the "counterfactuals" list.
+Each counterfactual item must:
+- Be a single, specific sentence.
+- Start with "Step N: " where N is 1, 2, 3, ...
+- Focus only on things the applicant can realistically change (income, savings, debt, documents, credit behaviour, etc.).
+- Avoid vague advice like "try your best" or "be responsible" and avoid technical jargon.
+If APPROVED, you may leave "counterfactuals" empty or use it for maintenance tips.
+Your reasoning text should be rich and specific (at least 4-6 sentences), but stay concise and focused on the applicant.
 
 INPUT (JSON):
-{json.dumps(applicant, indent=2)}
+{applicant_json}
 {policies}
 {history}
 
 OUTPUT (STRICT JSON ONLY):
 {{
-  "recommended_decision": "APPROVED or REJECTED",
-  "confidence": 0.85,
-  "reasoning": "DETAILED explanation for your recommendation (min 150 words). Discuss key factors, risk assessment, policy compliance, and justification.",
-  "alternative_reasoning": "DETAILED explanation for why the OPPOSITE decision could be justified (min 150 words). Be thorough and convincing.",
+  "decision": {{
+    "status": "APPROVED or REJECTED",
+    "confidence": 0.0,
+    "reasoning": "Audit-grade explanation"
+  }},
   "counterfactuals": ["Step 1: ...", "Step 2: ...", "Step 3: ..."],
   "fairness": {{
     "assessment": "Fair or Potentially Unfair",
     "concerns": "One sentence summary"
   }},
   "key_metrics": {{
-    "risk_score": 45,
-    "approval_probability": 0.75,
+    "risk_score": 0-100,
+    "approval_probability": 0.0-1.0,
     "critical_factors": ["factor1", "factor2"]
   }}
 }}
@@ -289,11 +355,11 @@ OUTPUT (STRICT JSON ONLY):
 # JSON EXTRACTION (CRASH-PROOF)
 # =====================================================
 def extract_json(text: str) -> Dict[str, Any]:
-    # Try multiple regex patterns for robustness - improved to handle Markdown blocks better
+    # Try multiple regex patterns for robustness
     patterns = [
-        r"```json\s*(\{.*?\})\s*```",  # Markdown JSON code block (try first)
+        r"\{.*\}",  # Standard pattern
+        r"```json\s*(\{.*?\})\s*```",  # Markdown code block
         r"```\s*(\{.*?\})\s*```",  # Generic code block
-        r"\{.*?\}",  # Standard pattern (non-greedy for consistency)
     ]
     
     for pattern in patterns:
@@ -301,20 +367,18 @@ def extract_json(text: str) -> Dict[str, Any]:
         if match:
             try:
                 json_str = match.group(1) if len(match.groups()) > 0 else match.group()
-                parsed = json.loads(json_str)
-                # Validate that it has the expected structure
-                if "decision" in parsed or "recommended_decision" in parsed:
-                    return parsed
+                return json.loads(json_str)
             except json.JSONDecodeError:
                 continue
     
     # Fallback response
     print(f"DEBUG: Parsing failed for text: {text[:200]}")
     return {
-        "recommended_decision": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error",
-        "alternative_reasoning": "Unable to generate alternative explanation due to parsing error.",
+        "decision": {
+            "status": "REJECTED",
+            "confidence": 0.5,
+            "reasoning": "Model output invalid or incomplete - System Error"
+        },
         "counterfactuals": [
             "Ensure all application fields are filled correctly.",
             "Verify income and employment details.",
@@ -330,6 +394,39 @@ def extract_json(text: str) -> Dict[str, Any]:
             "critical_factors": ["Invalid AI response"]
         }
     }
+
+
+def normalize_counterfactuals(raw_cf: Any) -> List[str]:
+    """Clean and standardize counterfactual list coming back from the model."""
+    cleaned: List[str] = []
+
+    if isinstance(raw_cf, str):
+        # Split on newlines or semicolons if model packed into one string
+        candidates = [part.strip() for part in re.split(r"[\n;]+", raw_cf) if part.strip()]
+    elif isinstance(raw_cf, list):
+        candidates = []
+        for item in raw_cf:
+            if isinstance(item, str):
+                candidates.append(item.strip())
+            else:
+                try:
+                    candidates.append(str(item).strip())
+                except Exception:
+                    continue
+    else:
+        candidates = []
+
+    for idx, text in enumerate(candidates, start=1):
+        if not text:
+            continue
+        # Enforce "Step N:" prefix
+        if not text.lower().startswith("step "):
+            text = f"Step {idx}: {text}"
+        cleaned.append(text)
+        if len(cleaned) >= 5:
+            break
+
+    return cleaned
 
 # =====================================================
 # OLLAMA CALL (NEVER CRASHES)
@@ -363,36 +460,31 @@ async def call_ai(prompt: str) -> Dict[str, Any]:
 async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
     ai_output = await call_ai(build_prompt(decision_type, applicant))
     
-    # Handle both old and new response formats for backwards compatibility
-    if "decision" in ai_output:
-        # Old format
-        decision_status = ai_output["decision"]["status"]
-        decision_reasoning = ai_output["decision"]["reasoning"]
-        confidence = ai_output["decision"].get("confidence", 0.5)
-    else:
-        # New format
-        decision_status = ai_output.get("recommended_decision", "REJECTED")
-        decision_reasoning = ai_output.get("reasoning", "No reasoning provided")
-        confidence = ai_output.get("confidence", 0.5)
-    
+    # Normalize counterfactuals for consistent frontend experience
+    try:
+        raw_cf = ai_output.get("counterfactuals", [])
+        ai_output["counterfactuals"] = normalize_counterfactuals(raw_cf)
+    except Exception as e:
+        print(f"WARNING: Failed to normalize counterfactuals: {e}")
+
     # Store decision in memory for future context
+    decision_status = ai_output["decision"]["status"]
+    decision_reasoning = ai_output["decision"]["reasoning"]
     ai_memory.add_decision(decision_type.value, decision_status, decision_reasoning)
 
-    # Return normalized structure with both reasoning paths
+    # Persist full explanation payload for auditing and analytics
+    try:
+        explanation_store.add_explanation(decision_type.value, applicant, ai_output)
+    except Exception as e:
+        # Do not let storage failures break decision flow
+        print(f"WARNING: Failed to store explanation: {e}")
+
     return {
         "decision_type": decision_type.value,
         "applicant": applicant,
-        "decision": {
-            "status": decision_status,
-            "confidence": confidence,
-            "reasoning": decision_reasoning
-        },
-        "alternative_reasoning": ai_output.get("alternative_reasoning", "Alternative reasoning not available"),
+        "decision": ai_output["decision"],
         "counterfactuals": ai_output.get("counterfactuals", []),
-        "fairness": ai_output.get("fairness", {
-            "assessment": "Unknown",
-            "concerns": "Not assessed"
-        }),
+        "fairness": ai_output["fairness"],
         "key_metrics": ai_output.get("key_metrics", {
             "risk_score": 50,
             "approval_probability": 0.5,
@@ -458,12 +550,14 @@ async def decision_csv(
     decision_type: DecisionType = Query(...),
     file: UploadFile = File(...)
 ):
-    df = pd.read_csv(BytesIO(await file.read()))
-    
+    content = await file.read()
+    df = pd.read_csv(BytesIO(content))
+
     if len(df) > MAX_CSV_ROWS:
         raise HTTPException(400, "CSV too large")
 
-    results = await process_batch(decision_type, df.to_dict(orient="records"))
+    applicants = df.to_dict(orient="records")
+    results = await process_batch(decision_type, applicants)
     return {"count": len(results), "results": results}
 
 
@@ -700,11 +794,12 @@ async def bulk_upload(
 ):
     """Optimized bulk CSV upload with parallel processing"""
     try:
-        df = pd.read_csv(BytesIO(await file.read()))
-        
+        content = await file.read()
+        df = pd.read_csv(BytesIO(content))
+
         if len(df) > MAX_CSV_ROWS:
             raise HTTPException(400, f"Max {MAX_CSV_ROWS} records allowed")
-        
+
         applicants = df.to_dict(orient="records")
         
         # Process in parallel batches

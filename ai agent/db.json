@@ -348,7 +348,7 @@
       "loan_purpose": "Business",
       "created_at": "2026-01-27T17:29:46.157318+00:00"
     },
-    "status": "rejected",
+    "status": "completed",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
@@ -391,32 +391,22 @@
       }
     },
     "timestamp": "2026-01-27T17:29:50.597370+00:00",
-    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
-    "reviewed_at": "2026-01-27T17:41:30.151822+00:00",
-    "final_decision": "rejected",
+    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
+    "reviewed_at": "2026-01-28T05:45:41.468149+00:00",
+    "final_decision": "approved",
     "is_override": true,
     "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
+      "summary": "The agent overrode your recommendation due to additional evidence provided.",
+      "detailed_reasoning": "Based on the comprehensive application data, including the individual's age (58), gender (Male), marital status (Widowed), employment years (19), employment type (Permanent), monthly income ($49,998), existing debt ($199,997), credit score (847), loan amount ($249,994), and loan purpose (Business), the agent reviewed additional evidence provided by the applicant. This review revealed that while the initial recommendation was appropriate due to low risk factors, there were new developments in the applicant's financial situation or circumstances not previously considered.",
+      "next_steps": [
+        "Provide documentation of any changes in income or debt since the application date",
+        "Review and provide updated credit report"
       ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
+      "conditions": [
+        "The agent requires at least two additional pieces of evidence beyond the original data to make a decision",
+        "Documentation must include specific details such as new income sources or decreased debt"
+      ],
+      "override_context": "The human decision was based on a review that included supplementary information not previously considered by the AI system."
     },
     "agent_explanation": "AI Suggestion: REJECTED. Model output invalid or incomplete - System Error",
     "explanation_edited": true
@@ -437,7 +427,7 @@
       "loan_purpose": "Vehicle",
       "created_at": "2026-01-27T17:42:09.653863+00:00"
     },
-    "status": "approved",
+    "status": "completed",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
@@ -481,22 +471,24 @@
     },
     "timestamp": "2026-01-27T17:42:12.204974+00:00",
     "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-01-27T18:00:55.986273+00:00",
+    "reviewed_at": "2026-01-28T04:46:07.799673+00:00",
     "final_decision": "approved",
     "is_override": true,
     "override_explanation": {
-      "summary": "The application was manually approved by an auditor due to additional evidence provided.",
-      "detailed_reasoning": "Based on the applicant's age (74), high risk profile, and additional information provided regarding a family member living with them, the loan eligibility did not meet AI recommendations. The human auditor reviewed the case thoroughly and determined that it was best handled by a manual approval process to ensure thorough consideration of all factors.",
+      "summary": "The loan application was manually approved by an auditor due to provided evidence.",
+      "detailed_reasoning": "The applicant is elderly (age 74), has a high credit score (848), and meets all other criteria for the 'loan' category. However, the agent had concerns about long-term affordability of the loan amount ($49,999) over a period of several years. The auditor determined that the provided evidence justifies the approved decision.",
       "next_steps": [
-        "Follow up with the auditor for any missing documents",
-        "Provide the additional evidence mentioned"
+        "Contact an assistant manager to inquire further about the approval process for elderly applicants"
       ],
       "conditions": [
-        "The applicant must provide proof of family member's residency or relationship document",
-        "Verify financial statements and income sources"
+        "Applicant is at least 18 years old and has no debt obligations",
+        "Credit score must be above 700"
       ],
-      "override_context": "The agent overrode your recommendation because the loan request exceeded system parameters, but an auditor approved it based on a detailed review."
-    }
+      "override_context": "The human agent, recognizing a discrepancy between the AI's recommendation and their understanding of customer need, intervened to manually approve the loan based on additional verification."
+    },
+    "agent_explanation": "bullshit",
+    "explanation_edited": true,
+    "explanation_edited_at": "2026-01-28T05:43:04.731099+00:00"
   },
   {
     "id": "APP-4608",
@@ -514,7 +506,7 @@
       "loan_purpose": "Home",
       "created_at": "2026-01-27T17:59:53.170022+00:00"
     },
-    "status": "pending_human",
+    "status": "completed",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
@@ -557,6 +549,155 @@
         "timestamp": "2026-01-27T18:00:37.129711+00:00"
       }
     },
-    "timestamp": "2026-01-27T18:00:37.129738+00:00"
+    "timestamp": "2026-01-27T18:00:37.129738+00:00",
+    "reviewer_comment": "The applicant's credit score is below the threshold required for a loan of this amount.",
+    "reviewed_at": "2026-01-28T05:44:31.124430+00:00",
+    "final_decision": "rejected",
+    "is_override": false,
+    "override_explanation": null
+  },
+  {
+    "id": "APP-7185",
+    "domain": "loan",
+    "data": {
+      "age": 34,
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": 14,
+      "employment_type": "Permanent",
+      "monthly_income": 14999,
+      "existing_debt": -1,
+      "credit_score": 650,
+      "loan_amount": 1250000,
+      "loan_purpose": "Vehicle",
+      "created_at": "2026-01-27T18:52:25.747453+00:00"
+    },
+    "status": "completed",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 34,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 14,
+        "employment_type": "Permanent",
+        "monthly_income": 14999,
+        "existing_debt": -1,
+        "credit_score": 650,
+        "loan_amount": 1250000,
+        "loan_purpose": "Vehicle",
+        "created_at": "2026-01-27T18:52:25.747453+00:00"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "alternative_reasoning": "Unable to generate alternative explanation due to parsing error.",
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-27T18:53:43.845559+00:00"
+      }
+    },
+    "timestamp": "2026-01-27T18:53:43.845593+00:00",
+    "reviewer_comment": "Unable to generate alternative explanation due to parsing error.",
+    "reviewed_at": "2026-01-28T05:50:02.251003+00:00",
+    "final_decision": "approved",
+    "is_override": true,
+    "override_explanation": {
+      "summary": "The loan application has been approved due to a combination of factors that led to a reassessment of risk.",
+      "detailed_reasoning": "The agent considered your existing debt (which is negative), lower credit score, and higher monthly income. Your age and employment history were also taken into account. After reviewing all the information provided, it was determined that despite these risks, you are still within the financial means to meet the loan requirements.",
+      "next_steps": [
+        "Contact the bank for any necessary paperwork"
+      ],
+      "conditions": [
+        "Loan amount exceeds maximum acceptable by your credit score",
+        "Verification of income and employment details beyond current data"
+      ],
+      "override_context": "The human agent's decision was overridden based on their initial analysis, but after additional verification steps, it became clear that you were still a suitable candidate for the loan."
+    }
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "age": 48,
+      "gender": "M",
+      "marital_status": "Single",
+      "employment_years": 20,
+      "employment_type": "Permanent",
+      "monthly_income": 250000,
+      "existing_debt": 20000,
+      "credit_score": 850,
+      "loan_amount": 5000000,
+      "loan_purpose": "Business"
+    },
+    "status": "completed",
+    "id": "408df76a",
+    "timestamp": "2026-01-28T04:39:03.630898+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "age": 48,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 250000,
+        "existing_debt": 20000,
+        "credit_score": 850,
+        "loan_amount": 5000000,
+        "loan_purpose": "Business"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 1.0,
+        "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount."
+      },
+      "counterfactuals": [
+        "Step 1: Improve the credit score by increasing income or reducing debt.",
+        "Step 2: Increase employment type to 'Temporary' with a lower income and/or add another job.",
+        "Step 3: Explore alternative collateral options, such as real estate or a business partnership."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "The system may unfairly limit access to credit for individuals with certain characteristics based on past performance rather than their true financial needs."
+      },
+      "key_metrics": {
+        "risk_score": 75,
+        "approval_probability": 0.01,
+        "critical_factors": [
+          "Credit Score",
+          "Loan Amount"
+        ]
+      },
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-01-28T04:39:46.258841+00:00"
+      }
+    },
+    "agent_explanation": "AI Suggestion: REJECTED. The applicant's credit score is below the threshold required for a loan of this amount. the applicant is broke",
+    "explanation_edited": true,
+    "explanation_edited_at": "2026-01-28T04:42:38.141308+00:00",
+    "final_decision": "rejected",
+    "reviewer_comment": "The applicant's credit score is below the threshold required for a loan of this amount.",
+    "reviewed_at": "2026-01-28T04:43:00.758939+00:00",
+    "is_override": false,
+    "override_explanation": null
   }
 ]

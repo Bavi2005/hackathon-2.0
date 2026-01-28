@@ -1,0 +1,32 @@
+{
+  "explanations": [
+    {
+      "id": "d4266941",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 8,
+        "age": 22,
+        "monthly_income": 80000.0,
+        "existing_debt": 1000000.0,
+        "credit_score": 420,
+        "loan_amount": 5.0
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.0,
+        "reasoning": "The applicant meets all necessary criteria for a loan, including their high income and low existing debt."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "This is an approved decision as the applicant's financial situation clearly supports them qualifying for this amount."
+      },
+      "key_metrics": {
+        "risk_score": 0,
+        "approval_probability": 1.0,
+        "critical_factors": []
+      },
+      "timestamp": "2026-01-28T05:41:24.094340+00:00"
+    }
+  ]
+}

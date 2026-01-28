@@ -31,7 +31,8 @@ const transform = (app: any): CaseData => {
 				: `AI Suggestion: ${app.ai_result?.decision?.status || 'Processing'}. ${aiReasoning}`
 		},
 		counterfactual: app.ai_result?.counterfactuals ? JSON.stringify(app.ai_result.counterfactuals[0]) : "N/A",
-		applicant_name: app.data?.full_name || app.data?.applicant_name
+		applicant_name: app.data?.full_name || app.data?.applicant_name,
+		ai_result: app.ai_result
 	};
 };
 

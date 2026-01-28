@@ -12,6 +12,7 @@ idna==3.11
 ollama==0.6.1
 pandas
 pypdf
+python-multipart
 pydantic==2.12.5
 pydantic_core==2.41.5
 starlette==0.50.0

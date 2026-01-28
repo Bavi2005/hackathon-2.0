@@ -34,6 +34,7 @@ MODEL_NAME = "qwen2.5:1.5b"
 MAX_CSV_ROWS = 50
 MAX_CONCURRENCY = 5  # Increased for parallel batch processing
 REQUEST_TIMEOUT = 120.0
+MAX_FILE_SIZE_MB = 10  # Maximum file size in MB for uploads
 
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
@@ -254,12 +255,26 @@ def format_as_text(data: Dict[str, Any]) -> str:
     """
     Convert dict data to a concise text format (key: value) for the AI prompt.
     This reduces token usage and improves AI processing speed compared to JSON.
+    Handles nested dictionaries, lists, and None values properly.
     """
     lines = []
     for key, value in data.items():
         # Format the key to be more readable
         readable_key = key.replace('_', ' ').title()
-        lines.append(f"{readable_key}: {value}")
+        
+        # Handle different value types
+        if value is None:
+            formatted_value = "N/A"
+        elif isinstance(value, dict):
+            # For nested dicts, use JSON representation
+            formatted_value = json.dumps(value)
+        elif isinstance(value, list):
+            # For lists, join items with commas
+            formatted_value = ", ".join(str(item) for item in value)
+        else:
+            formatted_value = str(value)
+            
+        lines.append(f"{readable_key}: {formatted_value}")
     return "\n".join(lines)
 
 
@@ -789,6 +804,47 @@ async def update_explanation(
     return updated_app
 
 # =====================================================
+# FILE PARSING HELPERS
+# =====================================================
+def safe_numeric_conversion(value: str) -> Any:
+    """
+    Safely convert a string to a number (int or float) if possible.
+    Returns the original string if conversion fails.
+    """
+    value = value.strip()
+    try:
+        # Try integer first
+        if '.' not in value:
+            return int(value)
+        # Try float - but validate it's a proper decimal number
+        parts = value.split('.')
+        if len(parts) == 2 and parts[0].lstrip('-').isdigit() and parts[1].isdigit():
+            return float(value)
+    except (ValueError, AttributeError):
+        pass
+    return value
+
+
+def parse_key_value_text(text: str) -> Dict[str, Any]:
+    """
+    Parse text containing 'key: value' lines into a dictionary.
+    Converts numeric values where appropriate.
+    """
+    parsed_data = {}
+    lines = text.strip().split('\n')
+    for line in lines:
+        line = line.strip()
+        if ':' in line:
+            parts = line.split(':', 1)
+            if len(parts) == 2:
+                key = parts[0].strip().lower().replace(' ', '_')
+                value = parts[1].strip()
+                # Convert to number if possible
+                parsed_data[key] = safe_numeric_conversion(value)
+    return parsed_data
+
+
+# =====================================================
 # BULK UPLOAD ENDPOINT (OPTIMIZED, MULTI-FORMAT)
 # =====================================================
 @app.post("/bulk/upload")
@@ -803,6 +859,11 @@ async def bulk_upload(
     try:
         content = await file.read()
         filename = file.filename.lower() if file.filename else ""
+        
+        # Security: Check file size
+        file_size_mb = len(content) / (1024 * 1024)
+        if file_size_mb > MAX_FILE_SIZE_MB:
+            raise HTTPException(400, f"File size ({file_size_mb:.1f}MB) exceeds maximum allowed ({MAX_FILE_SIZE_MB}MB)")
         
         applicants = []
         
@@ -835,32 +896,27 @@ async def bulk_upload(
             try:
                 # Extract text from PDF
                 pdf_reader = PdfReader(BytesIO(content))
+                
+                # Security: Limit number of pages to prevent memory exhaustion
+                max_pages = 50
+                if len(pdf_reader.pages) > max_pages:
+                    raise HTTPException(400, f"PDF has too many pages (max {max_pages})")
+                
                 text_content = ""
                 for page in pdf_reader.pages:
                     text_content += page.extract_text() + "\n"
                 
-                # Try to parse simple "Key: Value" lines
-                parsed_data = {}
-                lines = text_content.strip().split('\n')
-                for line in lines:
-                    line = line.strip()
-                    if ':' in line:
-                        parts = line.split(':', 1)
-                        if len(parts) == 2:
-                            key = parts[0].strip().lower().replace(' ', '_')
-                            value = parts[1].strip()
-                            # Try to convert to number if possible
-                            try:
-                                value = float(value) if '.' in value else int(value)
-                            except ValueError:
-                                pass
-                            parsed_data[key] = value
+                # Use helper function to parse key-value data
+                parsed_data = parse_key_value_text(text_content)
                 
                 # If we found structured data, use it; otherwise pass as raw content
                 if parsed_data:
                     applicants = [parsed_data]
                 else:
-                    applicants = [{"raw_content": text_content.strip()}]
+                    # Truncate raw content to prevent excessive data
+                    max_content_length = 5000
+                    truncated_content = text_content[:max_content_length].strip()
+                    applicants = [{"raw_content": truncated_content}]
                     
             except Exception as e:
                 raise HTTPException(400, f"Error processing PDF: {str(e)}")
@@ -869,28 +925,17 @@ async def bulk_upload(
         elif filename.endswith('.txt'):
             text_content = content.decode('utf-8')
             
-            # Try to parse key-value lines
-            parsed_data = {}
-            lines = text_content.strip().split('\n')
-            for line in lines:
-                line = line.strip()
-                if ':' in line:
-                    parts = line.split(':', 1)
-                    if len(parts) == 2:
-                        key = parts[0].strip().lower().replace(' ', '_')
-                        value = parts[1].strip()
-                        # Try to convert to number if possible
-                        try:
-                            value = float(value) if '.' in value else int(value)
-                        except ValueError:
-                            pass
-                        parsed_data[key] = value
+            # Use helper function to parse key-value data
+            parsed_data = parse_key_value_text(text_content)
             
             # If we found structured data, use it; otherwise pass as raw content
             if parsed_data:
                 applicants = [parsed_data]
             else:
-                applicants = [{"raw_content": text_content.strip()}]
+                # Truncate raw content to prevent excessive data
+                max_content_length = 5000
+                truncated_content = text_content[:max_content_length].strip()
+                applicants = [{"raw_content": truncated_content}]
         
         else:
             raise HTTPException(400, "Unsupported file type. Use .json, .csv, .pdf, or .txt")

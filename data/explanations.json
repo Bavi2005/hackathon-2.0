@@ -1,6 +1,456 @@
 {
   "explanations": [
     {
+      "id": "db433896",
+      "type": "loan",
+      "applicant": {
+        "full_name": "Zep Ernest",
+        "age": 18,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 1,
+        "employment_type": "Contract",
+        "monthly_income": 2699,
+        "existing_debt": 0,
+        "credit_score": 499,
+        "loan_amount": 19999,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 100.0,
+        "reasoning": "After evaluating the provided data, it was determined that Zep Ernest's financial situation is not strong enough to qualify for this loan. His Monthly Income of $2699 is significantly below a healthy threshold relative to his Employment Years (1 year) and existing debt level ($0). An additional $500 in monthly income would make him more financially stable, which could improve his credit score and increase the likelihood of approval."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income by finding a higher-paying job or taking on part-time work.",
+        "Step 2: Build an emergency fund with at least $500 to cover unexpected expenses, which could help manage any financial challenges.",
+        "Step 3: Ensure you have strong savings in case of unemployment or other emergencies."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "The applicant may not have the opportunity to increase income immediately due to his young age and limited work experience."
+      },
+      "key_metrics": {
+        "risk_score": 75,
+        "approval_probability": 0.12,
+        "critical_factors": [
+          "Income"
+        ]
+      },
+      "timestamp": "2026-02-03T08:29:05.824267+00:00"
+    },
+    {
+      "id": "b6a4868c",
+      "type": "job",
+      "applicant": {
+        "full_name": "Keluar",
+        "job_title": "Security Guard",
+        "years_experience": 10,
+        "education_level": "Diploma",
+        "companies_worked": 7,
+        "career_gaps": 1,
+        "expected_salary": 6000
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 85,
+        "reasoning": "Kelvin has more than 10 years of experience as a Security Guard and completed a Diploma, which is within the acceptable range for this position. However, his expected salary of $6000 does not align well with industry standards and expectations based on his level of experience and education. While Kelvin may still be suitable in terms of experience and qualifications, his expected salary falls below what would typically be considered reasonable for a professional in this field."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your savings or look for higher-paying job opportunities.",
+        "Step 2: Enhance your resume to reflect more responsibilities or achievements related to security guard work.",
+        "Step 3: Seek additional training or certifications that could justify a higher salary expectation."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "The expected salary might be lower than what is considered fair for an experienced Security Guard with the same level of education and experience as Kelvin. This could be seen as discriminatory, especially in a field where wages can vary significantly based on location and company policies."
+      },
+      "key_metrics": {
+        "risk_score": 75,
+        "approval_probability": 0.15,
+        "critical_factors": [
+          "Experience",
+          "Education Level"
+        ]
+      },
+      "timestamp": "2026-02-03T08:03:30.442626+00:00"
+    },
+    {
+      "id": "fbb18ec1",
+      "type": "job",
+      "applicant": {
+        "full_name": "Natalie",
+        "job_title": "Software developer",
+        "years_experience": 9,
+        "education_level": "Bachelor",
+        "companies_worked": 5,
+        "career_gaps": 0,
+        "expected_salary": 9000
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.85,
+        "reasoning": "Based on the provided information, Natalie does not meet our current approval criteria for a job application as a Software Developer with 9 years of experience and a bachelor's degree. The expected salary of $9000 seems unusually low given her qualifications and industry standards."
+      },
+      "counterfactuals": [
+        "Step 1: Natalie should consider updating the expected salary to reflect more reasonable market rates for a software developer with similar experience.",
+        "Step 2: Natalie could also seek references from current or former colleagues who can vouch for her abilities and provide recommendations on her behalf."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "The application's expected salary is significantly below industry standards, potentially indicating a bias against applicants with higher expected compensation."
+      },
+      "key_metrics": {
+        "risk_score": 80,
+        "approval_probability": 0.15,
+        "critical_factors": [
+          "Expected Salary"
+        ]
+      },
+      "timestamp": "2026-02-03T07:50:35.272923+00:00"
+    },
+    {
+      "id": "1c65595f",
+      "type": "loan",
+      "applicant": {
+        "full_name": "Ferrari",
+        "age": 40,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 10000,
+        "existing_debt": 30000,
+        "credit_score": 850,
+        "loan_amount": 10000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 85,
+        "reasoning": "After evaluating the provided data, it was determined that Mr. Ferrari's financial situation is not strong enough to qualify for this loan. His existing debt of $30,000 already exceeds a healthy threshold relative to his income and employment stability (Employment Years: 20). With an employment type as Permanent and no additional details indicating he has substantial savings or other sources of income that could reduce the impact of the existing debt, it would be risky for us to approve this loan. We recommend looking at ways to improve Mr. Ferrari's financial health through reducing his debt or increasing his income."
+      },
+      "counterfactuals": [
+        "Step 1: Consider paying down some of the existing debt.",
+        "Step 2: Explore side hustles or additional job opportunities to boost your income.",
+        "Step 3: Increase savings, even if it's a small amount each month to improve financial stability."
+      ],
+      "fairness": {
+        "assessment": "Potentially Unfair",
+        "concerns": "Existing debt levels may disproportionately impact low-income applicants when compared to more financially stable ones in similar situations. This could lead to unfair outcomes for certain demographics based on their credit history and current employment status."
+      },
+      "key_metrics": {
+        "risk_score": 85,
+        "approval_probability": 0.12,
+        "critical_factors": [
+          "Existing Debt",
+          "Employment Years"
+        ]
+      },
+      "timestamp": "2026-02-03T07:23:55.636520+00:00"
+    },
+    {
+      "id": "31171a84",
+      "type": "loan",
+      "applicant": {
+        "full_name": "yooooo",
+        "age": 56,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 30,
+        "employment_type": "Permanent",
+        "monthly_income": 10000,
+        "existing_debt": 49998,
+        "credit_score": 849,
+        "loan_amount": 10000,
+        "loan_purpose": "Business"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T07:06:55.087881+00:00"
+    },
+    {
+      "id": "8ace8945",
+      "type": "job",
+      "applicant": {
+        "full_name": "Zeperrnest",
+        "job_title": "Software engineer",
+        "years_experience": 10,
+        "education_level": "Master",
+        "companies_worked": 4,
+        "career_gaps": 0,
+        "expected_salary": 8000
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T07:01:30.544509+00:00"
+    },
+    {
+      "id": "623a55cd",
+      "type": "job",
+      "applicant": {
+        "full_name": "Bavithran",
+        "job_title": "General Manager",
+        "years_experience": 20,
+        "education_level": "Master",
+        "companies_worked": 2,
+        "career_gaps": 0,
+        "expected_salary": 10000
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T06:55:32.903982+00:00"
+    },
+    {
+      "id": "82a2de52",
+      "type": "loan",
+      "applicant": {
+        "full_name": "Zeperrnest",
+        "age": 50,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 20000,
+        "existing_debt": 300000,
+        "credit_score": 849,
+        "loan_amount": 50000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T06:53:10.210470+00:00"
+    },
+    {
+      "id": "766a9549",
+      "type": "loan",
+      "applicant": {
+        "full_name": "Raja Vikraman ",
+        "age": 37,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 10,
+        "employment_type": "Permanent",
+        "monthly_income": 20000,
+        "existing_debt": 70000,
+        "credit_score": 850,
+        "loan_amount": 100000,
+        "loan_purpose": "Business"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T05:16:46.551377+00:00"
+    },
+    {
+      "id": "acf3923c",
+      "type": "loan",
+      "applicant": {
+        "age": 37,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 10,
+        "employment_type": "Permanent",
+        "monthly_income": 10000,
+        "existing_debt": 40000,
+        "credit_score": 806,
+        "loan_amount": 70000,
+        "loan_purpose": "Personal"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T03:45:00.221429+00:00"
+    },
+    {
+      "id": "4033e9a5",
+      "type": "loan",
+      "applicant": {
+        "age": 37,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 37,
+        "employment_type": "Permanent",
+        "monthly_income": 10000,
+        "existing_debt": 50000,
+        "credit_score": 700,
+        "loan_amount": 20000,
+        "loan_purpose": "Home"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T03:26:35.606251+00:00"
+    },
+    {
+      "id": "fcc72037",
+      "type": "loan",
+      "applicant": {
+        "age": 37,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 10,
+        "employment_type": "Permanent",
+        "monthly_income": 10000,
+        "existing_debt": 20000,
+        "credit_score": 850,
+        "loan_amount": 30000,
+        "loan_purpose": "Business"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Step 1: Ensure all application fields are filled correctly.",
+        "Step 2: Verify income and employment details.",
+        "Step 3: Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      },
+      "timestamp": "2026-02-03T03:25:05.407331+00:00"
+    },
+    {
       "id": "d4266941",
       "type": "loan",
       "applicant": {

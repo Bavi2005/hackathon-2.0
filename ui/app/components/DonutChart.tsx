@@ -14,7 +14,7 @@ interface DonutChartProps {
 	centerSubLabel?: string;
 }
 
-export default function DonutChart({ data, size = 160, thickness = 20, centerLabel, centerSubLabel }: DonutChartProps) {
+export default function DonutChart({ data, size = 160, thickness = 100, centerLabel, centerSubLabel }: DonutChartProps) {
 	const total = useMemo(() => data.reduce((acc, curr) => acc + curr.value, 0), [data]);
 
 	const segments = useMemo(() => {

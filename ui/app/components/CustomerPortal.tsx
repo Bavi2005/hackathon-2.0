@@ -30,7 +30,8 @@ export default function CustomerPortal({ onBack }: CustomerPortalProps) {
 						// Job Done!
 						setAiResult({
 							decision: status.model_output.label,
-							summary: status.explanation.summary
+							summary: status.explanation.summary,
+							counterfactuals: status.ai_result?.counterfactuals
 						});
 						setPollStatus('completed');
 					}
@@ -54,8 +55,8 @@ export default function CustomerPortal({ onBack }: CustomerPortalProps) {
 				}
 			});
 
-			const id = await api.submitApplication(applicationType, cleanedData);
-			setSubmittedId(id);
+			const response = await api.submitApplication(applicationType, cleanedData);
+			setSubmittedId(response.id);
 			setPollStatus('waiting');
 			setIsSubmitting(false);
 		} catch (e) {

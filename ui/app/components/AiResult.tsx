@@ -8,7 +8,10 @@ interface AiResultProps {
 }
 
 export default function AiResult({ result, onReset }: AiResultProps) {
-	const isDenied = result.decision.toLowerCase() === 'denied' || result.decision.toLowerCase() === 'high risk';
+	// Note: in CustomerPortal, decision is passed as a string (status.model_output.label)
+	// which differs from the AiResultType definition. We handle both for robustness.
+	const decisionText = typeof result.decision === 'string' ? result.decision : result.decision?.status || '';
+	const isDenied = decisionText.toLowerCase() === 'denied' || decisionText.toLowerCase() === 'high risk';
 	const isApproved = !isDenied;
 
 	return (
@@ -28,11 +31,13 @@ export default function AiResult({ result, onReset }: AiResultProps) {
 					</div>
 				)}
 
-				<h1 className={`text-5xl font-black mb-4 tracking-tight ${isApproved ? 'text-white' : 'text-red-100'}`}>{result.decision}</h1>
-				<p className="text-amber-100/70 mb-10 text-lg font-medium leading-relaxed">"{result.summary}"</p>
+				<h1 className={`text-5xl font-black mb-4 tracking-tight ${isApproved ? 'text-white' : 'text-red-100'}`}>
+					{isApproved ? "Congratulations! Your application has been approved." : decisionText}
+				</h1>
+				{/* <p className="text-amber-100/70 mb-10 text-lg font-medium leading-relaxed">"{result.summary}"</p> */}
 
-				{/* Steps to Approval (Counterfactuals) */}
-				{result.counterfactuals && result.counterfactuals.length > 0 && (
+				{/* Steps to Approval (Counterfactuals) - ONLY SHOW IF DENIED */}
+				{!isApproved && result.counterfactuals && result.counterfactuals.length > 0 && (
 					<div className="mb-10 text-left bg-[#1a100e]/50 p-6 rounded-2xl border border-amber-500/10">
 						<h3 className="text-amber-400 font-bold uppercase tracking-wider text-sm mb-4">Steps to Approval</h3>
 						<ul className="space-y-3">

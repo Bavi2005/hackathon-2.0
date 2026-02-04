@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit } from 'lucide-react';
+import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Download } from 'lucide-react';
 import { CaseData } from '../lib/types';
 import { CATEGORIES, CATEGORY_CONFIG } from '../lib/constants';
 import DonutChart from './DonutChart';
@@ -22,7 +22,7 @@ type CategoryState = {
 export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [showPolicyManager, setShowPolicyManager] = useState(false);
-	
+
 	const [explanationEditorState, setExplanationEditorState] = useState<{
 		isOpen: boolean;
 		mode: 'edit' | 'override';
@@ -86,7 +86,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 		// INSTANT APPROVAL
 		if (action === 'Approved') {
 			let explanation = "Manually approved by auditor based on provided evidence.";
-			
+
 			// Use AI reasoning if available
 			if (activeCase.ai_result) {
 				if (activeCase.ai_result.decision.status.toLowerCase() === 'approved') {
@@ -97,7 +97,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 			}
 
 			await api.updateApplicationStatus(activeCase.decision_id, selectedCategory, action, explanation);
-			
+
 			// Force reload locally to reflect change instantly
 			const newData = await api.getApplications();
 			setRealData(newData);
@@ -110,7 +110,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 		// DENY WITH OVERRIDE POPUP
 		if (action === 'Denied') {
 			let explanation = "Manually denied by auditor due to policy mismatch.";
-			
+
 			// Use AI reasoning if available
 			if (activeCase.ai_result) {
 				if (activeCase.ai_result.decision.status.toLowerCase() === 'rejected') {
@@ -168,22 +168,22 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 				<button onClick={onBack} className="absolute top-8 left-8 flex items-center gap-2 text-amber-500 hover:text-amber-400 font-bold z-20"><ArrowLeft size={20} /> Back</button>
 				<h1 className="text-5xl font-black text-white mb-12">Employee Audit Portal</h1>
-				<div className="grid grid-cols-2 gap-8 max-w-5xl w-full">
+				<div className="grid grid-cols-4 gap-8 max-w-7xl w-full">
 					{categoriesWithStats.map(cat => {
 						const config = CATEGORY_CONFIG[cat.id] || CATEGORY_CONFIG.default;
 						return (
-							<button key={cat.id} onClick={() => setSelectedCategory(cat.id)} className="bg-white/5 hover:bg-white/10 border border-amber-900/50 hover:border-amber-500/50 rounded-[2rem] p-8 transition-all relative overflow-hidden group">
-								<div className="flex justify-between items-start mb-6 relative z-10">
-									<div className="p-4 bg-amber-500/10 rounded-2xl text-amber-500 group-hover:scale-110 transition-transform"><cat.icon size={32} /></div>
-									<div className="text-right">
-										<div className="text-3xl font-black text-white">{cat.total}</div>
-										<div className="flex items-center justify-end gap-2 text-xs uppercase font-bold text-amber-500/70">
-											{cat.pending > 0 && <span className="text-amber-400 animate-pulse">● {cat.pending} Pending</span>}
-											<span>Total Cases</span>
+							<button key={cat.id} onClick={() => setSelectedCategory(cat.id)} className="bg-white/5 hover:bg-white/10 border border-amber-900/50 hover:border-amber-500/50 rounded-[2rem] p-8 transition-all relative overflow-hidden group flex flex-col justify-between h-[320px]">
+								<div className="relative z-10 w-full">
+									<div className="flex justify-between items-start mb-6">
+										<div className="p-4 bg-amber-500/10 rounded-2xl text-amber-500 group-hover:scale-110 transition-transform"><cat.icon size={32} /></div>
+										<div className="text-right">
+											<div className="text-4xl font-black text-white mb-1">{cat.total}</div>
+											<div className="text-[10px] uppercase font-bold text-amber-500/50">Total Cases</div>
 										</div>
 									</div>
+									<h2 className="text-2xl font-bold text-amber-50 text-left mb-2">{cat.title}</h2>
+									<div className="text-xs text-amber-500/40 font-mono text-left mb-6">Last Active: {new Date().toLocaleTimeString()}</div>
 								</div>
-								<h2 className="text-2xl font-bold text-amber-50 text-left mb-6 relative z-10">{cat.title}</h2>
 
 								{/* Mini Stats Bar */}
 								<div className="flex gap-2 h-2 rounded-full overflow-hidden bg-black/20 relative z-10">
@@ -242,7 +242,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 						<Settings size={18} />
 						Manage Policies
 					</button>
-					
+
 					<div className="flex bg-[#1a100e] p-1 rounded-lg border border-amber-900/30">
 						{['Pending', 'All', 'Approved', 'Denied'].map((f) => {
 							const isActive = filter === f;
@@ -282,11 +282,11 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 				<div className="w-[400px] h-full overflow-y-auto border-r border-amber-900/30 bg-[#1a100e] flex-shrink-0 flex flex-col">
 					<div className="p-4 border-b border-amber-900/30 flex-shrink-0">
 						<div className="flex items-center gap-4 bg-[#291d1a] p-4 rounded-xl border border-amber-900/30 shadow-sm">
-							<DonutChart data={chartData} size={60} thickness={6} />
+							<DonutChart data={chartData} size={80} thickness={6} />
 							<div className="flex flex-col gap-1">
-								<div className="flex items-center gap-2 text-xs font-bold text-white"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: config.positive }} /> {currentCategory.approved} {config.posLabel}</div>
-								<div className="flex items-center gap-2 text-xs font-bold text-gray-400"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: config.negative }} /> {currentCategory.declined} {config.negLabel}</div>
-								{currentCategory.pending > 0 && <div className="flex items-center gap-2 text-xs font-bold text-amber-500"><span className="w-2 h-2 rounded-full bg-amber-500" /> {currentCategory.pending} Pending</div>}
+								<div className="flex items-center gap-2 text-xs font-bold text-white drop-shadow-md"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: config.positive }} /> {currentCategory.approved} {config.posLabel}</div>
+								<div className="flex items-center gap-2 text-xs font-bold text-gray-50 drop-shadow-md"><span className="w-2 h-2 rounded-full" style={{ backgroundColor: config.negative }} /> {currentCategory.declined} {config.negLabel}</div>
+								{currentCategory.pending > 0 && <div className="flex items-center gap-2 text-xs font-bold text-amber-400 drop-shadow-md"><span className="w-2 h-2 rounded-full bg-amber-500" /> {currentCategory.pending} Pending</div>}
 							</div>
 						</div>
 					</div>
@@ -339,7 +339,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 										<div>
 											<div className="text-[10px] font-bold text-amber-500/60 uppercase">Applicant</div>
 											<div className="text-xl font-black text-white leading-none group-hover:text-amber-200 transition-colors">
-												{c.input_features?.applicant_id || "Unknown"}
+												{c.applicant_name || c.input_features?.applicant_id || "Unknown"}
 											</div>
 										</div>
 									</div>
@@ -378,6 +378,45 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 												⚠ Override
 											</span>
 										)}
+										<div className="flex gap-2">
+											<button
+												onClick={() => {
+													const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(
+														`Application History\n` +
+														`ID: ${activeCase.decision_id}\n` +
+														`Applicant: ${activeCase.applicant_name || activeCase.input_features?.applicant_id || "Unknown"}\n` +
+														`Date: ${new Date().toLocaleString()}\n` +
+														`----------------------------------------\n\n` +
+														JSON.stringify(activeCase, null, 2)
+													);
+													const downloadAnchorNode = document.createElement('a');
+													downloadAnchorNode.setAttribute("href", dataStr);
+													downloadAnchorNode.setAttribute("download", `application_${activeCase.decision_id}.txt`);
+													document.body.appendChild(downloadAnchorNode);
+													downloadAnchorNode.click();
+													downloadAnchorNode.remove();
+												}}
+												className="px-3 py-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-2 text-sm font-bold border border-amber-500/30"
+												title="Download Text Summary"
+											>
+												<Download size={16} /> TXT
+											</button>
+											<button
+												onClick={() => {
+													const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(activeCase, null, 2));
+													const downloadAnchorNode = document.createElement('a');
+													downloadAnchorNode.setAttribute("href", dataStr);
+													downloadAnchorNode.setAttribute("download", `application_${activeCase.decision_id}.json`);
+													document.body.appendChild(downloadAnchorNode);
+													downloadAnchorNode.click();
+													downloadAnchorNode.remove();
+												}}
+												className="px-3 py-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-2 text-sm font-bold border border-amber-500/30"
+												title="Download JSON Data"
+											>
+												<Download size={16} /> JSON
+											</button>
+										</div>
 									</div>
 								</div>
 
@@ -432,7 +471,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 								</div>
 								<div className="bg-gradient-to-br from-[#291d1a] to-[#1a100e] rounded-3xl p-8 border-2 border-amber-500/40 shadow-2xl">
 									<p className="text-lg text-gray-200 leading-relaxed mb-8 font-medium">"{activeCase.explanation.summary}"</p>
-									
+
 									{/* Counterfactuals Display - More Prominent */}
 									{(activeCase as any).ai_result?.counterfactuals && (activeCase as any).ai_result.counterfactuals.length > 0 && (
 										<div className="pt-6 border-t-2 border-amber-900/40">
@@ -448,7 +487,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 											</div>
 										</div>
 									)}
-									
+
 									{/* Fallback if no structured counterfactuals */}
 									{!(activeCase as any).ai_result?.counterfactuals?.length && activeCase.counterfactual && activeCase.counterfactual !== 'N/A' && (
 										<div className="pt-6 border-t-2 border-amber-900/40">
@@ -467,7 +506,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 									<h3 className="text-sm font-black uppercase tracking-widest text-amber-500/70 mb-4">
 										Application Data
 									</h3>
-									
+
 									{/* Key Metrics Section */}
 									{(activeCase as any).ai_result?.key_metrics && (
 										<div>
@@ -508,7 +547,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 											)}
 										</div>
 									)}
-									
+
 									{/* Application Features */}
 									<div className="grid grid-cols-2 gap-4">
 										{Object.entries(activeCase.input_features).slice(0, 8).map(([key, val]) => (
@@ -560,12 +599,12 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 					)}
 				</div>
 			</div>
-			
+
 			{/* Modals */}
 			{showPolicyManager && (
 				<PolicyManager onClose={() => setShowPolicyManager(false)} />
 			)}
-			
+
 			{explanationEditorState.isOpen && activeCase && (
 				<ExplanationEditor
 					applicationId={activeCase.decision_id}
@@ -575,9 +614,9 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 					onSubmit={explanationEditorState.mode === 'override' ? async (text) => {
 						if (explanationEditorState.action && selectedCategory) {
 							await api.updateApplicationStatus(
-								activeCase.decision_id, 
-								selectedCategory, 
-								explanationEditorState.action, 
+								activeCase.decision_id,
+								selectedCategory,
+								explanationEditorState.action,
 								text
 							);
 						}

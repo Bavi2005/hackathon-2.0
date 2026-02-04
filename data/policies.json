@@ -1,5 +1,11 @@
 {
-  "loan": [],
+  "loan": [
+    {
+      "id": "9f0a7ad5",
+      "text": "deny collin",
+      "created_at": "2026-01-28T05:36:51.152424+00:00"
+    }
+  ],
   "credit": [],
   "insurance": [],
   "job": [],

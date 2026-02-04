@@ -29,7 +29,7 @@ app.add_middleware(
 # CONFIG (RAM-SAFE)
 # =====================================================
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "qwen2.5:1.5b"
+MODEL_NAME = "qwen2.5:3b"
 
 MAX_CSV_ROWS = 50
 MAX_CONCURRENCY = 5  # Increased for parallel batch processing

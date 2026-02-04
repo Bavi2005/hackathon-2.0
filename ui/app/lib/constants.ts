@@ -3,6 +3,7 @@ import { ApplicationType } from './types';
 
 export const FORM_FIELDS: { [key: string]: Array<{ name: string, label: string, type: string, options?: string[] }> } = {
 	loan: [
+		{ name: 'full_name', label: 'Full Name', type: 'text' },
 		{ name: 'age', label: 'What is your age?', type: 'number' },
 		{ name: 'gender', label: 'What is your gender?', type: 'select', options: ['M', 'F', 'Other'] },
 		{ name: 'marital_status', label: 'What is your marital status?', type: 'select', options: ['Single', 'Married', 'Divorced', 'Widowed'] },
@@ -15,6 +16,7 @@ export const FORM_FIELDS: { [key: string]: Array<{ name: string, label: string, 
 		{ name: 'loan_purpose', label: 'What is the purpose of this loan?', type: 'select', options: ['Personal', 'Business', 'Education', 'Home', 'Vehicle'] },
 	],
 	job: [
+		{ name: 'full_name', label: 'Full Name', type: 'text' },
 		{ name: 'job_title', label: 'What job title are you applying for?', type: 'text' },
 		{ name: 'years_experience', label: 'How many years of experience do you have?', type: 'number' },
 		{ name: 'education_level', label: 'What is your highest education level?', type: 'select', options: ['High School', 'Diploma', 'Bachelor', 'Master', 'PhD'] },
@@ -23,6 +25,7 @@ export const FORM_FIELDS: { [key: string]: Array<{ name: string, label: string, 
 		{ name: 'expected_salary', label: 'What is your expected salary (RM)?', type: 'number' },
 	],
 	insurance: [
+		{ name: 'full_name', label: 'Full Name', type: 'text' },
 		{ name: 'age', label: 'What is your age?', type: 'number' },
 		{ name: 'policy_type', label: 'What type of policy do you have?', type: 'select', options: ['Health', 'Life', 'Vehicle', 'Property'] },
 		{ name: 'policy_years', label: 'How many years have you held this policy?', type: 'number' },
@@ -33,6 +36,7 @@ export const FORM_FIELDS: { [key: string]: Array<{ name: string, label: string, 
 		{ name: 'annual_premium', label: 'What is your annual premium (RM)?', type: 'number' },
 	],
 	credit: [
+		{ name: 'full_name', label: 'Full Name', type: 'text' },
 		{ name: 'customer_id', label: 'What is your customer ID?', type: 'text' },
 		{ name: 'credit_score', label: 'What is your credit score?', type: 'number' },
 		{ name: 'accounts_open', label: 'How many accounts do you have open?', type: 'number' },

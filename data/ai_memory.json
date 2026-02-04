@@ -2,6 +2,78 @@
   "decisions": [
     {
       "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "After evaluating the provided data, it was determined that Zep Ernest's financial situation is not strong enough to qualify for this loan. His Monthly Income of $2699 is significantly below a healthy threshold relative to his Employment Years (1 year) and existing debt level ($0). An additional $500 in monthly income would make him more financially stable, which could improve his credit score and increase the likelihood of approval.",
+      "timestamp": "2026-02-03T08:29:05.821424+00:00"
+    },
+    {
+      "type": "job",
+      "decision": "REJECTED",
+      "reasoning": "Kelvin has more than 10 years of experience as a Security Guard and completed a Diploma, which is within the acceptable range for this position. However, his expected salary of $6000 does not align well with industry standards and expectations based on his level of experience and education. While Kelvin may still be suitable in terms of experience and qualifications, his expected salary falls below what would typically be considered reasonable for a professional in this field.",
+      "timestamp": "2026-02-03T08:03:30.438036+00:00"
+    },
+    {
+      "type": "job",
+      "decision": "REJECTED",
+      "reasoning": "Based on the provided information, Natalie does not meet our current approval criteria for a job application as a Software Developer with 9 years of experience and a bachelor's degree. The expected salary of $9000 seems unusually low given her qualifications and industry standards.",
+      "timestamp": "2026-02-03T07:50:35.270904+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "After evaluating the provided data, it was determined that Mr. Ferrari's financial situation is not strong enough to qualify for this loan. His existing debt of $30,000 already exceeds a healthy threshold relative to his income and employment stability (Employment Years: 20). With an employment type as Permanent and no additional details indicating he has substantial savings or other sources of income that could reduce the impact of the existing debt, it would be risky for us to approve this loan. We recommend looking at ways to improve Mr. Ferrari's financial health through reducing his debt or increasing his income.",
+      "timestamp": "2026-02-03T07:23:55.634461+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T07:06:55.087137+00:00"
+    },
+    {
+      "type": "job",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T07:01:30.540731+00:00"
+    },
+    {
+      "type": "job",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T06:55:32.903551+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T06:53:10.209306+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T05:16:46.550732+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T03:45:00.220504+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T03:26:35.605879+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-03T03:25:05.406859+00:00"
+    },
+    {
+      "type": "loan",
       "decision": "APPROVED",
       "reasoning": "The applicant meets all necessary criteria for a loan, including their high income and low existing debt.",
       "timestamp": "2026-01-28T05:41:24.074928+00:00"

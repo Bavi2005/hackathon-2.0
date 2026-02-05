@@ -1,6 +1,1106 @@
 {
   "explanations": [
     {
+      "id": "e85289f2",
+      "type": "insurance",
+      "applicant": {
+        "full_name": "ieubweibwi",
+        "age": 80,
+        "policy_type": "Life",
+        "policy_years": 25,
+        "previous_claims": -6,
+        "claim_amount": 249998,
+        "incident_severity": "critical",
+        "location_type": "urban",
+        "annual_premium": 900000
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.75,
+        "reasoning": "Based on automated analysis: Higher age risk, No prior claims. Risk score: 65/100.\n\nDetailed Analysis:\nYour age of 80 years places you in a higher actuarial risk category, which affects premium calculations and coverage eligibility. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+      },
+      "counterfactuals": [
+        "Step 1: Consider applying for senior-specific insurance plans designed for your age bracket with appropriate coverage options"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 35,
+        "approval_probability": 0.65,
+        "critical_factors": [
+          "Higher age risk",
+          "No prior claims"
+        ]
+      },
+      "timestamp": "2026-02-05T17:03:27.617747+00:00"
+    },
+    {
+      "id": "7e65e319",
+      "type": "loan",
+      "applicant": {
+        "full_name": "kj kj jonimon",
+        "age": 70,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 50,
+        "employment_type": "Permanent",
+        "monthly_income": 280000,
+        "existing_debt": 900,
+        "credit_score": 850,
+        "loan_amount": 90000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM280,000 (RM3,360,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T17:00:45.018467+00:00"
+    },
+    {
+      "id": "939b6dfe",
+      "type": "loan",
+      "applicant": {
+        "full_name": "weifbwiefbwiefbwibw",
+        "age": 30,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 10,
+        "employment_type": "Permanent",
+        "monthly_income": 50000,
+        "existing_debt": 9000,
+        "credit_score": 850,
+        "loan_amount": 300000,
+        "loan_purpose": "Home"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM50,000 (RM600,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:55:51.264190+00:00"
+    },
+    {
+      "id": "b0aa907e",
+      "type": "loan",
+      "applicant": {
+        "full_name": "nope jimma",
+        "age": 50,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 34,
+        "employment_type": "Permanent",
+        "monthly_income": 250000,
+        "existing_debt": 10000,
+        "credit_score": 850,
+        "loan_amount": 90000,
+        "loan_purpose": "Home"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM250,000 (RM3,000,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:50:20.198207+00:00"
+    },
+    {
+      "id": "a37b0b3f",
+      "type": "loan",
+      "applicant": {
+        "full_name": "bavi",
+        "age": 35,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 15,
+        "employment_type": "Permanent",
+        "monthly_income": 25000,
+        "existing_debt": 0,
+        "credit_score": 850,
+        "loan_amount": 100000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM25,000 (RM300,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:40:46.505873+00:00"
+    },
+    {
+      "id": "24df9f62",
+      "type": "loan",
+      "applicant": {
+        "full_name": "edoseifnde",
+        "age": 70,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 30,
+        "employment_type": "Permanent",
+        "monthly_income": 200000,
+        "existing_debt": 0,
+        "credit_score": 450,
+        "loan_amount": 1500000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM200,000 (RM2,400,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 450 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:36:26.751155+00:00"
+    },
+    {
+      "id": "7f24269c",
+      "type": "loan",
+      "applicant": {
+        "full_name": "e;ionwefo",
+        "age": 38,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 2900,
+        "existing_debt": 90800,
+        "credit_score": 800,
+        "loan_amount": 250000,
+        "loan_purpose": "Home"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,900 (RM34,800/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 800 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of RM250,000 represents a loan-to-income ratio of 7.2x your annual income (RM34,800), which exceeds BNM's prudent lending threshold of 5x annual income."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Request a smaller loan amount (max RM174,000 based on your income) or increase your income before reapplying"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Low income",
+          "Excellent credit",
+          "High loan-to-income"
+        ]
+      },
+      "timestamp": "2026-02-05T16:33:17.848303+00:00"
+    },
+    {
+      "id": "9f2051a8",
+      "type": "loan",
+      "applicant": {
+        "full_name": "weofnwejlfn",
+        "age": 50,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 200000,
+        "existing_debt": 99999900,
+        "credit_score": 850,
+        "loan_amount": 900000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM200,000 (RM2,400,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:08:54.648885+00:00"
+    },
+    {
+      "id": "0be2c6f5",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 18,
+        "age": 48,
+        "gender": "F",
+        "marital_status": "Single",
+        "employment_years": 4,
+        "employment_type": "Permanent",
+        "monthly_income": 13227,
+        "existing_debt": 48519,
+        "credit_score": 571,
+        "loan_amount": 130467,
+        "loan_purpose": "Home",
+        "dependents": 9
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM13,227 (RM158,724/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 571 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.592701+00:00"
+    },
+    {
+      "id": "2af43a11",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 17,
+        "age": 58,
+        "gender": "F",
+        "marital_status": "Married",
+        "employment_years": 19,
+        "employment_type": "Self-Employed",
+        "monthly_income": 17536,
+        "existing_debt": 8050,
+        "credit_score": 418,
+        "loan_amount": 132944,
+        "loan_purpose": "Education",
+        "dependents": 8
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM17,536 (RM210,432/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.587881+00:00"
+    },
+    {
+      "id": "97fd3854",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 16,
+        "age": 18,
+        "gender": "M",
+        "marital_status": "Divorced",
+        "employment_years": 3,
+        "employment_type": "Self-Employed",
+        "monthly_income": 2835,
+        "existing_debt": 4608,
+        "credit_score": 512,
+        "loan_amount": 165974,
+        "loan_purpose": "Education",
+        "dependents": 3
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.25,
+        "reasoning": "Based on automated analysis: Low income, Poor credit. Risk score: 15/100.\n\nDetailed Analysis:\nYour monthly income of RM2,835 (RM34,020/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 512 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 85,
+        "approval_probability": 0.15,
+        "critical_factors": [
+          "Low income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.581635+00:00"
+    },
+    {
+      "id": "d49ef0a7",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 15,
+        "age": 21,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 6,
+        "employment_type": "Unemployed",
+        "monthly_income": 7318,
+        "existing_debt": 7204,
+        "credit_score": 648,
+        "loan_amount": 162477,
+        "loan_purpose": "Personal",
+        "dependents": 2
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Based on automated analysis: Good income, Fair credit. Risk score: 75/100.\n\nDetailed Analysis:\nYour monthly income of RM7,318 (RM87,816/year) shows solid financial standing and meets our standard requirements. Your credit score of 648 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 25,
+        "approval_probability": 0.75,
+        "critical_factors": [
+          "Good income",
+          "Fair credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.567224+00:00"
+    },
+    {
+      "id": "c93a94f5",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 14,
+        "age": 62,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 28,
+        "employment_type": "Unemployed",
+        "monthly_income": 15043,
+        "existing_debt": 26147,
+        "credit_score": 703,
+        "loan_amount": 32141,
+        "loan_purpose": "Education",
+        "dependents": 7
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM15,043 (RM180,516/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 703 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.561412+00:00"
+    },
+    {
+      "id": "40f3634f",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 13,
+        "age": 49,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 9,
+        "employment_type": "Permanent",
+        "monthly_income": 6773,
+        "existing_debt": 27456,
+        "credit_score": 847,
+        "loan_amount": 101797,
+        "loan_purpose": "Auto",
+        "dependents": 3
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM6,773 (RM81,276/year) shows solid financial standing and meets our standard requirements. Your credit score of 847 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 10,
+        "approval_probability": 0.9,
+        "critical_factors": [
+          "Good income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.553951+00:00"
+    },
+    {
+      "id": "b00784f8",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 12,
+        "age": 61,
+        "gender": "F",
+        "marital_status": "Single",
+        "employment_years": 4,
+        "employment_type": "Permanent",
+        "monthly_income": 7774,
+        "existing_debt": 9915,
+        "credit_score": 537,
+        "loan_amount": 177626,
+        "loan_purpose": "Home",
+        "dependents": 1
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,774 (RM93,288/year) shows solid financial standing and meets our standard requirements. Your credit score of 537 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Good income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.547858+00:00"
+    },
+    {
+      "id": "e4d41b93",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 11,
+        "age": 23,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 12,
+        "employment_type": "Self-Employed",
+        "monthly_income": 6486,
+        "existing_debt": 28214,
+        "credit_score": 585,
+        "loan_amount": 190177,
+        "loan_purpose": "Education",
+        "dependents": 6
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM6,486 (RM77,832/year) shows solid financial standing and meets our standard requirements. Your credit score of 585 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Good income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.542338+00:00"
+    },
+    {
+      "id": "5dedc539",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 10,
+        "age": 25,
+        "gender": "F",
+        "marital_status": "Single",
+        "employment_years": 6,
+        "employment_type": "Self-Employed",
+        "monthly_income": 6238,
+        "existing_debt": 48389,
+        "credit_score": 553,
+        "loan_amount": 109306,
+        "loan_purpose": "Education",
+        "dependents": 8
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM6,238 (RM74,856/year) shows solid financial standing and meets our standard requirements. Your credit score of 553 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Good income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.537700+00:00"
+    },
+    {
+      "id": "0e708e3f",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 9,
+        "age": 61,
+        "gender": "F",
+        "marital_status": "Married",
+        "employment_years": 22,
+        "employment_type": "Unemployed",
+        "monthly_income": 13370,
+        "existing_debt": 1478,
+        "credit_score": 772,
+        "loan_amount": 98182,
+        "loan_purpose": "Home",
+        "dependents": 10
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM13,370 (RM160,440/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 772 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.532613+00:00"
+    },
+    {
+      "id": "4652a3ce",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 8,
+        "age": 47,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 30,
+        "employment_type": "Self-Employed",
+        "monthly_income": 17535,
+        "existing_debt": 45681,
+        "credit_score": 366,
+        "loan_amount": 20904,
+        "loan_purpose": "Auto",
+        "dependents": 10
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM17,535 (RM210,420/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 366 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.529039+00:00"
+    },
+    {
+      "id": "d7c5848f",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 7,
+        "age": 27,
+        "gender": "F",
+        "marital_status": "Married",
+        "employment_years": 1,
+        "employment_type": "Permanent",
+        "monthly_income": 12280,
+        "existing_debt": 22290,
+        "credit_score": 658,
+        "loan_amount": 160810,
+        "loan_purpose": "Education",
+        "dependents": 10
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.9,
+        "reasoning": "Based on automated analysis: High income, Fair credit. Risk score: 80/100.\n\nDetailed Analysis:\nYour monthly income of RM12,280 (RM147,360/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 658 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 20,
+        "approval_probability": 0.8,
+        "critical_factors": [
+          "High income",
+          "Fair credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.524387+00:00"
+    },
+    {
+      "id": "2d791510",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 6,
+        "age": 49,
+        "gender": "F",
+        "marital_status": "Divorced",
+        "employment_years": 14,
+        "employment_type": "Self-Employed",
+        "monthly_income": 4398,
+        "existing_debt": 7737,
+        "credit_score": 824,
+        "loan_amount": 114608,
+        "loan_purpose": "Home",
+        "dependents": 6
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.9,
+        "reasoning": "Based on automated analysis: Moderate income, Excellent credit. Risk score: 80/100.\n\nDetailed Analysis:\nYour monthly income of RM4,398 (RM52,776/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 824 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 20,
+        "approval_probability": 0.8,
+        "critical_factors": [
+          "Moderate income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.519031+00:00"
+    },
+    {
+      "id": "5cf9d861",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 5,
+        "age": 55,
+        "gender": "F",
+        "marital_status": "Married",
+        "employment_years": 9,
+        "employment_type": "Contract",
+        "monthly_income": 7890,
+        "existing_debt": 45809,
+        "credit_score": 549,
+        "loan_amount": 26457,
+        "loan_purpose": "Auto",
+        "dependents": 9
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,890 (RM94,680/year) shows solid financial standing and meets our standard requirements. Your credit score of 549 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Good income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.514770+00:00"
+    },
+    {
+      "id": "e74c749b",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 4,
+        "age": 63,
+        "gender": "M",
+        "marital_status": "Divorced",
+        "employment_years": 1,
+        "employment_type": "Contract",
+        "monthly_income": 18266,
+        "existing_debt": 44590,
+        "credit_score": 844,
+        "loan_amount": 117090,
+        "loan_purpose": "Auto",
+        "dependents": 8
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM18,266 (RM219,192/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 844 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 5,
+        "approval_probability": 0.95,
+        "critical_factors": [
+          "High income",
+          "Excellent credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.510575+00:00"
+    },
+    {
+      "id": "88751699",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 3,
+        "age": 44,
+        "gender": "M",
+        "marital_status": "Divorced",
+        "employment_years": 3,
+        "employment_type": "Self-Employed",
+        "monthly_income": 7922,
+        "existing_debt": 6753,
+        "credit_score": 492,
+        "loan_amount": 102621,
+        "loan_purpose": "Personal",
+        "dependents": 9
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,922 (RM95,064/year) shows solid financial standing and meets our standard requirements. Your credit score of 492 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": [
+          "Good income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.505520+00:00"
+    },
+    {
+      "id": "c6f6c392",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 2,
+        "age": 54,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 14998,
+        "existing_debt": 3249,
+        "credit_score": 526,
+        "loan_amount": 17211,
+        "loan_purpose": "Home",
+        "dependents": 5
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM14,998 (RM179,976/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 526 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.502057+00:00"
+    },
+    {
+      "id": "5e44797f",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 1,
+        "age": 31,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 13,
+        "employment_type": "Unemployed",
+        "monthly_income": 4289,
+        "existing_debt": 15772,
+        "credit_score": 392,
+        "loan_amount": 149453,
+        "loan_purpose": "Education",
+        "dependents": 1
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.45,
+        "reasoning": "Based on automated analysis: Moderate income, Poor credit. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM4,289 (RM51,468/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 392 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 65,
+        "approval_probability": 0.35,
+        "critical_factors": [
+          "Moderate income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.498972+00:00"
+    },
+    {
+      "id": "291e3a18",
+      "type": "loan",
+      "applicant": {
+        "applicant_id": 0,
+        "age": 38,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 4373,
+        "existing_debt": 35119,
+        "credit_score": 396,
+        "loan_amount": 100863,
+        "loan_purpose": "Personal",
+        "dependents": 9
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.45,
+        "reasoning": "Based on automated analysis: Moderate income, Poor credit. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM4,373 (RM52,476/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 396 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 65,
+        "approval_probability": 0.35,
+        "critical_factors": [
+          "Moderate income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:39.494384+00:00"
+    },
+    {
+      "id": "f9c0a677",
+      "type": "loan",
+      "applicant": {
+        "full_name": "WJOVNEAORJC",
+        "age": 39,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 10,
+        "employment_type": "Permanent",
+        "monthly_income": 900000,
+        "existing_debt": 12333,
+        "credit_score": 390,
+        "loan_amount": 3000000,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.6,
+        "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM900,000 (RM10,800,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 390 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.5,
+        "critical_factors": [
+          "High income",
+          "Poor credit"
+        ]
+      },
+      "timestamp": "2026-02-05T16:06:20.306257+00:00"
+    },
+    {
+      "id": "bd9570cd",
+      "type": "loan",
+      "applicant": {
+        "full_name": "woefmwoaejfnwoe",
+        "age": 49,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Permanent",
+        "monthly_income": 292992,
+        "existing_debt": 290299292,
+        "credit_score": 309,
+        "loan_amount": 92929292929,
+        "loan_purpose": "Vehicle"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.45,
+        "reasoning": "Based on automated analysis: High income, Poor credit, High loan-to-income. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM292,992 (RM3,515,904/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 309 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM92,929,292,929 represents a loan-to-income ratio of 26431.1x your annual income (RM3,515,904), which exceeds BNM's prudent lending threshold of 5x annual income."
+      },
+      "counterfactuals": [
+        "Step 1: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
+        "Step 2: Request a smaller loan amount (max RM17,579,520 based on your income) or increase your income before reapplying"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 65,
+        "approval_probability": 0.35,
+        "critical_factors": [
+          "High income",
+          "Poor credit",
+          "High loan-to-income"
+        ]
+      },
+      "timestamp": "2026-02-05T16:05:36.070587+00:00"
+    },
+    {
       "id": "880c91cf",
       "type": "credit",
       "applicant": {

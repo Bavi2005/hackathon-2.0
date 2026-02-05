@@ -1,6 +1,180 @@
 {
   "decisions": [
     {
+      "type": "insurance",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Higher age risk, No prior claims. Risk score: 65/100.\n\nDetailed Analysis:\nYour age of 80 years places you in a higher actuarial risk category, which affects premium calculations and coverage eligibility. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.",
+      "timestamp": "2026-02-05T17:03:27.616880+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM280,000 (RM3,360,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T17:00:45.017363+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM50,000 (RM600,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:55:51.263396+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM250,000 (RM3,000,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:50:20.197505+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM25,000 (RM300,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:40:46.505133+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM200,000 (RM2,400,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 450 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:36:26.750655+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,900 (RM34,800/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 800 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of RM250,000 represents a loan-to-income ratio of 7.2x your annual income (RM34,800), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T16:33:17.847070+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM200,000 (RM2,400,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:08:54.647714+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM13,227 (RM158,724/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 571 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.592319+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM17,536 (RM210,432/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.587471+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Poor credit. Risk score: 15/100.\n\nDetailed Analysis:\nYour monthly income of RM2,835 (RM34,020/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 512 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.580542+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Good income, Fair credit. Risk score: 75/100.\n\nDetailed Analysis:\nYour monthly income of RM7,318 (RM87,816/year) shows solid financial standing and meets our standard requirements. Your credit score of 648 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates.",
+      "timestamp": "2026-02-05T16:06:39.566797+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM15,043 (RM180,516/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 703 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:06:39.560941+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM6,773 (RM81,276/year) shows solid financial standing and meets our standard requirements. Your credit score of 847 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:06:39.553275+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,774 (RM93,288/year) shows solid financial standing and meets our standard requirements. Your credit score of 537 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.547267+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM6,486 (RM77,832/year) shows solid financial standing and meets our standard requirements. Your credit score of 585 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.541981+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM6,238 (RM74,856/year) shows solid financial standing and meets our standard requirements. Your credit score of 553 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.536945+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM13,370 (RM160,440/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 772 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:06:39.532336+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM17,535 (RM210,420/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 366 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.528701+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Fair credit. Risk score: 80/100.\n\nDetailed Analysis:\nYour monthly income of RM12,280 (RM147,360/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 658 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates.",
+      "timestamp": "2026-02-05T16:06:39.523939+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Moderate income, Excellent credit. Risk score: 80/100.\n\nDetailed Analysis:\nYour monthly income of RM4,398 (RM52,776/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 824 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:06:39.518470+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,890 (RM94,680/year) shows solid financial standing and meets our standard requirements. Your credit score of 549 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.514458+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM18,266 (RM219,192/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 844 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T16:06:39.509799+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Good income, Poor credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM7,922 (RM95,064/year) shows solid financial standing and meets our standard requirements. Your credit score of 492 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.505059+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM14,998 (RM179,976/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 526 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.501749+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Moderate income, Poor credit. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM4,289 (RM51,468/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 392 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.498604+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Moderate income, Poor credit. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM4,373 (RM52,476/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances. Your credit score of 396 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:39.493820+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit. Risk score: 50/100.\n\nDetailed Analysis:\nYour monthly income of RM900,000 (RM10,800,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 390 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T16:06:20.305948+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: High income, Poor credit, High loan-to-income. Risk score: 35/100.\n\nDetailed Analysis:\nYour monthly income of RM292,992 (RM3,515,904/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 309 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM92,929,292,929 represents a loan-to-income ratio of 26431.1x your annual income (RM3,515,904), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T16:05:36.070387+00:00"
+    },
+    {
       "type": "credit",
       "decision": "APPROVED",
       "reasoning": "Based on automated analysis: Good income, Employed, Good credit score. Risk score: 100/100.\n\nDetailed Analysis:\nYour income of RM72,000/year meets our credit requirements and indicates stable financial standing. Your current employment status provides assurance of stable income flow for meeting credit obligations. Your credit score of 600 is within acceptable range for credit approval. Your age of 30 years falls within our preferred demographic, typically associated with stable income and responsible credit behavior.",

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, CheckCircle, XCircle, Clock, Search, Filter, Download } from 'lucide-react';
+import { ArrowLeft, CheckCircle, XCircle, Clock, Search, Filter, Download, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 interface AuditEntry {
@@ -141,13 +141,37 @@ export default function AuditTrailPage() {
                             <p className="text-slate-500 text-sm">Complete history of all application decisions</p>
                         </div>
                     </div>
-                    <button
-                        onClick={handleDownload}
-                        className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-semibold rounded-lg transition-all"
-                    >
-                        <Download className="w-4 h-4" />
-                        Export JSON
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={handleDownload}
+                            className="flex items-center gap-2 px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-semibold rounded-lg transition-all"
+                        >
+                            <Download className="w-4 h-4" />
+                            Export JSON
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (confirm('Are you sure you want to delete ALL data? This action cannot be undone.')) {
+                                    try {
+                                        const response = await fetch('http://localhost:8000/clear-all-data', { method: 'DELETE' });
+                                        if (response.ok) {
+                                            setAuditData([]);
+                                            alert('All data has been cleared successfully.');
+                                        } else {
+                                            alert('Failed to clear data.');
+                                        }
+                                    } catch (err) {
+                                        console.error('Failed to clear data:', err);
+                                        alert('Failed to clear data. Is the server running?');
+                                    }
+                                }
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-semibold rounded-lg transition-all"
+                        >
+                            <Trash2 className="w-4 h-4" />
+                            Clear All Data
+                        </button>
+                    </div>
                 </div>
 
                 {/* Filters */}
@@ -294,8 +318,8 @@ export default function AuditTrailPage() {
                                             <td className="px-6 py-4">
                                                 <span className="text-xs text-slate-400">{formatDate(entry.reviewed_at)}</span>
                                             </td>
-                                            <td className="px-6 py-4 max-w-[200px]">
-                                                <span className="text-xs text-slate-400 truncate block" title={entry.reviewer_comment || ''}>
+                                            <td className="px-6 py-4 max-w-[400px]">
+                                                <span className="text-xs text-slate-400 block whitespace-pre-wrap" title={entry.reviewer_comment || ''}>
                                                     {entry.reviewer_comment || '-'}
                                                 </span>
                                             </td>

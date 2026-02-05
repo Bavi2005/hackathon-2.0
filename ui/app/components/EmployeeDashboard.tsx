@@ -28,8 +28,9 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 		isOpen: boolean;
 		mode: 'edit' | 'override';
 		initialText: string;
+		counterfactuals: string[];
 		action?: 'Approved' | 'Denied';
-	}>({ isOpen: false, mode: 'edit', initialText: '' });
+	}>({ isOpen: false, mode: 'edit', initialText: '', counterfactuals: [] });
 
 	// Per-category state persistence
 	const [categoryStates, setCategoryStates] = useState<Record<string, CategoryState>>({});
@@ -131,40 +132,66 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 	const handleAction = async (action: 'Approved' | 'Denied') => {
 		if (!selectedCategory || !activeCase) return;
 
-		// INSTANT APPROVAL
+		const caseId = activeCase.decision_id;
+
+		// INSTANT APPROVAL - optimistic UI update
 		if (action === 'Approved') {
+			// Remove from list immediately
+			setRealData(prev => ({
+				...prev,
+				[selectedCategory]: prev[selectedCategory].filter(c => c.decision_id !== caseId)
+			}));
+			updateState({ activeCase: null });
+
 			let explanation = "Manually approved by auditor based on provided evidence.";
 
 			// Use AI reasoning if available
 			if (activeCase.ai_result) {
-				if (activeCase.ai_result.decision.status.toLowerCase() === 'approved') {
-					explanation = activeCase.ai_result.decision.reasoning;
+				const decision = activeCase.ai_result.decision;
+				const decisionObj = typeof decision === 'object' ? decision : null;
+				const decisionStatus = decisionObj?.status?.toLowerCase() || '';
+				
+				if (decisionStatus === 'approved') {
+					explanation = decisionObj?.reasoning || explanation;
 				} else {
 					explanation = activeCase.ai_result.alternative_reasoning || explanation;
 				}
 			}
 
-			await api.updateApplicationStatus(activeCase.decision_id, selectedCategory, action, explanation);
-
-			// Force reload locally to reflect change instantly
-			const newData = await api.getApplications();
-			setRealData(newData);
-
-			const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
-			if (updatedCase) updateState({ activeCase: updatedCase });
+			try {
+				await api.updateApplicationStatus(caseId, selectedCategory, action, explanation);
+			} catch (err) {
+				console.error("Approval failed", err);
+				// Refresh data to restore state on error
+				const newData = await api.getApplications();
+				setRealData(newData);
+			}
 			return;
 		}
 
-		// DENY WITH OVERRIDE POPUP
+		// DENY WITH EDIT POPUP - let user customize explanation and counterfactuals
 		if (action === 'Denied') {
 			let explanation = "Manually denied by auditor due to policy mismatch.";
+			let counterfactuals: string[] = [];
 
 			// Use AI reasoning if available
 			if (activeCase.ai_result) {
-				if (activeCase.ai_result.decision.status.toLowerCase() === 'rejected') {
-					explanation = activeCase.ai_result.decision.reasoning;
+				const decision = activeCase.ai_result.decision;
+				const decisionObj = typeof decision === 'object' ? decision : null;
+				const decisionStatus = decisionObj?.status?.toLowerCase() || '';
+				
+				if (decisionStatus === 'rejected') {
+					// AI already rejected - use its reasoning and counterfactuals
+					explanation = decisionObj?.reasoning || explanation;
+					counterfactuals = activeCase.ai_result.counterfactuals || [];
 				} else {
-					explanation = activeCase.ai_result.alternative_reasoning || explanation;
+					// AI approved but employee is denying - use pre-generated alternative_reasoning 
+					// which contains data-specific rejection analysis
+					explanation = activeCase.ai_result.alternative_reasoning || 
+						"After manual review by our assessment officer, this application has been declined.";
+					// Use alternative_counterfactuals which are data-specific improvement steps
+					counterfactuals = activeCase.ai_result.alternative_counterfactuals || 
+						activeCase.ai_result.counterfactuals || [];
 				}
 			}
 
@@ -172,6 +199,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 				isOpen: true,
 				mode: 'override',
 				initialText: explanation,
+				counterfactuals: counterfactuals,
 				action: 'Denied'
 			});
 		}
@@ -686,12 +714,22 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 				<ExplanationEditor
 					applicationId={activeCase.decision_id}
 					currentExplanation={explanationEditorState.initialText}
+					counterfactuals={explanationEditorState.counterfactuals}
 					isOverride={explanationEditorState.mode === 'override' || (activeCase as any).is_override}
 					onClose={() => setExplanationEditorState(prev => ({ ...prev, isOpen: false }))}
-					onSubmit={explanationEditorState.mode === 'override' ? async (text) => {
+					onSubmit={explanationEditorState.mode === 'override' ? async (text, counterfactuals) => {
 						if (explanationEditorState.action && selectedCategory) {
+							const caseId = activeCase.decision_id;
+							
+							// Optimistic UI update - remove immediately
+							setRealData(prev => ({
+								...prev,
+								[selectedCategory]: prev[selectedCategory].filter(c => c.decision_id !== caseId)
+							}));
+							updateState({ activeCase: null });
+							
 							await api.updateApplicationStatus(
-								activeCase.decision_id,
+								caseId,
 								selectedCategory,
 								explanationEditorState.action,
 								text
@@ -699,11 +737,14 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 						}
 					} : undefined}
 					onSave={async () => {
-						const newData = await api.getApplications();
-						setRealData(newData);
-						if (selectedCategory) {
-							const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
-							if (updatedCase) updateState({ activeCase: updatedCase });
+						// For non-override edits, just refresh
+						if (explanationEditorState.mode !== 'override') {
+							const newData = await api.getApplications();
+							setRealData(newData);
+							if (selectedCategory) {
+								const updatedCase = newData[selectedCategory].find(c => c.decision_id === activeCase.decision_id);
+								if (updatedCase) updateState({ activeCase: updatedCase });
+							}
 						}
 					}}
 				/>

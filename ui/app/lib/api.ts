@@ -16,23 +16,20 @@ const transform = (app: any): CaseData => {
 	// Check if application has been reviewed (not pending anymore)
 	const isReviewed = app.status === 'approved' || app.status === 'rejected' || app.status === 'completed';
 	
-	// Create a short customer-friendly summary (first 2 sentences or 200 chars max)
-	const createShortSummary = (text: string): string => {
-		if (!text) return "";
-		// Split by sentence endings
-		const sentences = text.split(/(?<=[.!?])\s+/);
-		const shortText = sentences.slice(0, 2).join(' ');
-		// Cap at 200 characters
-		if (shortText.length > 200) {
-			return shortText.substring(0, 197) + "...";
-		}
-		return shortText;
-	};
-	
-	// Short summary for customer view
+	// For customer result view, show full explanation (no truncation)
 	const customerSummary = isReviewed
-		? createShortSummary(reviewerComment || aiReasoning)
+		? (reviewerComment ? `${reviewerComment}` : aiReasoning)
 		: `Your application is being processed.`;
+
+	// Get counterfactuals - prefer override_explanation.next_steps for reviewed apps, otherwise ai_result
+	const getCounterfactuals = () => {
+		// If reviewed and has override explanation, use those counterfactuals
+		if (isReviewed && app.override_explanation) {
+			return app.override_explanation.next_steps || app.override_explanation.counterfactuals || [];
+		}
+		// Otherwise use original AI counterfactuals
+		return app.ai_result?.counterfactuals || [];
+	};
 
 	return {
 		decision_id: app.id,
@@ -47,7 +44,7 @@ const transform = (app: any): CaseData => {
 			confidence: app.ai_result?.decision?.confidence || null
 		},
 		explanation: {
-			// Short summary for customers
+			// Full summary for customers (no truncation)
 			summary: customerSummary,
 			// Full reasoning available for employee dashboard
 			fullReasoning: isReviewed
@@ -56,7 +53,11 @@ const transform = (app: any): CaseData => {
 		},
 		counterfactual: app.ai_result?.counterfactuals ? JSON.stringify(app.ai_result.counterfactuals[0]) : "N/A",
 		applicant_name: app.data?.full_name || app.data?.applicant_name,
-		ai_result: app.ai_result
+		ai_result: {
+			...app.ai_result,
+			// Ensure counterfactuals are available from the right source
+			counterfactuals: getCounterfactuals()
+		}
 	};
 };
 

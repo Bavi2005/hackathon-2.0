@@ -28,6 +28,7 @@ export type AiResultType = {
 	};
 	summary?: string;  // Explanation summary for customer display
 	alternative_reasoning?: string;
+	alternative_counterfactuals?: string[];  // Pre-generated counterfactuals for override scenarios
 	counterfactuals?: string[];
 	fairness?: {
 		assessment: string;
@@ -46,6 +47,7 @@ export type OverrideExplanation = {
 	next_steps: string[];
 	conditions: string[];
 	override_context: string;
+	counterfactuals?: string[];
 };
 
 export type Application = {

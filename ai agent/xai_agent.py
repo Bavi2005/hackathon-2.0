@@ -75,6 +75,276 @@ def set_cached_response(key: str, response: Dict[str, Any]):
     _response_cache[key] = response
 
 # =====================================================
+# HELPER FUNCTIONS FOR DYNAMIC EXPLANATION GENERATION
+# =====================================================
+
+def generate_rejection_reasons(decision_type, applicant: Dict[str, Any]) -> Dict[str, Any]:
+    """Generate dynamic rejection reasons and counterfactuals based on applicant data"""
+    data = {k.lower().replace(" ", "_"): v for k, v in applicant.items()}
+    reasons = []
+    counterfactuals = []
+    detailed_analysis = []
+    # Handle both enum and string types
+    domain = decision_type.value.lower() if hasattr(decision_type, 'value') else decision_type.lower()
+    
+    if domain == "loan":
+        # Check income
+        monthly_income = float(data.get("monthly_income", data.get("monthlyincome", 0)) or 0)
+        annual_income = monthly_income * 12 if monthly_income > 0 else float(data.get("income", data.get("annual_income", 0)) or 0)
+        loan_amount = float(data.get("loan_amount", data.get("loanamount", 10000)) or 10000)
+        credit_score = int(data.get("credit_score", data.get("cibil_score", data.get("cibil_score", 650))) or 650)
+        existing_debt = float(data.get("existing_debt", data.get("existingdebt", 0)) or 0)
+        
+        # Debt-to-income ratio check
+        if annual_income > 0:
+            dti = (existing_debt + loan_amount * 0.05) / (annual_income / 12) * 100
+            if dti > 50:
+                reasons.append(f"Debt-to-income ratio of {dti:.0f}% exceeds the recommended 50% threshold per BNM guidelines")
+                detailed_analysis.append(f"Your current debt obligations combined with the requested loan would result in a DTI of {dti:.0f}%, which exceeds the Bank Negara Malaysia recommended maximum of 50%. This indicates potential strain on your monthly finances.")
+                counterfactuals.append("Reduce your existing debt by at least 20% before reapplying to improve your DTI ratio")
+                counterfactuals.append("Consider applying for a smaller loan amount that results in a DTI below 50%")
+        
+        # Loan-to-income check
+        if annual_income > 0 and loan_amount > annual_income * 5:
+            ratio = loan_amount/annual_income
+            reasons.append(f"Requested loan amount (RM{loan_amount:,.0f}) is {ratio:.1f}x annual income, exceeding prudent lending limits")
+            detailed_analysis.append(f"The requested loan of RM{loan_amount:,.0f} is approximately {ratio:.1f} times your annual income of RM{annual_income:,.0f}. Prudent lending guidelines typically cap loans at 4-5x annual income.")
+            counterfactuals.append(f"Increase your annual income to at least RM{loan_amount/5:,.0f} or reduce the loan request to RM{annual_income*4:,.0f}")
+        
+        # Credit score concerns
+        if credit_score < 700:
+            reasons.append(f"Credit score of {credit_score} indicates elevated risk requiring additional scrutiny")
+            detailed_analysis.append(f"Your credit score of {credit_score} is below our preferred threshold of 700. This may indicate past credit difficulties or limited credit history.")
+            counterfactuals.append("Improve your credit score by paying all bills on time for at least 6 months")
+            counterfactuals.append("Reduce credit card utilization to below 30% of available limits")
+            counterfactuals.append("Dispute any errors on your credit report with credit bureaus")
+        
+        # Income threshold
+        if annual_income < 48000:  # RM4,000/month
+            reasons.append(f"Annual income of RM{annual_income:,.0f} may not support repayment obligations")
+            detailed_analysis.append(f"Your annual income of RM{annual_income:,.0f} (RM{annual_income/12:,.0f}/month) is below our minimum threshold for this loan type. This raises concerns about sustainable repayment capacity.")
+            counterfactuals.append("Increase your monthly income through additional employment, side business, or career advancement")
+            counterfactuals.append("Consider adding a co-applicant with stable income to strengthen the application")
+            
+        # Check employment
+        employment = str(data.get("employment_status", data.get("employment", data.get("self_employed", "")))).lower()
+        if employment in ["unemployed", "no", "0", "none"]:
+            reasons.append("Employment status requires verification for income stability assessment")
+            detailed_analysis.append("Your current employment status indicates potential income instability, which is a key factor in our lending assessment.")
+            counterfactuals.append("Secure stable employment for at least 6 months before reapplying")
+            counterfactuals.append("Provide documentation of alternative income sources such as rental income or investments")
+            
+    elif domain == "credit":
+        credit_score = int(data.get("credit_score", data.get("score", 600)) or 600)
+        utilization = float(data.get("credit_utilization", data.get("utilization", 0)) or 0)
+        
+        if credit_score < 650:
+            reasons.append(f"Credit score of {credit_score} is below the minimum threshold for credit approval")
+            detailed_analysis.append(f"Your credit score of {credit_score} does not meet our minimum requirement of 650 for this credit product.")
+            counterfactuals.append("Focus on improving your credit score by making all payments on time")
+            counterfactuals.append("Keep credit accounts open but maintain low balances to build positive history")
+            
+        if utilization > 70:
+            reasons.append(f"Credit utilization of {utilization:.0f}% indicates high existing credit dependency")
+            detailed_analysis.append(f"Your current credit utilization of {utilization:.0f}% suggests heavy reliance on existing credit. Lenders prefer utilization below 30%.")
+            counterfactuals.append(f"Pay down existing credit balances to reduce utilization to below 30%")
+        
+        missed_payments = int(data.get("missed_payments", data.get("delinquencies", 0)) or 0)
+        if missed_payments > 0:
+            reasons.append(f"{missed_payments} missed payment(s) on record indicate payment reliability concerns")
+            detailed_analysis.append(f"Your credit history shows {missed_payments} late or missed payment(s), which negatively impacts your creditworthiness assessment.")
+            counterfactuals.append("Establish a 12-month history of on-time payments before reapplying")
+            counterfactuals.append("Set up automatic payments to avoid future missed payments")
+            
+    elif domain == "insurance":
+        age = int(data.get("age", 30) or 30)
+        claims_history = int(data.get("claims", data.get("claims_history", data.get("previous_claims", 0))) or 0)
+        risk_score = float(data.get("risk_score", data.get("risk", 50)) or 50)
+        
+        if age > 65:
+            reasons.append(f"Age of {age} places applicant in higher risk category requiring enhanced underwriting")
+            detailed_analysis.append(f"At {age} years of age, you fall into an elevated risk category that requires specialized underwriting assessment.")
+            counterfactuals.append("Consider policies specifically designed for seniors with appropriate coverage levels")
+        if claims_history > 2:
+            reasons.append(f"Claims history of {claims_history} previous claims indicates elevated risk profile")
+            detailed_analysis.append(f"Your history of {claims_history} claims in the reference period indicates higher-than-average risk.")
+            counterfactuals.append("Maintain a claims-free record for 2-3 years to demonstrate improved risk profile")
+            counterfactuals.append("Consider accepting a higher deductible to reduce premium and demonstrate confidence")
+        if risk_score > 70:
+            reasons.append(f"Risk assessment score of {risk_score:.0f} exceeds acceptable threshold")
+            detailed_analysis.append(f"Your risk assessment score of {risk_score:.0f} exceeds our threshold for standard coverage.")
+            counterfactuals.append("Address lifestyle factors that may be contributing to elevated risk scores")
+            
+    elif domain == "job":
+        experience = int(data.get("years_experience", data.get("experience", data.get("experience_years", 0))) or 0)
+        education = str(data.get("education", data.get("education_level", ""))).lower()
+        skills_match = float(data.get("skills_match", data.get("skill_score", 50)) or 50)
+        
+        if experience < 2:
+            reasons.append(f"{experience} years of experience is below the minimum requirement for this position")
+            detailed_analysis.append(f"The position requires candidates with at least 2 years of relevant experience. Your {experience} years of experience, while valuable, does not meet this threshold.")
+            counterfactuals.append("Gain additional experience through internships, freelance work, or junior-level positions")
+            counterfactuals.append("Pursue relevant certifications to supplement practical experience")
+        if skills_match < 60:
+            reasons.append(f"Skills assessment score of {skills_match:.0f}% indicates gaps in required competencies")
+            detailed_analysis.append(f"Your skills assessment score of {skills_match:.0f}% indicates that some required competencies may need development.")
+            counterfactuals.append("Focus on developing key technical skills highlighted in the job requirements")
+            counterfactuals.append("Consider taking online courses or workshops in areas where gaps were identified")
+            counterfactuals.append("Build a portfolio demonstrating practical application of required skills")
+    
+    if not reasons:
+        reasons.append("Additional verification requirements were not satisfactorily met during manual review")
+        detailed_analysis.append("During the manual review process, certain aspects of your application required additional verification that could not be completed.")
+        counterfactuals.append("Ensure all required documents are complete and accurate when reapplying")
+        counterfactuals.append("Contact our support team for guidance on specific requirements")
+    
+    # Number the counterfactuals
+    numbered_counterfactuals = [f"Step {i+1}: {cf}" for i, cf in enumerate(counterfactuals)]
+    
+    return {
+        "reasons": " ".join(reasons),
+        "detailed_analysis": " ".join(detailed_analysis) if detailed_analysis else "Standard evaluation criteria were applied during the review.",
+        "counterfactuals": numbered_counterfactuals
+    }
+
+
+def generate_human_override_reasons(decision_type, applicant: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Generate reasons why a HUMAN reviewer might reject an AI-APPROVED application.
+    This analyzes the data to find edge cases, borderline metrics, and concerns
+    that require human judgment beyond automated thresholds.
+    """
+    data = {k.lower().replace(" ", "_"): v for k, v in applicant.items()}
+    concerns = []
+    detailed_analysis = []
+    counterfactuals = []
+    
+    domain = decision_type.value.lower() if hasattr(decision_type, 'value') else decision_type.lower()
+    
+    if domain == "loan":
+        monthly_income = float(data.get("monthly_income", data.get("monthlyincome", 0)) or 0)
+        annual_income = monthly_income * 12 if monthly_income > 0 else float(data.get("income", data.get("annual_income", 0)) or 0)
+        loan_amount = float(data.get("loan_amount", data.get("loanamount", 10000)) or 10000)
+        credit_score = int(data.get("credit_score", data.get("cibil_score", 650)) or 650)
+        employment_length = float(data.get("employment_length", data.get("years_employed", data.get("experience", 0))) or 0)
+        loan_term = int(data.get("loan_term", data.get("term", 12)) or 12)
+        
+        lti_ratio = loan_amount / annual_income if annual_income > 0 else 0
+        monthly_payment = loan_amount / loan_term if loan_term > 0 else loan_amount
+        dti_ratio = (monthly_payment / monthly_income * 100) if monthly_income > 0 else 100
+        
+        # Borderline income concerns
+        if 3000 <= monthly_income <= 4000:
+            concerns.append("Borderline Income Level")
+            detailed_analysis.append(f"While your monthly income of RM{monthly_income:,.0f} meets the minimum threshold, it is in the borderline range. Our assessment officer identified that after accounting for typical living expenses in your area, the remaining disposable income may not provide adequate buffer for loan repayment during financial emergencies.")
+            counterfactuals.append(f"Increase your monthly income to at least RM5,000 by seeking additional income sources, a higher-paying position, or adding a co-applicant")
+        
+        # DTI ratio concerns (even if passing, near threshold)
+        if 35 <= dti_ratio <= 50:
+            concerns.append("High Debt Service Ratio")
+            detailed_analysis.append(f"Your debt-to-income ratio of {dti_ratio:.1f}% is within acceptable limits but on the higher end. Manual review determined that this leaves limited financial flexibility, which increases the risk of payment difficulties if unexpected expenses arise.")
+            counterfactuals.append(f"Reduce your debt-to-income ratio to below 30% by paying down existing debts or requesting a smaller loan amount (recommend RM{loan_amount * 0.7:,.0f} or less)")
+        
+        # Loan-to-income ratio concerns
+        if 3.5 <= lti_ratio <= 5:
+            concerns.append("Elevated Loan-to-Income Ratio")
+            detailed_analysis.append(f"The loan amount of RM{loan_amount:,.0f} represents {lti_ratio:.1f}x your annual income. While this is within policy limits, our officer noted that loans above 3x annual income historically show higher default rates in similar applicant profiles.")
+            counterfactuals.append(f"Consider a smaller loan amount of RM{annual_income * 3:,.0f} (3x annual income) for higher approval probability")
+        
+        # Employment stability
+        if 1 <= employment_length <= 2:
+            concerns.append("Limited Employment History")
+            detailed_analysis.append(f"Your current employment tenure of {employment_length:.1f} years meets minimum requirements, but our assessment officer noted that longer employment history provides stronger evidence of income stability. This is particularly relevant given current economic conditions.")
+            counterfactuals.append(f"Continue at your current employer for at least 2-3 years to demonstrate employment stability, then reapply")
+        
+        # Credit score edge cases
+        if 650 <= credit_score <= 700:
+            concerns.append("Fair Credit Score")
+            detailed_analysis.append(f"Your credit score of {credit_score} is in the 'fair' range. While acceptable for automated approval, manual review identified recent credit activities that may indicate emerging financial stress not yet reflected in your score.")
+            counterfactuals.append(f"Improve your credit score to above 750 by maintaining timely payments and reducing credit utilization below 30%")
+        
+        # If no specific concerns found, provide general human-judgment reasons
+        if not concerns:
+            concerns.append("Additional Verification Required")
+            detailed_analysis.append(f"Although your application met automated screening criteria (income: RM{monthly_income:,.0f}/month, credit score: {credit_score}, loan amount: RM{loan_amount:,.0f}), our assessment officer identified discrepancies during document verification that require clarification. This includes potential inconsistencies between declared income and supporting documentation.")
+            counterfactuals.append("Ensure all income documentation (payslips, bank statements, EA forms) accurately reflect your declared monthly income")
+            counterfactuals.append("Provide additional verification documents such as employment letter, latest 6 months bank statements, and proof of other income sources if applicable")
+            counterfactuals.append("Contact our customer service team to understand specific documentation requirements before reapplying")
+    
+    elif domain == "credit":
+        credit_score = int(data.get("credit_score", data.get("cibil_score", 650)) or 650)
+        annual_income = float(data.get("annual_income", data.get("income", 50000)) or 50000)
+        num_accounts = int(data.get("num_credit_accounts", data.get("open_accounts", 0)) or 0)
+        credit_utilization = float(data.get("credit_utilization", data.get("utilization", 30)) or 30)
+        
+        if 25 <= credit_utilization <= 40:
+            concerns.append("Elevated Credit Utilization")
+            detailed_analysis.append(f"Your credit utilization of {credit_utilization:.0f}% is within acceptable limits but indicates you're using a significant portion of available credit. Manual review suggests this pattern may indicate reliance on credit for regular expenses.")
+            counterfactuals.append(f"Reduce your credit utilization to below 20% by paying down existing balances")
+        
+        if num_accounts > 5:
+            concerns.append("Multiple Credit Accounts")
+            detailed_analysis.append(f"You have {num_accounts} open credit accounts. While this isn't automatically disqualifying, our assessment officer noted that managing multiple accounts increases the risk of oversight and potential payment issues.")
+            counterfactuals.append(f"Consider consolidating or closing {num_accounts - 3} accounts you use least frequently")
+        
+        if not concerns:
+            concerns.append("Credit History Pattern Concerns")
+            detailed_analysis.append(f"Manual review of your credit history (score: {credit_score}) identified patterns suggesting potential financial stress. While your score meets automated thresholds, recent inquiry patterns and account activity raised concerns about near-term creditworthiness.")
+            counterfactuals.append("Maintain current credit accounts without opening new ones for 6 months")
+            counterfactuals.append("Ensure all payments are made on or before due dates")
+            counterfactuals.append("Reapply after demonstrating 6 months of stable credit behavior")
+    
+    elif domain == "insurance":
+        age = int(data.get("age", 35) or 35)
+        claims_history = int(data.get("claims_count", data.get("past_claims", 0)) or 0)
+        risk_score = float(data.get("risk_score", 50) or 50)
+        policy_type = data.get("policy_type", data.get("insurance_type", "general"))
+        
+        if 35 <= age <= 45:
+            concerns.append("Age-Related Risk Assessment")
+            detailed_analysis.append(f"At age {age}, you are entering a demographic bracket with statistically higher claim rates. While this doesn't disqualify you, our underwriter determined that the current premium structure doesn't adequately account for this elevated risk.")
+            counterfactuals.append("Consider alternative policy structures with adjusted coverage that better match your risk profile")
+        
+        if claims_history >= 1:
+            concerns.append("Claims History Review")
+            detailed_analysis.append(f"Your record shows {claims_history} previous claim(s). Our underwriting team reviewed the nature of these claims and determined they indicate a pattern that increases future claim probability beyond acceptable thresholds.")
+            counterfactuals.append(f"Maintain a claims-free record for at least 2 years before reapplying")
+        
+        if not concerns:
+            concerns.append("Underwriting Risk Assessment")
+            detailed_analysis.append(f"While your application passed automated screening, our underwriting team identified lifestyle or occupation factors that increase risk exposure beyond standard policy parameters. This assessment is based on comprehensive risk evaluation that considers factors not fully captured in the application form.")
+            counterfactuals.append("Request a detailed risk assessment report from our underwriting team")
+            counterfactuals.append("Consider applying for an alternative policy type with different coverage parameters")
+            counterfactuals.append("Address any modifiable risk factors before reapplying in 6-12 months")
+    
+    else:  # job
+        experience = float(data.get("experience", data.get("years_experience", 0)) or 0)
+        skills_match = float(data.get("skills_match", data.get("skill_score", 70)) or 70)
+        education = data.get("education", data.get("qualification", ""))
+        
+        if 60 <= skills_match <= 75:
+            concerns.append("Partial Skills Alignment")
+            detailed_analysis.append(f"Your skills assessment score of {skills_match:.0f}% indicates partial alignment with position requirements. While meeting minimum thresholds, our hiring manager identified specific technical competencies where additional development would be needed.")
+            counterfactuals.append("Acquire certifications or training in the specific skills gaps identified for this role")
+        
+        if not concerns:
+            concerns.append("Cultural Fit Assessment")
+            detailed_analysis.append(f"While your qualifications met technical requirements (experience: {experience:.0f} years, skills match: {skills_match:.0f}%), our assessment indicated potential misalignment with team dynamics or organizational culture. This determination was made through comprehensive evaluation of your interview responses and assessment results.")
+            counterfactuals.append("Research our company culture and values before reapplying")
+            counterfactuals.append("Consider roles in different teams or departments that may be a better fit")
+            counterfactuals.append("Request feedback from HR on specific areas for development")
+    
+    # Format counterfactuals with step numbers
+    numbered_counterfactuals = [f"Step {i+1}: {cf}" for i, cf in enumerate(counterfactuals)]
+    
+    return {
+        "concerns": concerns,
+        "detailed_analysis": "\n\n".join(detailed_analysis) if detailed_analysis else "Manual review identified concerns requiring the application to be declined.",
+        "counterfactuals": numbered_counterfactuals
+    }
+
+
+# =====================================================
 # FAST RULE-BASED ENGINE (Instant decisions)
 # =====================================================
 def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, Any]:
@@ -332,28 +602,19 @@ def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, An
     # Generate alternative reasoning for when employee overrides the AI decision
     # This ensures logical, Bank Negara-compliant explanations are ready for both outcomes
     if approved:
-        # If AI approved, generate a ready-made denial explanation for employee override
-        denial_reasons = []
-        denial_reasons.append("After manual review by our assessment officer, this application has been declined.")
+        # If AI approved, generate human-reviewer concerns for potential denial
+        # Uses generate_human_override_reasons which finds edge cases and borderline metrics
+        override_data = generate_human_override_reasons(decision_type, applicant)
+        override_analysis = override_data["detailed_analysis"]
+        override_counterfactuals = override_data["counterfactuals"]
+        override_concerns = override_data["concerns"]
         
-        if decision_type == "loan":
-            denial_reasons.append("While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines.")
-            denial_reasons.append("Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.")
-        elif decision_type == "credit":
-            denial_reasons.append("Manual verification identified discrepancies or risks not captured by automated screening.")
-            denial_reasons.append("Per credit policy, applications flagged for manual review require additional documentation or guarantees.")
-        elif decision_type == "insurance":
-            denial_reasons.append("Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows.")
-            denial_reasons.append("Per insurance regulations, certain risk profiles require specialized underwriting assessment.")
-        elif decision_type == "job":
-            denial_reasons.append("After interview and reference check, the candidate profile did not align with current team requirements.")
-            denial_reasons.append("While qualifications were met, cultural fit or specific skill gaps were identified during the review process.")
-        
-        alternative_reasoning = " ".join(denial_reasons)
-        alternative_counterfactuals = [
-            "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
-            "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
-            "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+        concerns_summary = ", ".join(override_concerns) if override_concerns else "Additional verification concerns"
+        alternative_reasoning = f"After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed the following concerns ({concerns_summary}):\n\n{override_analysis}"
+        alternative_counterfactuals = override_counterfactuals if override_counterfactuals else [
+            "Step 1: Address the specific concerns highlighted in the decision explanation",
+            "Step 2: Provide additional supporting documentation",
+            "Step 3: Reapply after improving your application profile"
         ]
     else:
         # If AI rejected, generate a ready-made approval explanation for employee override
@@ -653,9 +914,124 @@ OUTPUT FORMAT:
 
 RULES: If REJECTED, list 3 actionable steps. If APPROVED, counterfactuals can be empty."""
 
-# =====================================================
-# OVERRIDE PROMPT
-# =====================================================
+
+def fast_override_explanation(
+    decision_type: DecisionType,
+    applicant: Dict[str, Any],
+    ai_recommendation: str,
+    agent_decision: str,
+    agent_comment: Optional[str] = None
+) -> Dict[str, Any]:
+    """Instant rule-based override explanation - no AI calls"""
+    
+    domain = decision_type.value.lower()
+    ai_rec = ai_recommendation.upper()
+    agent_dec = agent_decision.upper()
+    
+    # Base explanation templates
+    if ai_rec == "REJECTED" and agent_dec == "APPROVED":
+        summary = f"Your {domain} application has been approved after manual review by our assessment officer."
+        override_context = "After careful human review, additional factors were identified that support approval despite automated concerns."
+        
+        if domain == "loan":
+            detailed_reasoning = agent_comment or "Manual verification confirmed adequate repayment capacity. Additional factors such as employment stability, savings history, or collateral support this approval per BNM guidelines."
+            next_steps = [
+                "Step 1: You will receive your loan agreement via email within 2-3 business days",
+                "Step 2: Review and sign the agreement to finalize your loan",
+                "Step 3: Funds will be disbursed within 5-7 business days after signing"
+            ]
+            conditions = [
+                "Subject to final document verification",
+                "Interest rate and terms as specified in the agreement"
+            ]
+        elif domain == "credit":
+            detailed_reasoning = agent_comment or "Manual review found positive credit indicators not captured in automated screening, supporting approval."
+            next_steps = [
+                "Step 1: Your credit application is approved",
+                "Step 2: Await final documentation via email",
+                "Step 3: Contact us if you have any questions"
+            ]
+            conditions = ["Subject to final verification"]
+        elif domain == "insurance":
+            detailed_reasoning = agent_comment or "Manual underwriting review identified mitigating factors that support policy issuance."
+            next_steps = [
+                "Step 1: Your insurance application is approved",
+                "Step 2: Policy documents will be sent within 3-5 business days",
+                "Step 3: Premium payment details will be included"
+            ]
+            conditions = ["Subject to policy terms and conditions", "Premium rates as quoted"]
+        else:  # job
+            detailed_reasoning = agent_comment or "Manual review confirmed candidate qualifications meet position requirements."
+            next_steps = [
+                "Step 1: Proceed to the next interview stage",
+                "Step 2: HR will contact you with further details"
+            ]
+            conditions = ["Subject to background verification"]
+        
+        return {
+            "summary": summary,
+            "detailed_reasoning": detailed_reasoning,
+            "next_steps": next_steps,
+            "conditions": conditions,
+            "override_context": override_context,
+            "counterfactuals": next_steps
+        }
+    
+    else:  # AI approved but agent rejected - GENERATE DYNAMIC REASONS
+        summary = f"Your {domain} application has been declined after manual review by our assessment officer."
+        override_context = "While automated screening passed, additional scrutiny during manual review identified concerns that require the application to be declined at this time."
+        
+        # Generate HUMAN OVERRIDE reasons - concerns a human reviewer might have even when AI approved
+        override_data = generate_human_override_reasons(decision_type, applicant)
+        detailed_analysis = override_data["detailed_analysis"]
+        counterfactuals = override_data["counterfactuals"]
+        concerns = override_data["concerns"]
+        
+        concerns_text = ", ".join(concerns) if concerns else "Additional verification concerns"
+        
+        if domain == "loan":
+            detailed_reasoning = agent_comment or f"Upon closer review of your application by our assessment officer, the following concerns were identified ({concerns_text}):\n\n{detailed_analysis}\n\nThese factors require us to decline your loan application at this time per Bank Negara Malaysia (BNM) prudent lending guidelines. We understand this may be disappointing, and we've provided specific steps below to help you improve your chances in future applications."
+            next_steps = counterfactuals if counterfactuals else [
+                "Step 1: Review and address the concerns mentioned above",
+                "Step 2: Improve your debt-to-income ratio by reducing existing debts",
+                "Step 3: Reapply after 90 days with updated financial information"
+            ]
+            conditions = []
+        elif domain == "credit":
+            detailed_reasoning = agent_comment or f"Manual review identified the following factors ({concerns_text}) that prevent credit approval at this time:\n\n{detailed_analysis}\n\nPlease review the improvement steps below to enhance your credit profile."
+            next_steps = counterfactuals if counterfactuals else [
+                "Step 1: Improve your credit score through timely payments",
+                "Step 2: Reduce credit utilization below 30%",
+                "Step 3: Reapply after 6 months with improved credit standing"
+            ]
+            conditions = []
+        elif domain == "insurance":
+            detailed_reasoning = agent_comment or f"Underwriting review identified the following risk factors ({concerns_text}):\n\n{detailed_analysis}\n\nThis risk profile requires us to decline coverage at this time."
+            next_steps = counterfactuals if counterfactuals else [
+                "Step 1: Maintain a claims-free record for at least 2 years",
+                "Step 2: Address any lifestyle factors contributing to risk",
+                "Step 3: Consider reapplying with updated information"
+            ]
+            conditions = []
+        else:  # job
+            detailed_reasoning = agent_comment or f"After careful evaluation by our hiring team, the following factors were considered ({concerns_text}):\n\n{detailed_analysis}\n\nWhile we appreciate your interest, we have decided to pursue other candidates whose qualifications more closely match our current requirements."
+            next_steps = counterfactuals if counterfactuals else [
+                "Step 1: Gain additional relevant experience in your field",
+                "Step 2: Consider obtaining certifications in key skill areas",
+                "Step 3: Apply for future openings that match your profile"
+            ]
+            conditions = []
+    
+    return {
+        "summary": summary,
+        "detailed_reasoning": detailed_reasoning,
+        "next_steps": next_steps,
+        "conditions": conditions,
+        "override_context": override_context,
+        "counterfactuals": next_steps  # Include counterfactuals for frontend access
+    }
+
+
 def build_override_prompt(
     decision_type: DecisionType,
     applicant: Dict[str, Any],
@@ -985,6 +1361,61 @@ async def submit_application(
     return updated_app
 
 
+@app.post("/applications/batch_csv")
+async def batch_csv_upload(
+    decision_type: DecisionType = Query(...),
+    file: UploadFile = File(...)
+):
+    """Batch process applications from CSV file"""
+    content = await file.read()
+    
+    try:
+        df = pd.read_csv(BytesIO(content))
+    except Exception as e:
+        raise HTTPException(400, f"Invalid CSV file: {str(e)}")
+    
+    if len(df) > MAX_CSV_ROWS:
+        raise HTTPException(400, f"CSV too large. Maximum {MAX_CSV_ROWS} rows allowed.")
+    
+    if len(df) == 0:
+        raise HTTPException(400, "CSV file is empty")
+    
+    applicants = df.to_dict(orient="records")
+    saved_apps = []
+    
+    for applicant_data in applicants:
+        # Save each application
+        app_entry = {
+            "domain": decision_type.value,
+            "data": applicant_data,
+            "status": ApplicationStatus.PENDING_AI.value
+        }
+        saved_app = db.save_application(app_entry)
+        
+        # Run AI analysis (fast mode is instant)
+        ai_result = await ai_decision(decision_type, applicant_data)
+        
+        # Update with AI result
+        updates = {
+            "status": ApplicationStatus.PENDING_HUMAN.value,
+            "ai_result": ai_result
+        }
+        updated_app = db.update_application(saved_app["id"], updates)
+        saved_apps.append(updated_app)
+    
+    return {"count": len(saved_apps), "applications": saved_apps}
+
+
+# Alias for frontend compatibility
+@app.post("/applications/batch_upload")
+async def batch_upload_alias(
+    decision_type: DecisionType = Query(...),
+    file: UploadFile = File(...)
+):
+    """Alias for batch_csv_upload for frontend compatibility"""
+    return await batch_csv_upload(decision_type, file)
+
+
 @app.get("/applications")
 async def get_applications(status: Optional[str] = None):
     return db.get_all_applications(status)
@@ -1022,17 +1453,30 @@ async def review_application(
         # Generate override explanation
         try:
             decision_type = DecisionType(app["domain"])
-            override_prompt = build_override_prompt(
-                decision_type,
-                app["data"],
-                ai_decision,
-                agent_decision,
-                comment
-            )
-            override_result = await call_ai(override_prompt)
-            override_explanation = override_result
+            
+            # FAST MODE: Use instant rule-based explanation
+            if FAST_MODE:
+                print("DEBUG: FAST MODE - instant override explanation")
+                override_explanation = fast_override_explanation(
+                    decision_type,
+                    app["data"],
+                    ai_decision,
+                    agent_decision,
+                    comment
+                )
+            else:
+                # Slow mode: Call AI for explanation
+                override_prompt = build_override_prompt(
+                    decision_type,
+                    app["data"],
+                    ai_decision,
+                    agent_decision,
+                    comment
+                )
+                override_result = await call_ai(override_prompt)
+                override_explanation = override_result
         except Exception as e:
-            # Fallback if AI fails
+            # Fallback if anything fails
             override_explanation = {
                 "summary": f"Agent overrode AI recommendation from {ai_decision} to {agent_decision}",
                 "detailed_reasoning": comment or "Agent determined a different decision was appropriate",
@@ -1357,6 +1801,19 @@ async def download_audit_log():
             "Content-Disposition": "attachment; filename=audit_log.json"
         }
     )
+
+@app.delete("/clear-all-data")
+async def clear_all_data():
+    """
+    Clear all application data from the database.
+    This is a destructive operation - use with caution.
+    """
+    try:
+        # Clear the database by writing an empty array
+        db._write_db([])
+        return {"success": True, "message": "All data has been cleared"}
+    except Exception as e:
+        raise HTTPException(500, f"Failed to clear data: {str(e)}")
 
 # =====================================================
 # HEALTH CHECK ENDPOINT

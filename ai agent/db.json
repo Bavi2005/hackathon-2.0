@@ -2,58 +2,43 @@
   {
     "domain": "loan",
     "data": {
-      "applicant_id": 12,
-      "age": 80,
-      "monthly_income": 500000,
-      "existing_debt": 0,
-      "credit_score": 850,
-      "loan_amount": 6000000
-    },
-    "status": "pending_ai",
-    "id": "9e835df4",
-    "timestamp": "2026-02-05T06:24:34.070063+00:00"
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "bavithran alagna",
-      "age": 21,
+      "full_name": "Raja",
+      "age": 29,
       "gender": "M",
       "marital_status": "Single",
-      "employment_years": 11,
+      "employment_years": 9,
       "employment_type": "Permanent",
-      "monthly_income": 25000,
-      "existing_debt": 0,
-      "credit_score": 754,
-      "loan_amount": 1500000,
-      "loan_purpose": "Vehicle"
+      "monthly_income": 2900,
+      "existing_debt": 10000,
+      "credit_score": 670,
+      "loan_amount": 90000,
+      "loan_purpose": "Education"
     },
     "status": "completed",
-    "id": "c87b30fb",
-    "timestamp": "2026-02-05T06:50:29.752695+00:00",
+    "id": "ebf4983c",
+    "timestamp": "2026-02-05T11:33:57.798277+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "full_name": "bavithran alagna",
-        "age": 21,
+        "full_name": "Raja",
+        "age": 29,
         "gender": "M",
         "marital_status": "Single",
-        "employment_years": 11,
+        "employment_years": 9,
         "employment_type": "Permanent",
-        "monthly_income": 25000,
-        "existing_debt": 0,
-        "credit_score": 754,
-        "loan_amount": 1500000,
-        "loan_purpose": "Vehicle"
+        "monthly_income": 2900,
+        "existing_debt": 10000,
+        "credit_score": 670,
+        "loan_amount": 90000,
+        "loan_purpose": "Education"
       },
       "decision": {
         "status": "REJECTED",
         "confidence": 0.55,
-        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100."
+        "reasoning": "Based on automated analysis: Low income, Fair credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,900 (RM34,800/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 670 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates."
       },
       "counterfactuals": [
-        "Step 1: Increase your monthly income above $25,000",
-        "Step 3: Request a smaller loan amount"
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income"
       ],
       "fairness": {
         "assessment": "Fair",
@@ -64,180 +49,59 @@
         "approval_probability": 0.45,
         "critical_factors": [
           "Low income",
-          "Excellent credit",
-          "High loan-to-income"
+          "Fair credit"
         ]
       },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_counterfactuals": [],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T06:50:29.758453+00:00"
+        "timestamp": "2026-02-05T11:33:57.799192+00:00"
       }
     },
     "final_decision": "rejected",
-    "reviewer_comment": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100. so problem la",
-    "reviewed_at": "2026-02-05T06:51:13.154201+00:00",
+    "reviewer_comment": "Based on automated analysis: Low income, Fair credit. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,900 (RM34,800/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 670 is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates.",
+    "reviewed_at": "2026-02-05T11:38:56.717168+00:00",
     "is_override": false,
     "override_explanation": null
   },
   {
     "domain": "loan",
     "data": {
-      "full_name": "zep",
-      "age": 50,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 50,
-      "employment_type": "Permanent",
-      "monthly_income": 9000,
-      "existing_debt": 0,
-      "credit_score": 850,
-      "loan_amount": 14999,
-      "loan_purpose": "Vehicle"
-    },
-    "status": "pending_human",
-    "id": "8de72d09",
-    "timestamp": "2026-02-05T06:52:18.191836+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "zep",
-        "age": 50,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 50,
-        "employment_type": "Permanent",
-        "monthly_income": 9000,
-        "existing_debt": 0,
-        "credit_score": 850,
-        "loan_amount": 14999,
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.55,
-        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income above $25,000",
-        "Step 3: Request a smaller loan amount"
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 55,
-        "approval_probability": 0.45,
-        "critical_factors": [
-          "Low income",
-          "Excellent credit",
-          "High loan-to-income"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T06:52:18.195742+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "zepernest",
+      "full_name": "Bavi",
       "age": 20,
       "gender": "M",
       "marital_status": "Single",
-      "employment_years": 5,
-      "employment_type": "Permanent",
-      "monthly_income": 12000,
+      "employment_years": 2,
+      "employment_type": "Contract",
+      "monthly_income": 9000,
       "existing_debt": 0,
       "credit_score": 750,
-      "loan_amount": 6000,
-      "loan_purpose": "Personal"
+      "loan_amount": 15000,
+      "loan_purpose": "Vehicle"
     },
-    "status": "pending_human",
-    "id": "c773a264",
-    "timestamp": "2026-02-05T07:04:04.178357+00:00",
+    "status": "completed",
+    "id": "33e008d7",
+    "timestamp": "2026-02-05T11:38:26.252242+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "full_name": "zepernest",
+        "full_name": "Bavi",
         "age": 20,
         "gender": "M",
         "marital_status": "Single",
-        "employment_years": 5,
-        "employment_type": "Permanent",
-        "monthly_income": 12000,
+        "employment_years": 2,
+        "employment_type": "Contract",
+        "monthly_income": 9000,
         "existing_debt": 0,
         "credit_score": 750,
-        "loan_amount": 6000,
-        "loan_purpose": "Personal"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.55,
-        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour reported income of $0 is below our preferred threshold of $25,000. This significantly impacts your debt-to-income ratio and loan repayment capacity. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of $6,000 represents a loan-to-income ratio of infx, which exceeds our maximum threshold of 5x annual income."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income above $25,000 through additional employment, side income, or by adding a co-applicant with higher income",
-        "Step 2: Request a smaller loan amount that keeps your loan-to-income ratio below 5x, or consider increasing your income before reapplying"
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 55,
-        "approval_probability": 0.45,
-        "critical_factors": [
-          "Low income",
-          "Excellent credit",
-          "High loan-to-income"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:04:04.181620+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "collin",
-      "age": 22,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 1,
-      "employment_type": "Self-Employed",
-      "monthly_income": 5000,
-      "existing_debt": 1000,
-      "credit_score": 850,
-      "loan_amount": 50000,
-      "loan_purpose": "Business"
-    },
-    "status": "completed",
-    "id": "7b79b045",
-    "timestamp": "2026-02-05T07:19:04.207229+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "collin",
-        "age": 22,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 1,
-        "employment_type": "Self-Employed",
-        "monthly_income": 5000,
-        "existing_debt": 1000,
-        "credit_score": 850,
-        "loan_amount": 50000,
-        "loan_purpose": "Business"
+        "loan_amount": 15000,
+        "loan_purpose": "Vehicle"
       },
       "decision": {
         "status": "APPROVED",
         "confidence": 0.95,
-        "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM5,000 (RM60,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+        "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM9,000 (RM108,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments."
       },
       "counterfactuals": [],
       "fairness": {
@@ -260,405 +124,46 @@
       ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:19:04.213554+00:00"
+        "timestamp": "2026-02-05T11:38:26.253083+00:00"
       }
     },
     "final_decision": "approved",
-    "reviewer_comment": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM5,000 (RM60,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
-    "reviewed_at": "2026-02-05T07:19:50.456400+00:00",
+    "reviewer_comment": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM9,000 (RM108,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments.",
+    "reviewed_at": "2026-02-05T11:39:56.472217+00:00",
     "is_override": false,
     "override_explanation": null
   },
   {
-    "domain": "loan",
+    "domain": "job",
     "data": {
-      "full_name": "bob bobison",
-      "age": 52,
-      "gender": "F",
-      "marital_status": "Married",
-      "employment_years": 5,
-      "employment_type": "Part-Time",
-      "monthly_income": 1500,
-      "existing_debt": 15000,
-      "credit_score": 420,
-      "loan_amount": 100000,
-      "loan_purpose": "Personal"
-    },
-    "status": "pending_human",
-    "id": "0ce7ecad",
-    "timestamp": "2026-02-05T07:23:10.767977+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "bob bobison",
-        "age": 52,
-        "gender": "F",
-        "marital_status": "Married",
-        "employment_years": 5,
-        "employment_type": "Part-Time",
-        "monthly_income": 1500,
-        "existing_debt": 15000,
-        "credit_score": 420,
-        "loan_amount": 100000,
-        "loan_purpose": "Personal"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.1,
-        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,500 (RM18,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM100,000 represents a loan-to-income ratio of 5.6x your annual income (RM18,000), which exceeds BNM's prudent lending threshold of 5x annual income."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
-        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
-        "Step 3: Request a smaller loan amount (max RM90,000 based on your income) or increase your income before reapplying"
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 100,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Low income",
-          "Poor credit",
-          "High loan-to-income"
-        ]
-      },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
-      "alternative_counterfactuals": [],
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:23:10.771944+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "raja fail",
-      "age": 50,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 39,
-      "employment_type": "Permanent",
-      "monthly_income": 120000,
-      "existing_debt": 0,
-      "credit_score": 750,
-      "loan_amount": 59999,
-      "loan_purpose": "Vehicle"
-    },
-    "status": "pending_human",
-    "id": "d331fee4",
-    "timestamp": "2026-02-05T07:25:44.890272+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "raja fail",
-        "age": 50,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 39,
-        "employment_type": "Permanent",
-        "monthly_income": 120000,
-        "existing_debt": 0,
-        "credit_score": 750,
-        "loan_amount": 59999,
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 0.95,
-        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM120,000 (RM1,440,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments."
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 5,
-        "approval_probability": 0.95,
-        "critical_factors": [
-          "High income",
-          "Excellent credit"
-        ]
-      },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
-      "alternative_counterfactuals": [
-        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
-        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
-        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
-      ],
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:25:44.894259+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "bavi",
-      "age": 80,
-      "gender": "M",
-      "marital_status": "Divorced",
-      "employment_years": 20,
-      "employment_type": "Self-Employed",
-      "monthly_income": 2000,
-      "credit_score": 850,
-      "existing_debt": 0,
-      "loan_amount": 5000000,
-      "loan_purpose": "Home"
-    },
-    "status": "pending_human",
-    "id": "a16d7d60",
-    "timestamp": "2026-02-05T07:43:40.600319+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "bavi",
-        "age": 80,
-        "gender": "M",
-        "marital_status": "Divorced",
-        "employment_years": 20,
-        "employment_type": "Self-Employed",
-        "monthly_income": 2000,
-        "credit_score": 850,
-        "existing_debt": 0,
-        "loan_amount": 5000000,
-        "loan_purpose": "Home"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.55,
-        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of RM5,000,000 represents a loan-to-income ratio of 208.3x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
-        "Step 2: Request a smaller loan amount (max RM120,000 based on your income) or increase your income before reapplying"
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 55,
-        "approval_probability": 0.45,
-        "critical_factors": [
-          "Low income",
-          "Excellent credit",
-          "High loan-to-income"
-        ]
-      },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
-      "alternative_counterfactuals": [],
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:43:40.606426+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "uhsu",
-      "age": 27,
-      "gender": "M",
-      "marital_status": "Divorced",
-      "employment_years": 9,
-      "employment_type": "Permanent",
-      "monthly_income": 19000,
-      "existing_debt": 0,
-      "credit_score": 850,
-      "loan_amount": 1200,
-      "loan_purpose": "Personal"
+      "full_name": "Will Smith",
+      "job_title": "Clerk",
+      "years_experience": 2,
+      "education_level": "Bachelor",
+      "companies_worked": 1,
+      "career_gaps": 0,
+      "expected_salary": 6000
     },
     "status": "completed",
-    "id": "31dd8f7f",
-    "timestamp": "2026-02-05T07:44:51.819376+00:00",
+    "id": "52e3d21e",
+    "timestamp": "2026-02-05T11:42:55.794551+00:00",
     "ai_result": {
-      "decision_type": "loan",
+      "decision_type": "job",
       "applicant": {
-        "full_name": "uhsu",
-        "age": 27,
-        "gender": "M",
-        "marital_status": "Divorced",
-        "employment_years": 9,
-        "employment_type": "Permanent",
-        "monthly_income": 19000,
-        "existing_debt": 0,
-        "credit_score": 850,
-        "loan_amount": 1200,
-        "loan_purpose": "Personal"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 0.95,
-        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM19,000 (RM228,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 5,
-        "approval_probability": 0.95,
-        "critical_factors": [
-          "High income",
-          "Excellent credit"
-        ]
-      },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
-      "alternative_counterfactuals": [
-        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
-        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
-        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
-      ],
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:44:51.823756+00:00"
-      }
-    },
-    "final_decision": "rejected",
-    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
-    "reviewed_at": "2026-02-05T07:47:46.871574+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "uyxr",
-      "age": 75,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 14,
-      "employment_type": "Part-Time",
-      "monthly_income": 1996,
-      "existing_debt": 50000,
-      "credit_score": 418,
-      "loan_amount": 1000000,
-      "loan_purpose": "Business"
-    },
-    "status": "completed",
-    "id": "25b325b7",
-    "timestamp": "2026-02-05T07:58:26.493941+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "uyxr",
-        "age": 75,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 14,
-        "employment_type": "Part-Time",
-        "monthly_income": 1996,
-        "existing_debt": 50000,
-        "credit_score": 418,
-        "loan_amount": 1000000,
-        "loan_purpose": "Business"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.1,
-        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,996 (RM23,952/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM1,000,000 represents a loan-to-income ratio of 41.8x your annual income (RM23,952), which exceeds BNM's prudent lending threshold of 5x annual income."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
-        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
-        "Step 3: Request a smaller loan amount (max RM119,760 based on your income) or increase your income before reapplying"
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "Automated rule-based evaluation"
-      },
-      "key_metrics": {
-        "risk_score": 100,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Low income",
-          "Poor credit",
-          "High loan-to-income"
-        ]
-      },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
-      "alternative_counterfactuals": [],
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T07:58:26.503127+00:00"
-      }
-    },
-    "final_decision": "rejected",
-    "reviewer_comment": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,996 (RM23,952/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM1,000,000 represents a loan-to-income ratio of 41.8x your annual income (RM23,952), which exceeds BNM's prudent lending threshold of 5x annual income.",
-    "reviewed_at": "2026-02-05T07:59:22.946308+00:00",
-    "is_override": false,
-    "override_explanation": null
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "Qhabylen",
-      "age": 32,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 15,
-      "employment_type": "Permanent",
-      "monthly_income": 2600,
-      "existing_debt": 30000,
-      "credit_score": 850,
-      "loan_amount": 50000,
-      "loan_purpose": "Business"
-    },
-    "status": "completed",
-    "id": "49065ecf",
-    "timestamp": "2026-02-05T08:26:17.480868+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "Qhabylen",
-        "age": 32,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 15,
-        "employment_type": "Permanent",
-        "monthly_income": 2600,
-        "existing_debt": 30000,
-        "credit_score": 850,
-        "loan_amount": 50000,
-        "loan_purpose": "Business"
+        "full_name": "Will Smith",
+        "job_title": "Clerk",
+        "years_experience": 2,
+        "education_level": "Bachelor",
+        "companies_worked": 1,
+        "career_gaps": 0,
+        "expected_salary": 6000
       },
       "decision": {
         "status": "APPROVED",
         "confidence": 0.7,
-        "reasoning": "Based on automated analysis: Low income, Excellent credit. Risk score: 60/100.\n\nDetailed Analysis:\nYour monthly income of RM2,600 (RM31,200/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+        "reasoning": "Based on automated analysis: Some experience. Risk score: 60/100.\n\nDetailed Analysis:\nWith 2 years of experience, you meet our minimum requirements, though candidates with 5+ years are typically preferred. Consider obtaining relevant certifications or completing a degree program to strengthen your candidacy. Your skills alignment score of 70% suggests some gaps with job requirements. Consider developing skills more closely aligned with the role."
       },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income"
-      ],
+      "counterfactuals": [],
       "fairness": {
         "assessment": "Fair",
         "concerns": "Automated rule-based evaluation"
@@ -667,11 +172,10 @@
         "risk_score": 40,
         "approval_probability": 0.6,
         "critical_factors": [
-          "Low income",
-          "Excellent credit"
+          "Some experience"
         ]
       },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. After interview and reference check, the candidate profile did not align with current team requirements. While qualifications were met, cultural fit or specific skill gaps were identified during the review process.",
       "alternative_counterfactuals": [
         "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
         "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
@@ -679,139 +183,103 @@
       ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T08:26:17.488839+00:00"
+        "timestamp": "2026-02-05T11:42:55.795270+00:00"
       }
     },
-    "final_decision": "rejected",
-    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations. very noty boy kenot asept",
-    "reviewed_at": "2026-02-05T08:29:43.437428+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
+    "final_decision": "approved",
+    "reviewer_comment": "Based on automated analysis: Some experience. Risk score: 60/100.\n\nDetailed Analysis:\nWith 2 years of experience, you meet our minimum requirements, though candidates with 5+ years are typically preferred. Consider obtaining relevant certifications or completing a degree program to strengthen your candidacy. Your skills alignment score of 70% suggests some gaps with job requirements. Consider developing skills more closely aligned with the role.",
+    "reviewed_at": "2026-02-05T11:43:03.609997+00:00",
+    "is_override": false,
+    "override_explanation": null
   },
   {
-    "domain": "loan",
+    "domain": "job",
     "data": {
-      "full_name": "uehbssibsbsbsun",
-      "age": 56,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 20,
-      "employment_type": "Contract",
-      "monthly_income": 2000,
-      "existing_debt": 4999,
-      "credit_score": 420,
-      "loan_amount": 123000,
-      "loan_purpose": "Personal"
+      "full_name": "Laura Croft",
+      "job_title": "Software Engineer",
+      "years_experience": 1,
+      "education_level": "Bachelor",
+      "companies_worked": 1,
+      "career_gaps": 1,
+      "expected_salary": 10000
     },
     "status": "completed",
-    "id": "082e60c4",
-    "timestamp": "2026-02-05T08:59:58.206626+00:00",
+    "id": "3a25b02b",
+    "timestamp": "2026-02-05T11:44:11.494499+00:00",
     "ai_result": {
-      "decision_type": "loan",
+      "decision_type": "job",
       "applicant": {
-        "full_name": "uehbssibsbsbsun",
-        "age": 56,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 20,
-        "employment_type": "Contract",
-        "monthly_income": 2000,
-        "existing_debt": 4999,
-        "credit_score": 420,
-        "loan_amount": 123000,
-        "loan_purpose": "Personal"
+        "full_name": "Laura Croft",
+        "job_title": "Software Engineer",
+        "years_experience": 1,
+        "education_level": "Bachelor",
+        "companies_worked": 1,
+        "career_gaps": 1,
+        "expected_salary": 10000
       },
       "decision": {
         "status": "REJECTED",
-        "confidence": 0.1,
-        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income."
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Standard evaluation criteria applied. Risk score: 45/100.\n\nDetailed Analysis:\nYour experience of 1 years is below our preferred threshold. We typically look for candidates with at least 2 years of relevant experience. Consider obtaining relevant certifications or completing a degree program to strengthen your candidacy. Your skills alignment score of 70% suggests some gaps with job requirements. Consider developing skills more closely aligned with the role."
       },
       "counterfactuals": [
-        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
-        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
-        "Step 3: Request a smaller loan amount (max RM120,000 based on your income) or increase your income before reapplying"
+        "Step 1: Gain more industry experience through internships, projects, or entry-level positions before reapplying"
       ],
       "fairness": {
         "assessment": "Fair",
         "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 100,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Low income",
-          "Poor credit",
-          "High loan-to-income"
-        ]
+        "risk_score": 55,
+        "approval_probability": 0.45,
+        "critical_factors": []
       },
-      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Interview performance and references demonstrated potential that outweighs experience gaps. Candidate shows strong learning ability and cultural fit that supports hiring decision.",
       "alternative_counterfactuals": [],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T08:59:58.215079+00:00"
+        "timestamp": "2026-02-05T11:44:11.495299+00:00"
       }
     },
     "final_decision": "rejected",
-    "reviewer_comment": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
-    "reviewed_at": "2026-02-05T09:00:18.847905+00:00",
+    "reviewer_comment": "Based on automated analysis: Standard evaluation criteria applied. Risk score: 45/100.\n\nDetailed Analysis:\nYour experience of 1 years is below our preferred threshold. We typically look for candidates with at least 2 years of relevant experience. Consider obtaining relevant certifications or completing a degree program to strengthen your candidacy. Your skills alignment score of 70% suggests some gaps with job requirements. Consider developing skills more closely aligned with the role.",
+    "reviewed_at": "2026-02-05T11:44:46.051422+00:00",
     "is_override": false,
     "override_explanation": null
   },
   {
     "domain": "insurance",
     "data": {
-      "full_name": "ygyvfyviyg",
-      "age": 35,
-      "policy_type": "Health",
-      "policy_years": 18,
-      "previous_claims": 0,
-      "claim_amount": 20000,
-      "incident_severity": "critical",
+      "full_name": "Reece Smedley",
+      "age": 25,
+      "policy_type": "Vehicle",
+      "policy_years": 3,
+      "previous_claims": 1,
+      "claim_amount": 6000,
+      "incident_severity": "moderate",
       "location_type": "urban",
-      "annual_premium": 350230
+      "annual_premium": 1200
     },
     "status": "completed",
-    "id": "dacde3ed",
-    "timestamp": "2026-02-05T09:43:58.059595+00:00",
+    "id": "877bff0f",
+    "timestamp": "2026-02-05T11:51:18.781879+00:00",
     "ai_result": {
       "decision_type": "insurance",
       "applicant": {
-        "full_name": "ygyvfyviyg",
-        "age": 35,
-        "policy_type": "Health",
-        "policy_years": 18,
-        "previous_claims": 0,
-        "claim_amount": 20000,
-        "incident_severity": "critical",
+        "full_name": "Reece Smedley",
+        "age": 25,
+        "policy_type": "Vehicle",
+        "policy_years": 3,
+        "previous_claims": 1,
+        "claim_amount": 6000,
+        "incident_severity": "moderate",
         "location_type": "urban",
-        "annual_premium": 350230
+        "annual_premium": 1200
       },
       "decision": {
         "status": "APPROVED",
-        "confidence": 0.85,
-        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 35 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: Young age, No prior claims. Risk score: 90/100.\n\nDetailed Analysis:\nAt 25 years old, you fall into a lower-risk age bracket with statistically fewer claims and health issues. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
       },
       "counterfactuals": [],
       "fairness": {
@@ -819,9 +287,10 @@
         "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 25,
-        "approval_probability": 0.75,
+        "risk_score": 10,
+        "approval_probability": 0.9,
         "critical_factors": [
+          "Young age",
           "No prior claims"
         ]
       },
@@ -833,70 +302,48 @@
       ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T09:43:58.066109+00:00"
+        "timestamp": "2026-02-05T11:51:18.782696+00:00"
       }
     },
-    "final_decision": "rejected",
-    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment.",
-    "reviewed_at": "2026-02-05T09:50:08.969520+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
+    "final_decision": "approved",
+    "reviewer_comment": "Based on automated analysis: Young age, No prior claims. Risk score: 90/100.\n\nDetailed Analysis:\nAt 25 years old, you fall into a lower-risk age bracket with statistically fewer claims and health issues. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.",
+    "reviewed_at": "2026-02-05T11:53:00.737496+00:00",
+    "is_override": false,
+    "override_explanation": null
   },
   {
     "domain": "insurance",
     "data": {
-      "full_name": "eu8ichWEYCV",
-      "age": 55,
+      "full_name": "Adam Gillbert",
+      "age": 26,
       "policy_type": "Health",
-      "policy_years": 12,
+      "policy_years": 4,
       "previous_claims": 1,
-      "claim_amount": 49999992,
-      "incident_severity": "critical",
+      "claim_amount": 15000,
+      "incident_severity": "major",
       "location_type": "urban",
-      "annual_premium": 210321
+      "annual_premium": 2400
     },
     "status": "completed",
-    "id": "15fef3d4",
-    "timestamp": "2026-02-05T10:09:19.420469+00:00",
+    "id": "66c61447",
+    "timestamp": "2026-02-05T11:54:41.629427+00:00",
     "ai_result": {
       "decision_type": "insurance",
       "applicant": {
-        "full_name": "eu8ichWEYCV",
-        "age": 55,
+        "full_name": "Adam Gillbert",
+        "age": 26,
         "policy_type": "Health",
-        "policy_years": 12,
+        "policy_years": 4,
         "previous_claims": 1,
-        "claim_amount": 49999992,
-        "incident_severity": "critical",
+        "claim_amount": 15000,
+        "incident_severity": "major",
         "location_type": "urban",
-        "annual_premium": 210321
+        "annual_premium": 2400
       },
       "decision": {
         "status": "APPROVED",
-        "confidence": 0.85,
-        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 55 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: Young age, No prior claims. Risk score: 90/100.\n\nDetailed Analysis:\nAt 26 years old, you fall into a lower-risk age bracket with statistically fewer claims and health issues. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
       },
       "counterfactuals": [],
       "fairness": {
@@ -904,9 +351,10 @@
         "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 25,
-        "approval_probability": 0.75,
+        "risk_score": 10,
+        "approval_probability": 0.9,
         "critical_factors": [
+          "Young age",
           "No prior claims"
         ]
       },
@@ -918,35 +366,78 @@
       ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-05T10:09:19.425691+00:00"
+        "timestamp": "2026-02-05T11:54:41.630344+00:00"
       }
     },
-    "final_decision": "rejected",
-    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment. BCUS UR A JACKASS",
-    "reviewed_at": "2026-02-05T10:11:42.653941+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+    "final_decision": "approved",
+    "reviewer_comment": "Based on automated analysis: Young age, No prior claims. Risk score: 90/100.\n\nDetailed Analysis:\nAt 26 years old, you fall into a lower-risk age bracket with statistically fewer claims and health issues. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.",
+    "reviewed_at": "2026-02-05T11:55:32.285283+00:00",
+    "is_override": false,
+    "override_explanation": null
+  },
+  {
+    "domain": "credit",
+    "data": {
+      "full_name": "David Blaine",
+      "customer_id": "6215296",
+      "credit_score": 600,
+      "accounts_open": 2,
+      "late_payments": 2,
+      "credit_utilization": 29,
+      "annual_income": 72000,
+      "credit_history_years": 5,
+      "defaults": 3
+    },
+    "status": "completed",
+    "id": "bd410a09",
+    "timestamp": "2026-02-05T11:57:52.674768+00:00",
+    "ai_result": {
+      "decision_type": "credit",
+      "applicant": {
+        "full_name": "David Blaine",
+        "customer_id": "6215296",
+        "credit_score": 600,
+        "accounts_open": 2,
+        "late_payments": 2,
+        "credit_utilization": 29,
+        "annual_income": 72000,
+        "credit_history_years": 5,
+        "defaults": 3
       },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: Good income, Employed, Good credit score. Risk score: 100/100.\n\nDetailed Analysis:\nYour income of RM72,000/year meets our credit requirements and indicates stable financial standing. Your current employment status provides assurance of stable income flow for meeting credit obligations. Your credit score of 600 is within acceptable range for credit approval. Your age of 30 years falls within our preferred demographic, typically associated with stable income and responsible credit behavior."
+      },
+      "counterfactuals": [],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 0,
+        "approval_probability": 1.0,
         "critical_factors": [
-          "Invalid AI response"
+          "Good income",
+          "Employed",
+          "Good credit score"
         ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. Manual verification identified discrepancies or risks not captured by automated screening. Per credit policy, applications flagged for manual review require additional documentation or guarantees.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T11:57:52.676605+00:00"
       }
-    }
+    },
+    "final_decision": "approved",
+    "reviewer_comment": "Based on automated analysis: Good income, Employed, Good credit score. Risk score: 100/100.\n\nDetailed Analysis:\nYour income of RM72,000/year meets our credit requirements and indicates stable financial standing. Your current employment status provides assurance of stable income flow for meeting credit obligations. Your credit score of 600 is within acceptable range for credit approval. Your age of 30 years falls within our preferred demographic, typically associated with stable income and responsible credit behavior.",
+    "reviewed_at": "2026-02-05T11:58:26.006277+00:00",
+    "is_override": false,
+    "override_explanation": null
   }
 ]

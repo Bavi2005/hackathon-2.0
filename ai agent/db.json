@@ -778,5 +778,175 @@
     "reviewed_at": "2026-02-05T09:00:18.847905+00:00",
     "is_override": false,
     "override_explanation": null
+  },
+  {
+    "domain": "insurance",
+    "data": {
+      "full_name": "ygyvfyviyg",
+      "age": 35,
+      "policy_type": "Health",
+      "policy_years": 18,
+      "previous_claims": 0,
+      "claim_amount": 20000,
+      "incident_severity": "critical",
+      "location_type": "urban",
+      "annual_premium": 350230
+    },
+    "status": "completed",
+    "id": "dacde3ed",
+    "timestamp": "2026-02-05T09:43:58.059595+00:00",
+    "ai_result": {
+      "decision_type": "insurance",
+      "applicant": {
+        "full_name": "ygyvfyviyg",
+        "age": 35,
+        "policy_type": "Health",
+        "policy_years": 18,
+        "previous_claims": 0,
+        "claim_amount": 20000,
+        "incident_severity": "critical",
+        "location_type": "urban",
+        "annual_premium": 350230
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 35 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 25,
+        "approval_probability": 0.75,
+        "critical_factors": [
+          "No prior claims"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T09:43:58.066109+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment.",
+    "reviewed_at": "2026-02-05T09:50:08.969520+00:00",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      }
+    }
+  },
+  {
+    "domain": "insurance",
+    "data": {
+      "full_name": "eu8ichWEYCV",
+      "age": 55,
+      "policy_type": "Health",
+      "policy_years": 12,
+      "previous_claims": 1,
+      "claim_amount": 49999992,
+      "incident_severity": "critical",
+      "location_type": "urban",
+      "annual_premium": 210321
+    },
+    "status": "completed",
+    "id": "15fef3d4",
+    "timestamp": "2026-02-05T10:09:19.420469+00:00",
+    "ai_result": {
+      "decision_type": "insurance",
+      "applicant": {
+        "full_name": "eu8ichWEYCV",
+        "age": 55,
+        "policy_type": "Health",
+        "policy_years": 12,
+        "previous_claims": 1,
+        "claim_amount": 49999992,
+        "incident_severity": "critical",
+        "location_type": "urban",
+        "annual_premium": 210321
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 55 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 25,
+        "approval_probability": 0.75,
+        "critical_factors": [
+          "No prior claims"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T10:09:19.425691+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows. Per insurance regulations, certain risk profiles require specialized underwriting assessment. BCUS UR A JACKASS",
+    "reviewed_at": "2026-02-05T10:11:42.653941+00:00",
+    "is_override": true,
+    "override_explanation": {
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.5,
+        "reasoning": "Model output invalid or incomplete - System Error"
+      },
+      "counterfactuals": [
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
+      ],
+      "fairness": {
+        "assessment": "Unknown",
+        "concerns": "Processing Error"
+      },
+      "key_metrics": {
+        "risk_score": 50,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Invalid AI response"
+        ]
+      }
+    }
   }
 ]

@@ -1,6 +1,72 @@
 {
   "explanations": [
     {
+      "id": "b738ee20",
+      "type": "insurance",
+      "applicant": {
+        "full_name": "eu8ichWEYCV",
+        "age": 55,
+        "policy_type": "Health",
+        "policy_years": 12,
+        "previous_claims": 1,
+        "claim_amount": 49999992,
+        "incident_severity": "critical",
+        "location_type": "urban",
+        "annual_premium": 210321
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 55 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 25,
+        "approval_probability": 0.75,
+        "critical_factors": [
+          "No prior claims"
+        ]
+      },
+      "timestamp": "2026-02-05T10:09:19.423380+00:00"
+    },
+    {
+      "id": "fe1e35c4",
+      "type": "insurance",
+      "applicant": {
+        "full_name": "ygyvfyviyg",
+        "age": 35,
+        "policy_type": "Health",
+        "policy_years": 18,
+        "previous_claims": 0,
+        "claim_amount": 20000,
+        "incident_severity": "critical",
+        "location_type": "urban",
+        "annual_premium": 350230
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.85,
+        "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 35 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates."
+      },
+      "counterfactuals": [],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 25,
+        "approval_probability": 0.75,
+        "critical_factors": [
+          "No prior claims"
+        ]
+      },
+      "timestamp": "2026-02-05T09:43:58.062952+00:00"
+    },
+    {
       "id": "cabbeccf",
       "type": "loan",
       "applicant": {

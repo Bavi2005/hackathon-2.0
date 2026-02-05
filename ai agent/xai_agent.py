@@ -176,6 +176,9 @@ def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, An
         else:
             annual_income = float(data.get("income", data.get("annual_income", data.get("amt_income_total", 0))) or 0)
         
+        # Credit score if provided
+        credit_score = float(data.get("credit_score", data.get("cibil_score", data.get("cibil score", 0))) or 0)
+        
         # BNM Guidelines for credit - similar thresholds
         if annual_income > 120000:
             score += 25
@@ -200,10 +203,30 @@ def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, An
             detailed_analysis.append("Being currently unemployed creates uncertainty about your ability to make regular credit payments. Employment stability is a key factor in credit decisions.")
             counterfactuals.append("Secure stable employment with verifiable income before reapplying for credit")
         
+        # Credit score analysis
+        if credit_score > 0:
+            if credit_score >= 700:
+                score += 20
+                factors.append("Excellent credit score")
+                detailed_analysis.append(f"Your credit score of {credit_score:.0f} demonstrates an excellent credit history and responsible financial behavior.")
+            elif credit_score >= 600:
+                score += 10
+                factors.append("Good credit score")
+                detailed_analysis.append(f"Your credit score of {credit_score:.0f} is within acceptable range for credit approval.")
+            else:
+                score -= 15
+                factors.append("Low credit score")
+                detailed_analysis.append(f"Your credit score of {credit_score:.0f} is below our preferred threshold of 600, indicating potential credit history issues.")
+                counterfactuals.append("Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report")
+        
         if 25 <= age <= 60:
             score += 10
             factors.append("Prime age")
             detailed_analysis.append(f"Your age of {age:.0f} years falls within our preferred demographic, typically associated with stable income and responsible credit behavior.")
+        elif age < 25:
+            detailed_analysis.append(f"At {age:.0f} years old, you have limited credit history which may affect approval. Building credit over time will improve future applications.")
+            counterfactuals.append("Build a longer credit history by responsibly using a secured credit card or becoming an authorized user on an established account")
+        
         
     elif decision_type == "insurance":
         # Insurance scoring rules
@@ -219,6 +242,7 @@ def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, An
             score -= 10
             factors.append("Higher age risk")
             detailed_analysis.append(f"Your age of {age:.0f} years places you in a higher actuarial risk category, which affects premium calculations and coverage eligibility.")
+            counterfactuals.append("Consider applying for senior-specific insurance plans designed for your age bracket with appropriate coverage options")
         else:
             detailed_analysis.append(f"Your age of {age:.0f} is within standard risk parameters for insurance coverage.")
         
@@ -230,11 +254,17 @@ def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, An
             score += 5
             factors.append("Few claims")
             detailed_analysis.append(f"Your claims history shows {claims} previous claim(s), which is within acceptable limits but may affect your premium rates.")
+            counterfactuals.append("Maintain a claim-free record going forward to gradually improve your risk profile and premium rates")
         else:
             score -= 20
             factors.append("Multiple claims")
             detailed_analysis.append(f"Your history of {claims} claims indicates higher-than-average risk. Multiple claims suggest patterns that insurers consider when assessing coverage and pricing.")
             counterfactuals.append("Maintain a claim-free record for at least 2 years to demonstrate lower risk and qualify for better rates")
+        
+        # Additional insurance-specific counterfactuals
+        if premium > 500:
+            detailed_analysis.append(f"Your current premium of RM{premium:.0f}/month reflects your risk profile and coverage level.")
+            counterfactuals.append("Consider adjusting your coverage level or increasing deductibles to reduce monthly premiums")
         
     elif decision_type == "job":
         # Job application scoring

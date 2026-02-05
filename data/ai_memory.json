@@ -1,6 +1,18 @@
 {
   "decisions": [
     {
+      "type": "insurance",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 55 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.",
+      "timestamp": "2026-02-05T10:09:19.421922+00:00"
+    },
+    {
+      "type": "insurance",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: No prior claims. Risk score: 75/100.\n\nDetailed Analysis:\nYour age of 35 is within standard risk parameters for insurance coverage. Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.",
+      "timestamp": "2026-02-05T09:43:58.061434+00:00"
+    },
+    {
       "type": "loan",
       "decision": "REJECTED",
       "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
@@ -287,18 +299,6 @@
       "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete - System Error",
       "timestamp": "2026-02-05T06:12:09.621225+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-05T06:12:09.617489+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-05T06:12:09.614261+00:00"
     }
   ]
 }

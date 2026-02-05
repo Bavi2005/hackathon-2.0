@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Upload, Loader2, FileText } from 'lucide-react';
+import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Upload, Loader2, FileText, Download } from 'lucide-react';
 import Link from 'next/link';
 import { CaseData } from '../lib/types';
 import { CATEGORIES, CATEGORY_CONFIG } from '../lib/constants';

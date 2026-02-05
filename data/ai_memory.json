@@ -2,129 +2,303 @@
   "decisions": [
     {
       "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "After evaluating the provided data, it was determined that Zep Ernest's financial situation is not strong enough to qualify for this loan. His Monthly Income of $2699 is significantly below a healthy threshold relative to his Employment Years (1 year) and existing debt level ($0). An additional $500 in monthly income would make him more financially stable, which could improve his credit score and increase the likelihood of approval.",
-      "timestamp": "2026-02-03T08:29:05.821424+00:00"
-    },
-    {
-      "type": "job",
-      "decision": "REJECTED",
-      "reasoning": "Kelvin has more than 10 years of experience as a Security Guard and completed a Diploma, which is within the acceptable range for this position. However, his expected salary of $6000 does not align well with industry standards and expectations based on his level of experience and education. While Kelvin may still be suitable in terms of experience and qualifications, his expected salary falls below what would typically be considered reasonable for a professional in this field.",
-      "timestamp": "2026-02-03T08:03:30.438036+00:00"
-    },
-    {
-      "type": "job",
-      "decision": "REJECTED",
-      "reasoning": "Based on the provided information, Natalie does not meet our current approval criteria for a job application as a Software Developer with 9 years of experience and a bachelor's degree. The expected salary of $9000 seems unusually low given her qualifications and industry standards.",
-      "timestamp": "2026-02-03T07:50:35.270904+00:00"
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit. Risk score: 60/100.\n\nDetailed Analysis:\nYour monthly income of RM2,600 (RM31,200/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T08:26:17.485142+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
-      "reasoning": "After evaluating the provided data, it was determined that Mr. Ferrari's financial situation is not strong enough to qualify for this loan. His existing debt of $30,000 already exceeds a healthy threshold relative to his income and employment stability (Employment Years: 20). With an employment type as Permanent and no additional details indicating he has substantial savings or other sources of income that could reduce the impact of the existing debt, it would be risky for us to approve this loan. We recommend looking at ways to improve Mr. Ferrari's financial health through reducing his debt or increasing his income.",
-      "timestamp": "2026-02-03T07:23:55.634461+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T07:06:55.087137+00:00"
-    },
-    {
-      "type": "job",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T07:01:30.540731+00:00"
-    },
-    {
-      "type": "job",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T06:55:32.903551+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T06:53:10.209306+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T05:16:46.550732+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T03:45:00.220504+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T03:26:35.605879+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-03T03:25:05.406859+00:00"
+      "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,996 (RM23,952/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM1,000,000 represents a loan-to-income ratio of 41.8x your annual income (RM23,952), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T07:58:26.498451+00:00"
     },
     {
       "type": "loan",
       "decision": "APPROVED",
-      "reasoning": "The applicant meets all necessary criteria for a loan, including their high income and low existing debt.",
-      "timestamp": "2026-01-28T05:41:24.074928+00:00"
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM19,000 (RM228,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T07:44:51.820540+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
-      "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount.",
-      "timestamp": "2026-01-28T04:39:46.257127+00:00"
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of RM5,000,000 represents a loan-to-income ratio of 208.3x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T07:43:40.601883+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM120,000 (RM1,440,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T07:25:44.891019+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,500 (RM18,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM100,000 represents a loan-to-income ratio of 5.6x your annual income (RM18,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T07:23:10.768933+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM5,000 (RM60,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T07:19:04.209466+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Poor credit. Risk score: 15/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 500 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.",
+      "timestamp": "2026-02-05T07:12:55.248561+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM12,000 (RM144,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T07:12:39.189637+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "APPROVED",
+      "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM12,000 (RM144,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments.",
+      "timestamp": "2026-02-05T07:12:12.644731+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour reported income of $0 is below our preferred threshold of $25,000. This significantly impacts your debt-to-income ratio and loan repayment capacity. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of $6,000 represents a loan-to-income ratio of infx, which exceeds our maximum threshold of 5x annual income.",
+      "timestamp": "2026-02-05T07:04:04.178825+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.",
+      "timestamp": "2026-02-05T06:52:18.192407+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.",
+      "timestamp": "2026-02-05T06:50:29.753470+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Fair credit, High loan-to-income. Risk score: 30/100.",
+      "timestamp": "2026-02-05T06:44:52.835605+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Fair credit, High loan-to-income. Risk score: 30/100.",
+      "timestamp": "2026-02-05T06:44:15.001557+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.",
+      "timestamp": "2026-02-05T06:43:36.715422+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-01-27T18:53:43.843369+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount.",
-      "timestamp": "2026-01-27T18:00:37.127708+00:00"
+      "timestamp": "2026-02-05T06:43:16.749929+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-01-27T17:42:12.203271+00:00"
+      "timestamp": "2026-02-05T06:39:04.172356+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-01-27T17:29:50.596063+00:00"
+      "timestamp": "2026-02-05T06:23:46.645163+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete",
-      "timestamp": "2026-01-27T16:19:16.072609+00:00"
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:22:14.169140+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete",
-      "timestamp": "2026-01-27T16:11:11.024257+00:00"
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.565383+00:00"
     },
     {
       "type": "loan",
       "decision": "REJECTED",
-      "reasoning": "Your existing debt is too high for this loan amount.",
-      "timestamp": "2026-01-27T16:08:58.856820+00:00"
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.541580+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.512208+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.482920+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.442588+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.411730+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.380620+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.344535+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.311270+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.281699+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.253129+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.224844+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.199079+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.171989+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.144413+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.117326+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.093942+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.066759+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:20:53.042621+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:14:30.380509+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:14:30.332285+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:14:30.284356+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.795656+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.792092+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.786655+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.777483+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.621225+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.617489+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.614261+00:00"
+    },
+    {
+      "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Model output invalid or incomplete - System Error",
+      "timestamp": "2026-02-05T06:12:09.607676+00:00"
     }
   ]
 }

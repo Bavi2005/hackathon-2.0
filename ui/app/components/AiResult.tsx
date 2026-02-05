@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, XCircle } from 'lucide-react';
 import { AiResultType } from '../lib/types';
 
 interface AiResultProps {
@@ -11,7 +11,8 @@ export default function AiResult({ result, onReset }: AiResultProps) {
 	// Note: in CustomerPortal, decision is passed as a string (status.model_output.label)
 	// which differs from the AiResultType definition. We handle both for robustness.
 	const decisionText = typeof result.decision === 'string' ? result.decision : result.decision?.status || '';
-	const isDenied = decisionText.toLowerCase() === 'denied' || decisionText.toLowerCase() === 'high risk';
+	// Check for all possible rejection/denial statuses from backend
+	const isDenied = ['denied', 'rejected', 'high risk', 'high_risk'].includes(decisionText.toLowerCase());
 	const isApproved = !isDenied;
 
 	return (
@@ -25,21 +26,31 @@ export default function AiResult({ result, onReset }: AiResultProps) {
 					<CheckCircle2 size={72} className="text-emerald-500 mx-auto mb-6 drop-shadow-lg" />
 				) : (
 					<div className="relative inline-block mb-6">
-						<div className="absolute inset-0 bg-red-500/20 blur-xl rounded-full" />
-						<CheckCircle2 size={72} className="text-red-500 relative z-10 hidden" /> {/* Placeholder to keep import if needed, but we switch to X */}
-						<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-500 relative z-10"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" /></svg>
+						<div className="absolute inset-0 bg-red-500/30 blur-2xl rounded-full" />
+						<XCircle size={96} className="text-red-500 relative z-10 drop-shadow-lg" />
 					</div>
 				)}
 
-				<h1 className={`text-5xl font-black mb-4 tracking-tight ${isApproved ? 'text-white' : 'text-red-100'}`}>
-					{isApproved ? "Congratulations! Your application has been approved." : decisionText}
+				<h1 className={`text-4xl font-black mb-4 tracking-tight ${isApproved ? 'text-white' : 'text-red-100'}`}>
+					{isApproved ? "Congratulations! Your application has been approved." : "Application Denied"}
 				</h1>
-				{/* <p className="text-amber-100/70 mb-10 text-lg font-medium leading-relaxed">"{result.summary}"</p> */}
+
+				{/* REASON FOR DECISION - Always show summary */}
+				{result.summary && (
+					<div className={`mb-8 text-left p-6 rounded-2xl border ${isApproved ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+						<h3 className={`font-bold uppercase tracking-wider text-sm mb-3 ${isApproved ? 'text-emerald-400' : 'text-red-400'}`}>
+							{isApproved ? 'Decision Summary' : 'Reason for Decline'}
+						</h3>
+						<p className={`text-base leading-relaxed whitespace-pre-line ${isApproved ? 'text-emerald-100/80' : 'text-red-100/80'}`}>
+							{result.summary}
+						</p>
+					</div>
+				)}
 
 				{/* Steps to Approval (Counterfactuals) - ONLY SHOW IF DENIED */}
 				{!isApproved && result.counterfactuals && result.counterfactuals.length > 0 && (
 					<div className="mb-10 text-left bg-[#1a100e]/50 p-6 rounded-2xl border border-amber-500/10">
-						<h3 className="text-amber-400 font-bold uppercase tracking-wider text-sm mb-4">Steps to Approval</h3>
+						<h3 className="text-amber-400 font-bold uppercase tracking-wider text-sm mb-4">Steps to Improve Your Application</h3>
 						<ul className="space-y-3">
 							{result.counterfactuals.map((step: string, i: number) => (
 								<li key={i} className="flex items-start text-amber-100/80">

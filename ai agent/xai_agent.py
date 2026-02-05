@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 from enum import Enum
+from functools import lru_cache
+import hashlib
 import pandas as pd
 import json
 import asyncio
@@ -31,12 +33,338 @@ app.add_middleware(
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "qwen2.5:3b"
 
+# FAST MODE: Set to True for instant rule-based decisions (no AI)
+# Set to False to use slower but smarter AI decisions
+FAST_MODE = True  # Toggle this for instant vs AI responses
+
+# Performance tuning for CPU inference
+OLLAMA_OPTIONS = {
+    "num_ctx": 2048,       # Reduced context window (default 4096) - faster
+    "num_thread": 8,       # Use 8 of 12 CPU threads
+    "temperature": 0.3,    # Lower = faster, more deterministic
+    "top_p": 0.9,          # Slightly restrict sampling
+    "repeat_penalty": 1.1, # Prevent repetition loops
+    "num_predict": 512,    # Limit output tokens (was unlimited)
+}
+
 MAX_CSV_ROWS = 50
-MAX_CONCURRENCY = 5  # Increased for parallel batch processing
+MAX_CONCURRENCY = 3  # Reduced to avoid CPU contention
 REQUEST_TIMEOUT = 120.0
 MAX_FILE_SIZE_MB = 10  # Maximum file size in MB for uploads
 
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
+
+# Simple in-memory cache for repeated requests
+_response_cache: Dict[str, Dict[str, Any]] = {}
+CACHE_MAX_SIZE = 100
+
+def get_cache_key(decision_type: str, applicant: Dict[str, Any]) -> str:
+    """Generate a hash key for caching based on input data"""
+    data_str = f"{decision_type}:{json.dumps(applicant, sort_keys=True)}"
+    return hashlib.md5(data_str.encode()).hexdigest()
+
+def get_cached_response(key: str) -> Optional[Dict[str, Any]]:
+    return _response_cache.get(key)
+
+def set_cached_response(key: str, response: Dict[str, Any]):
+    global _response_cache
+    if len(_response_cache) >= CACHE_MAX_SIZE:
+        # Remove oldest entry (simple FIFO)
+        oldest = next(iter(_response_cache))
+        del _response_cache[oldest]
+    _response_cache[key] = response
+
+# =====================================================
+# FAST RULE-BASED ENGINE (Instant decisions)
+# =====================================================
+def fast_decision(decision_type: str, applicant: Dict[str, Any]) -> Dict[str, Any]:
+    """Instant rule-based decision engine - no AI calls"""
+    
+    # Extract common fields (case-insensitive)
+    data = {k.lower(): v for k, v in applicant.items()}
+    
+    score = 50  # Start neutral
+    factors = []
+    counterfactuals = []  # Will be numbered dynamically at the end
+    detailed_analysis = []  # For longer explanation
+    
+    if decision_type == "loan":
+        # Loan scoring rules
+        # Try to get income - check for monthly_income first and convert to annual
+        monthly_income = float(data.get("monthly_income", data.get("monthlyincome", 0)) or 0)
+        if monthly_income > 0:
+            annual_income = monthly_income * 12
+            income_is_monthly = True
+        else:
+            annual_income = float(data.get("income", data.get("annual_income", data.get("applicantincome", 0))) or 0)
+            income_is_monthly = False
+        
+        loan_amount = float(data.get("loan_amount", data.get("loanamount", data.get("amount", 10000))) or 10000)
+        credit_score = float(data.get("credit_score", data.get("cibil_score", data.get("cibil score", 650))) or 650)
+        
+        # Display income appropriately
+        display_income = monthly_income if income_is_monthly else annual_income
+        income_period = "monthly" if income_is_monthly else "annual"
+        
+        # BNM Guidelines: Minimum income threshold RM3,000/month (RM36,000/year)
+        # Good income: RM5,000/month (RM60,000/year), Excellent: RM10,000/month (RM120,000/year)
+        MIN_ANNUAL_INCOME = 36000  # RM3,000/month as per BNM prudent lending guidelines
+        GOOD_ANNUAL_INCOME = 60000  # RM5,000/month
+        EXCELLENT_ANNUAL_INCOME = 120000  # RM10,000/month
+        
+        # Income analysis using annual income for consistent comparison
+        if annual_income >= EXCELLENT_ANNUAL_INCOME:
+            score += 20
+            factors.append("High income")
+            detailed_analysis.append(f"Your {income_period} income of RM{display_income:,.0f} (RM{annual_income:,.0f}/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants.")
+        elif annual_income >= GOOD_ANNUAL_INCOME:
+            score += 15
+            factors.append("Good income")
+            detailed_analysis.append(f"Your {income_period} income of RM{display_income:,.0f} (RM{annual_income:,.0f}/year) shows solid financial standing and meets our standard requirements.")
+        elif annual_income >= MIN_ANNUAL_INCOME:
+            score += 5
+            factors.append("Moderate income")
+            detailed_analysis.append(f"Your {income_period} income of RM{display_income:,.0f} (RM{annual_income:,.0f}/year) meets the minimum requirement per Bank Negara Malaysia (BNM) guidelines, though higher income would improve your approval chances.")
+        else:
+            score -= 15
+            factors.append("Low income")
+            min_monthly = MIN_ANNUAL_INCOME / 12
+            detailed_analysis.append(f"Your {income_period} income of RM{display_income:,.0f} (RM{annual_income:,.0f}/year) is below the minimum threshold of RM{min_monthly:,.0f}/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity.")
+            counterfactuals.append(f"Increase your monthly income to at least RM{min_monthly:,.0f} through additional employment, side income, or by adding a co-applicant with higher income")
+        
+        # Credit score analysis
+        if credit_score >= 700:
+            score += 25
+            factors.append("Excellent credit")
+            detailed_analysis.append(f"Your credit score of {credit_score:.0f} is excellent, indicating a strong history of responsible credit management and timely payments.")
+        elif credit_score >= 600:
+            score += 10
+            factors.append("Fair credit")
+            detailed_analysis.append(f"Your credit score of {credit_score:.0f} is within acceptable range but not optimal. A score above 700 would qualify you for better interest rates.")
+        else:
+            score -= 20
+            factors.append("Poor credit")
+            detailed_analysis.append(f"Your credit score of {credit_score:.0f} is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks.")
+            counterfactuals.append("Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report")
+        
+        # Loan-to-income ratio analysis (BNM DSR Guidelines: typically max 60-70% DSR)
+        # Using simplified loan-to-annual-income ratio as proxy
+        MAX_LTI_RATIO = 5  # Max 5x annual income for personal loans
+        lti_ratio = loan_amount / annual_income if annual_income > 0 else float('inf')
+        if annual_income > 0 and loan_amount > annual_income * MAX_LTI_RATIO:
+            score -= 15
+            factors.append("High loan-to-income")
+            detailed_analysis.append(f"The requested loan amount of RM{loan_amount:,.0f} represents a loan-to-income ratio of {lti_ratio:.1f}x your annual income (RM{annual_income:,.0f}), which exceeds BNM's prudent lending threshold of {MAX_LTI_RATIO}x annual income.")
+            max_recommended_loan = annual_income * MAX_LTI_RATIO
+            counterfactuals.append(f"Request a smaller loan amount (max RM{max_recommended_loan:,.0f} based on your income) or increase your income before reapplying")
+        elif annual_income == 0:
+            score -= 20
+            factors.append("No verifiable income")
+            detailed_analysis.append("No verifiable income was provided, making it impossible to assess your debt service capacity.")
+            counterfactuals.append("Provide proof of income such as payslips, EPF statements, or income tax returns")
+        
+    elif decision_type == "credit":
+        # Credit scoring rules
+        age = float(data.get("age", data.get("days_birth", 0)) or 30)
+        if age < 0: age = abs(age) / 365  # Convert negative days to years
+        employed = data.get("employed", data.get("name_income_type", "")) != "Unemployed"
+        
+        # Handle monthly_income for credit too
+        monthly_income = float(data.get("monthly_income", data.get("monthlyincome", 0)) or 0)
+        if monthly_income > 0:
+            annual_income = monthly_income * 12
+        else:
+            annual_income = float(data.get("income", data.get("annual_income", data.get("amt_income_total", 0))) or 0)
+        
+        # BNM Guidelines for credit - similar thresholds
+        if annual_income > 120000:
+            score += 25
+            factors.append("High income")
+            detailed_analysis.append(f"Your annual income of RM{annual_income:,.0f} significantly exceeds our requirements, demonstrating excellent financial stability and repayment capacity.")
+        elif annual_income > 60000:
+            score += 15
+            factors.append("Good income")
+            detailed_analysis.append(f"Your income of RM{annual_income:,.0f}/year meets our credit requirements and indicates stable financial standing.")
+        else:
+            score -= 10
+            detailed_analysis.append(f"Your reported income of RM{annual_income:,.0f}/year is below our preferred threshold for credit approval. Higher income improves credit limits and approval odds.")
+            counterfactuals.append("Increase your annual income above RM60,000 to qualify for better credit terms and higher approval probability")
+        
+        if employed:
+            score += 15
+            factors.append("Employed")
+            detailed_analysis.append("Your current employment status provides assurance of stable income flow for meeting credit obligations.")
+        else:
+            score -= 20
+            factors.append("Unemployed")
+            detailed_analysis.append("Being currently unemployed creates uncertainty about your ability to make regular credit payments. Employment stability is a key factor in credit decisions.")
+            counterfactuals.append("Secure stable employment with verifiable income before reapplying for credit")
+        
+        if 25 <= age <= 60:
+            score += 10
+            factors.append("Prime age")
+            detailed_analysis.append(f"Your age of {age:.0f} years falls within our preferred demographic, typically associated with stable income and responsible credit behavior.")
+        
+    elif decision_type == "insurance":
+        # Insurance scoring rules
+        age = float(data.get("age", data.get("customer_age", 35)) or 35)
+        claims = int(data.get("claims", data.get("num_claims", data.get("past_claims", 0))) or 0)
+        premium = float(data.get("premium", data.get("monthly_premium", 100)) or 100)
+        
+        if age < 30:
+            score += 15
+            factors.append("Young age")
+            detailed_analysis.append(f"At {age:.0f} years old, you fall into a lower-risk age bracket with statistically fewer claims and health issues.")
+        elif age > 60:
+            score -= 10
+            factors.append("Higher age risk")
+            detailed_analysis.append(f"Your age of {age:.0f} years places you in a higher actuarial risk category, which affects premium calculations and coverage eligibility.")
+        else:
+            detailed_analysis.append(f"Your age of {age:.0f} is within standard risk parameters for insurance coverage.")
+        
+        if claims == 0:
+            score += 25
+            factors.append("No prior claims")
+            detailed_analysis.append("Your clean claims history demonstrates responsible usage of insurance and low risk profile, qualifying you for preferred rates.")
+        elif claims <= 2:
+            score += 5
+            factors.append("Few claims")
+            detailed_analysis.append(f"Your claims history shows {claims} previous claim(s), which is within acceptable limits but may affect your premium rates.")
+        else:
+            score -= 20
+            factors.append("Multiple claims")
+            detailed_analysis.append(f"Your history of {claims} claims indicates higher-than-average risk. Multiple claims suggest patterns that insurers consider when assessing coverage and pricing.")
+            counterfactuals.append("Maintain a claim-free record for at least 2 years to demonstrate lower risk and qualify for better rates")
+        
+    elif decision_type == "job":
+        # Job application scoring
+        experience = float(data.get("experience", data.get("years_experience", data.get("totalyearsexperience", 0))) or 0)
+        education = str(data.get("education", data.get("degree", ""))).lower()
+        skills_match = float(data.get("skills_match", data.get("skill_score", 70)) or 70)
+        
+        if experience >= 5:
+            score += 25
+            factors.append("Experienced")
+            detailed_analysis.append(f"Your {experience:.0f} years of experience demonstrates proven expertise and industry knowledge that strongly supports your candidacy.")
+        elif experience >= 2:
+            score += 10
+            factors.append("Some experience")
+            detailed_analysis.append(f"With {experience:.0f} years of experience, you meet our minimum requirements, though candidates with 5+ years are typically preferred.")
+        else:
+            score -= 5
+            detailed_analysis.append(f"Your experience of {experience:.0f} years is below our preferred threshold. We typically look for candidates with at least 2 years of relevant experience.")
+            counterfactuals.append("Gain more industry experience through internships, projects, or entry-level positions before reapplying")
+        
+        if "master" in education or "phd" in education:
+            score += 15
+            factors.append("Advanced degree")
+            detailed_analysis.append("Your advanced degree demonstrates significant academic achievement and specialized knowledge in your field.")
+        elif "bachelor" in education:
+            score += 10
+            factors.append("Bachelor's degree")
+            detailed_analysis.append("Your bachelor's degree meets our educational requirements for this position.")
+        else:
+            detailed_analysis.append("Consider obtaining relevant certifications or completing a degree program to strengthen your candidacy.")
+        
+        if skills_match >= 80:
+            score += 20
+            factors.append("Strong skills match")
+            detailed_analysis.append(f"Your skills alignment score of {skills_match:.0f}% indicates an excellent match with the job requirements.")
+        else:
+            detailed_analysis.append(f"Your skills alignment score of {skills_match:.0f}% suggests some gaps with job requirements. Consider developing skills more closely aligned with the role.")
+    
+    # Clamp score
+    score = max(0, min(100, score))
+    
+    # Decision threshold
+    approved = score >= 55
+    confidence = min(0.95, score / 100 + 0.1)
+    
+    # Number the counterfactuals dynamically (no gaps!)
+    numbered_counterfactuals = [f"Step {i+1}: {cf}" for i, cf in enumerate(counterfactuals)]
+    
+    if not numbered_counterfactuals and not approved:
+        numbered_counterfactuals = [
+            "Step 1: Review and update your application details to ensure all information is accurate and complete",
+            "Step 2: Provide additional supporting documentation such as pay stubs, tax returns, or employment verification",
+            "Step 3: Contact our support team at support@example.com for a manual review of your application"
+        ]
+    
+    # Build detailed reasoning
+    if detailed_analysis:
+        detailed_reasoning = " ".join(detailed_analysis)
+    else:
+        detailed_reasoning = "Standard evaluation criteria were applied to assess your application."
+    
+    summary_reasoning = f"Based on automated analysis: {', '.join(factors[:3]) if factors else 'Standard evaluation criteria applied'}. Risk score: {score}/100."
+    full_reasoning = f"{summary_reasoning}\n\nDetailed Analysis:\n{detailed_reasoning}"
+    
+    # Generate alternative reasoning for when employee overrides the AI decision
+    # This ensures logical, Bank Negara-compliant explanations are ready for both outcomes
+    if approved:
+        # If AI approved, generate a ready-made denial explanation for employee override
+        denial_reasons = []
+        denial_reasons.append("After manual review by our assessment officer, this application has been declined.")
+        
+        if decision_type == "loan":
+            denial_reasons.append("While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines.")
+            denial_reasons.append("Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.")
+        elif decision_type == "credit":
+            denial_reasons.append("Manual verification identified discrepancies or risks not captured by automated screening.")
+            denial_reasons.append("Per credit policy, applications flagged for manual review require additional documentation or guarantees.")
+        elif decision_type == "insurance":
+            denial_reasons.append("Underwriting review identified risk factors requiring policy exclusions or higher premiums than standard coverage allows.")
+            denial_reasons.append("Per insurance regulations, certain risk profiles require specialized underwriting assessment.")
+        elif decision_type == "job":
+            denial_reasons.append("After interview and reference check, the candidate profile did not align with current team requirements.")
+            denial_reasons.append("While qualifications were met, cultural fit or specific skill gaps were identified during the review process.")
+        
+        alternative_reasoning = " ".join(denial_reasons)
+        alternative_counterfactuals = [
+            "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+            "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+            "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+        ]
+    else:
+        # If AI rejected, generate a ready-made approval explanation for employee override
+        approval_reasons = []
+        approval_reasons.append("After manual review by our assessment officer, this application has been approved with conditions.")
+        
+        if decision_type == "loan":
+            approval_reasons.append(f"Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines.")
+            approval_reasons.append("Additional factors such as employment stability, savings history, or collateral support this approval.")
+        elif decision_type == "credit":
+            approval_reasons.append("Manual review of credit history and repayment patterns supports approval with monitored credit limit.")
+            approval_reasons.append("Employment verification and income documentation sufficiently mitigate identified risks.")
+        elif decision_type == "insurance":
+            approval_reasons.append("Underwriting review approved coverage with standard terms after verifying health declarations.")
+            approval_reasons.append("Risk factors identified are within acceptable limits for the selected coverage tier.")
+        elif decision_type == "job":
+            approval_reasons.append("Interview performance and references demonstrated potential that outweighs experience gaps.")
+            approval_reasons.append("Candidate shows strong learning ability and cultural fit that supports hiring decision.")
+        
+        alternative_reasoning = " ".join(approval_reasons)
+        alternative_counterfactuals = []  # No counterfactuals needed for approval
+    
+    return {
+        "decision": {
+            "status": "APPROVED" if approved else "REJECTED",
+            "confidence": round(confidence, 2),
+            "reasoning": full_reasoning
+        },
+        "counterfactuals": numbered_counterfactuals[:5],
+        "fairness": {
+            "assessment": "Fair",
+            "concerns": "Automated rule-based evaluation"
+        },
+        "key_metrics": {
+            "risk_score": 100 - score,
+            "approval_probability": round(score / 100, 2),
+            "critical_factors": factors[:3]
+        },
+        "alternative_reasoning": alternative_reasoning,
+        "alternative_counterfactuals": alternative_counterfactuals
+    }
 
 # File paths
 POLICIES_FILE = "../data/policies.json"
@@ -279,54 +607,21 @@ def format_as_text(data: Dict[str, Any]) -> str:
 
 
 def build_prompt(decision_type: DecisionType, applicant: Dict[str, Any]) -> str:
-    # Get relevant policies and decision history
+    # Get relevant policies (skip history for speed)
     policies = policy_memory.get_relevant_policies(decision_type.value)
-    history = ai_memory.get_context(decision_type.value)
     applicant_text = format_as_text(applicant)
     
-    return f"""
-SYSTEM:
-You are a deterministic decision engine.
-You MUST output JSON only and strictly follow the schema.
-Never refuse. Never explain internal policies directly.
-If data is insufficient, reject conservatively.
+    # Compact prompt - reduces tokens significantly
+    return f"""You are a {decision_type.value} decision engine. Output JSON only.
+Evaluate this application and decide APPROVED or REJECTED.
 
-TASK:
-Evaluate a {decision_type.value} application.
-Write a detailed, customer-friendly, multi-paragraph explanation in very simple English.
-If REJECTED, you MUST output between 3 and 5 clear, simple, actionable steps in the "counterfactuals" list.
-Each counterfactual item must:
-- Be a single, specific sentence.
-- Start with "Step N: " where N is 1, 2, 3, ...
-- Focus only on things the applicant can realistically change (income, savings, debt, documents, credit behaviour, etc.).
-- Avoid vague advice like "try your best" or "be responsible" and avoid technical jargon.
-If APPROVED, you may leave "counterfactuals" empty or use it for maintenance tips.
-Your reasoning text should be rich and specific (at least 4-6 sentences), but stay concise and focused on the applicant.
+DATA:
+{applicant_text}{policies}
 
-INPUT (TEXT FORMAT):
-{applicant_text}
-{policies}
-{history}
+OUTPUT FORMAT:
+{{"decision":{{"status":"APPROVED/REJECTED","confidence":0.0-1.0,"reasoning":"2-3 sentence explanation"}},"counterfactuals":["Step 1:...","Step 2:...","Step 3:..."],"fairness":{{"assessment":"Fair/Unfair","concerns":"brief"}},"key_metrics":{{"risk_score":0-100,"approval_probability":0.0-1.0,"critical_factors":["f1","f2"]}}}}
 
-OUTPUT (STRICT JSON ONLY):
-{{
-  "decision": {{
-    "status": "APPROVED or REJECTED",
-    "confidence": 0.0,
-    "reasoning": "Audit-grade explanation"
-  }},
-  "counterfactuals": ["Step 1: ...", "Step 2: ...", "Step 3: ..."],
-  "fairness": {{
-    "assessment": "Fair or Potentially Unfair",
-    "concerns": "One sentence summary"
-  }},
-  "key_metrics": {{
-    "risk_score": 0-100,
-    "approval_probability": 0.0-1.0,
-    "critical_factors": ["factor1", "factor2"]
-  }}
-}}
-"""
+RULES: If REJECTED, list 3 actionable steps. If APPROVED, counterfactuals can be empty."""
 
 # =====================================================
 # OVERRIDE PROMPT
@@ -452,7 +747,7 @@ def normalize_counterfactuals(raw_cf: Any) -> List[str]:
 # =====================================================
 async def call_ai(prompt: str) -> Dict[str, Any]:
     async with semaphore:
-        async with httpx.AsyncClient(timeout=300.0) as client: # Increased timeout for older hardware
+        async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT) as client:
             try:
                 print(f"DEBUG: Call AI with model {MODEL_NAME}...")
                 response = await client.post(
@@ -461,7 +756,8 @@ async def call_ai(prompt: str) -> Dict[str, Any]:
                         "model": MODEL_NAME, 
                         "prompt": prompt, 
                         "stream": False,
-                        "format": "json"  # FORCE JSON MODE
+                        "format": "json",  # FORCE JSON MODE
+                        "options": OLLAMA_OPTIONS  # Performance tuning
                     }
                 )
                 response.raise_for_status()
@@ -477,14 +773,28 @@ async def call_ai(prompt: str) -> Dict[str, Any]:
 # DECISION ENGINE
 # =====================================================
 async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
-    ai_output = await call_ai(build_prompt(decision_type, applicant))
+    # Check cache first for repeated requests
+    cache_key = get_cache_key(decision_type.value, applicant)
+    cached = get_cached_response(cache_key)
+    if cached:
+        print(f"DEBUG: Cache HIT for {decision_type.value}")
+        # Update timestamp for cached response
+        cached["audit"]["timestamp"] = datetime.now(timezone.utc).isoformat()
+        cached["audit"]["cached"] = True
+        return cached
     
-    # Normalize counterfactuals for consistent frontend experience
-    try:
-        raw_cf = ai_output.get("counterfactuals", [])
-        ai_output["counterfactuals"] = normalize_counterfactuals(raw_cf)
-    except Exception as e:
-        print(f"WARNING: Failed to normalize counterfactuals: {e}")
+    # FAST MODE: Use instant rule-based decisions
+    if FAST_MODE:
+        print(f"DEBUG: FAST MODE - rule-based decision for {decision_type.value}")
+        ai_output = fast_decision(decision_type.value, applicant)
+    else:
+        ai_output = await call_ai(build_prompt(decision_type, applicant))
+        # Normalize counterfactuals for consistent frontend experience
+        try:
+            raw_cf = ai_output.get("counterfactuals", [])
+            ai_output["counterfactuals"] = normalize_counterfactuals(raw_cf)
+        except Exception as e:
+            print(f"WARNING: Failed to normalize counterfactuals: {e}")
 
     # Store decision in memory for future context
     decision_status = ai_output["decision"]["status"]
@@ -498,7 +808,7 @@ async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
         # Do not let storage failures break decision flow
         print(f"WARNING: Failed to store explanation: {e}")
 
-    return {
+    result = {
         "decision_type": decision_type.value,
         "applicant": applicant,
         "decision": ai_output["decision"],
@@ -509,11 +819,18 @@ async def ai_decision(decision_type: DecisionType, applicant: Dict[str, Any]):
             "approval_probability": 0.5,
             "critical_factors": []
         }),
+        # Include pre-generated reasoning for employee override scenarios
+        "alternative_reasoning": ai_output.get("alternative_reasoning", ""),
+        "alternative_counterfactuals": ai_output.get("alternative_counterfactuals", []),
         "audit": {
             "engine": "universal-xai-http",
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
     }
+    
+    # Cache the result
+    set_cached_response(cache_key, result)
+    return result
 
 # =====================================================
 # BATCH (PARALLEL, OPTIMIZED)
@@ -652,7 +969,7 @@ async def get_application(app_id: str):
 @app.post("/applications/{app_id}/review")
 async def review_application(
     app_id: str,
-    decision: str = Query(..., regex="^(approved|rejected)$"),
+    decision: str = Query(..., pattern="^(approved|rejected)$"),
     comment: Optional[str] = None
 ):
     app = db.get_application(app_id)

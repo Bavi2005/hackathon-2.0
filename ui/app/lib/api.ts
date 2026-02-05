@@ -12,6 +12,9 @@ const client = axios.create({
 const transform = (app: any): CaseData => {
 	const aiReasoning = app.ai_result?.decision?.reasoning || "Pending AI analysis...";
 	const reviewerComment = app.reviewer_comment ? `Auditor Note: ${app.reviewer_comment}` : "";
+	
+	// Check if application has been reviewed (not pending anymore)
+	const isReviewed = app.status === 'approved' || app.status === 'rejected' || app.status === 'completed';
 
 	return {
 		decision_id: app.id,
@@ -22,11 +25,11 @@ const transform = (app: any): CaseData => {
 			applicant_id: app.data.applicant_id || `ID: ${app.id.slice(0, 8)}`
 		},
 		model_output: {
-			label: app.status === 'completed' ? (app.final_decision?.toUpperCase() || 'COMPLETED') : 'Pending',
+			label: isReviewed ? (app.final_decision?.toUpperCase() || app.status?.toUpperCase() || 'COMPLETED') : 'Pending',
 			confidence: app.ai_result?.decision?.confidence || null
 		},
 		explanation: {
-			summary: app.status === 'completed'
+			summary: isReviewed
 				? `${aiReasoning}${reviewerComment ? ` | ${reviewerComment}` : ""}`
 				: `AI Suggestion: ${app.ai_result?.decision?.status || 'Processing'}. ${aiReasoning}`
 		},

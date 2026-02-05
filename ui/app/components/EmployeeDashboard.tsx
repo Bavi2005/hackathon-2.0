@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Download } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Download, Upload, Loader2 } from 'lucide-react';
 import { CaseData } from '../lib/types';
 import { CATEGORIES, CATEGORY_CONFIG } from '../lib/constants';
 import DonutChart from './DonutChart';
@@ -35,6 +35,53 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 	const [realData, setRealData] = useState<{ [key: string]: CaseData[] }>({ loan: [], job: [], insurance: [], credit: [] });
 	const [loading, setLoading] = useState(true);
+
+	// CSV Upload State
+	const [isUploading, setIsUploading] = useState(false);
+	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	const handleCsvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (!e.target.files || !e.target.files[0]) return;
+		
+		const file = e.target.files[0];
+		if (!file.name.endsWith('.csv')) {
+			alert('Please upload a CSV file');
+			return;
+		}
+		
+		setIsUploading(true);
+		
+		const formData = new FormData();
+		formData.append('file', file);
+		
+		// Use current selected category or ask user
+		const type = selectedCategory || prompt("Enter domain type (loan, credit, insurance, job):", "loan") || "loan";
+		
+		try {
+			const response = await fetch(`http://localhost:8000/applications/batch_csv?decision_type=${type}`, {
+				method: 'POST',
+				body: formData
+			});
+			
+			if (!response.ok) {
+				const error = await response.json();
+				throw new Error(error.detail || 'Upload failed');
+			}
+			
+			const result = await response.json();
+			alert(`Successfully processed ${result.count} applications from CSV!`);
+			
+			// Refresh data
+			const newData = await api.getApplications();
+			setRealData(newData);
+		} catch (err: any) {
+			console.error(err);
+			alert(`Upload failed: ${err.message}`);
+		} finally {
+			setIsUploading(false);
+			if (fileInputRef.current) fileInputRef.current.value = '';
+		}
+	};
 
 	// Poll for new data every 5 seconds (to catch new submissions)
 	useEffect(() => {
@@ -234,6 +281,24 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 				{/* Filter & Search Bar */}
 				<div className="flex items-center gap-4">
+					{/* CSV Upload Button */}
+					<button
+						onClick={() => fileInputRef.current?.click()}
+						disabled={isUploading}
+						className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-500 font-bold rounded-xl transition-all flex items-center gap-2 disabled:opacity-50"
+						title="Upload CSV file to batch process applications"
+					>
+						{isUploading ? <Loader2 size={18} className="animate-spin" /> : <Upload size={18} />}
+						{isUploading ? 'Processing...' : 'Upload CSV'}
+					</button>
+					<input
+						type="file"
+						ref={fileInputRef}
+						hidden
+						accept=".csv"
+						onChange={handleCsvUpload}
+					/>
+
 					{/* Manage Policies Button */}
 					<button
 						onClick={() => setShowPolicyManager(true)}

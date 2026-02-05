@@ -1,0 +1,117 @@
+================================================================================
+                         HOW TO RUN THE XAI DECISION ENGINE
+================================================================================
+
+This project consists of two main components:
+1. AI Backend (FastAPI + Ollama) - runs on http://localhost:8000
+2. UI Frontend (Next.js) - runs on http://localhost:3000
+
+================================================================================
+                              PREREQUISITES
+================================================================================
+
+1. Python 3.12+ installed
+2. Node.js 18+ installed
+3. Ollama running locally with qwen2.5:3b model (optional, for AI decisions)
+
+================================================================================
+                          STEP 1: START THE AI BACKEND
+================================================================================
+
+Option A: Using the virtual environment (recommended)
+------------------------------------------------------
+cd /home/bpichyal/hackathon_bavi/hackathon-2.0
+source venv/bin/activate
+cd "ai agent"
+uvicorn xai_agent:app --reload --host 0.0.0.0 --port 8000
+
+Option B: If you need to create the virtual environment first
+--------------------------------------------------------------
+cd /home/bpichyal/hackathon_bavi/hackathon-2.0
+python3 -m venv venv
+source venv/bin/activate
+pip install -r "ai agent/requirements.txt"
+cd "ai agent"
+uvicorn xai_agent:app --reload --host 0.0.0.0 --port 8000
+
+The API will be available at: http://localhost:8000
+API Documentation (Swagger): http://localhost:8000/docs
+
+================================================================================
+                          STEP 2: START THE UI FRONTEND
+================================================================================
+
+Open a NEW terminal and run:
+
+cd /home/bpichyal/hackathon_bavi/hackathon-2.0/ui
+npm install    # Only needed on first run
+npm run dev
+
+The UI will be available at: http://localhost:3000
+
+================================================================================
+                              USAGE GUIDE
+================================================================================
+
+1. Open http://localhost:3000 in your browser
+2. You'll see the landing page with options for Customer and Employee portals
+
+CUSTOMER PORTAL:
+- Submit loan, credit, insurance, or job applications
+- View AI-generated decisions and explanations
+
+EMPLOYEE PORTAL:
+- Review pending applications
+- Approve or deny applications
+- Upload CSV files for batch processing (NEW!)
+- Manage policies that affect AI decisions
+
+CSV UPLOAD FEATURE:
+- Go to Employee Portal
+- Select a category (loan, credit, insurance, job)
+- Click the green "Upload CSV" button
+- Select your CSV file with applicant data
+- The AI will process all rows and generate decisions
+
+================================================================================
+                          OPTIONAL: START OLLAMA
+================================================================================
+
+If you want the AI to generate real decisions (not mock data):
+
+1. Install Ollama: https://ollama.ai
+2. Pull the model: ollama pull qwen2.5:3b
+3. Start Ollama: ollama serve (runs on http://localhost:11434)
+
+================================================================================
+                              TROUBLESHOOTING
+================================================================================
+
+Error: "ModuleNotFoundError: No module named 'fastapi'"
+Solution: Make sure you activate the virtual environment first:
+          source venv/bin/activate
+
+Error: "Port 8000 already in use"
+Solution: Kill the existing process or use a different port:
+          uvicorn xai_agent:app --reload --port 8001
+
+Error: "npm: command not found"
+Solution: Install Node.js from https://nodejs.org
+
+Error: "Cannot connect to AI backend"
+Solution: Make sure the AI backend is running on http://localhost:8000
+
+================================================================================
+                              QUICK START
+================================================================================
+
+Terminal 1 (AI Backend):
+  cd /home/bpichyal/hackathon_bavi/hackathon-2.0
+  source venv/bin/activate && cd "ai agent" && uvicorn xai_agent:app --reload
+
+Terminal 2 (UI Frontend):
+  cd /home/bpichyal/hackathon_bavi/hackathon-2.0/ui && npm run dev
+
+Then open: http://localhost:3000
+
+================================================================================

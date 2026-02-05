@@ -1,0 +1,4 @@
+applicant_id,age,gender,marital_status,employment_years,employment_type,monthly_income,existing_debt,credit_score,loan_amount,loan_purpose,dependents
+1001,35,M,Married,10,Permanent,8500,5000,750,25000,Home,2
+1002,28,F,Single,3,Contract,4500,8000,580,15000,Personal,0
+1003,45,M,Married,15,Self-Employed,12000,2000,820,50000,Auto,3

@@ -1,1122 +1,529 @@
 [
   {
-    "id": "37572cdc",
     "domain": "loan",
     "data": {
-      "age": "27",
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": "4",
-      "employment_type": "Permanent",
-      "monthly_income": "9000",
-      "existing_debt": "2000",
-      "credit_score": "800",
-      "loan_amount": "20000",
-      "loan_purpose": "Vehicle"
-    },
-    "status": "completed",
-    "timestamp": "2026-01-13T17:59:15.808643+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": "27",
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": "4",
-        "employment_type": "Permanent",
-        "monthly_income": "9000",
-        "existing_debt": "2000",
-        "credit_score": "800",
-        "loan_amount": "20000",
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 0.95,
-        "reasoning": "Applicant's age is within the typical range for responsible borrowers; employment type and years suggest financial stability which correlates with reliable repayment capability."
-      },
-      "counterfactuals": [
-        {
-          "change_in_employment_years": "-5",
-          "decision": "REJECTED"
-        },
-        {
-          "change_in_existing_debt": "+2000",
-          "decision": "REJECTED"
-        }
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None identified based on provided criteria."
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-13T17:59:59.842239+00:00"
-      }
-    },
-    "final_decision": "rejected",
-    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
-    "reviewed_at": "2026-01-27T16:20:55.208216+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete"
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
-  },
-  {
-    "id": "d1b8b7b5",
-    "domain": "loan",
-    "data": {
-      "age": "26",
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": "4",
-      "employment_type": "Permanent",
-      "monthly_income": "9000",
-      "existing_debt": "2000",
-      "credit_score": "800",
-      "loan_amount": "15000",
-      "loan_purpose": "Vehicle"
-    },
-    "status": "completed",
-    "timestamp": "2026-01-13T18:01:35.714508+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": "26",
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": "4",
-        "employment_type": "Permanent",
-        "monthly_income": "9000",
-        "existing_debt": "2000",
-        "credit_score": "800",
-        "loan_amount": "15000",
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 1.0,
-        "reasoning": "The applicant has a stable income and employment history with no default on credit."
-      },
-      "counterfactuals": [
-        {
-          "age_increase": -2
-        },
-        {
-          "employment_years_decrease": -1
-        }
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": null
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-13T18:02:07.759054+00:00"
-      }
-    },
-    "final_decision": "rejected",
-    "reviewer_comment": "Manually denied by auditor due to policy mismatch.",
-    "reviewed_at": "2026-01-27T16:25:25.269114+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete"
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
-  },
-  {
-    "id": "b4718f5a",
-    "domain": "job",
-    "data": {
-      "job_title": "Software Engineer",
-      "years_experience": "5",
-      "education_level": "Master",
-      "companies_worked": "2",
-      "career_gaps": "0",
-      "expected_salary": "5000"
-    },
-    "status": "completed",
-    "timestamp": "2026-01-13T18:04:25.842933+00:00",
-    "ai_result": {
-      "decision_type": "job",
-      "applicant": {
-        "job_title": "Software Engineer",
-        "years_experience": "5",
-        "education_level": "Master",
-        "companies_worked": "2",
-        "career_gaps": "0",
-        "expected_salary": "5000"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 0.85,
-        "reasoning": "Applicant meets the job title requirement with sufficient years of experience and a relevant education level; worked at multiple companies demonstrating adaptability and potentially diverse skill set."
-      },
-      "counterfactuals": [
-        {
-          "input_variation": {
-            "education_level": "Bachelor",
-            "companies_worked": "3"
-          },
-          "output_decision": {
-            "status": "REJECTED",
-            "confidence": 0.95,
-            "reasoning": "Insufficient education level for the job title; however, additional experience and company diversity may compensate."
-          }
-        }
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-13T18:05:10.180254+00:00"
-      }
-    },
-    "final_decision": "rejected",
-    "reviewer_comment": "Bad employment history",
-    "reviewed_at": "2026-02-03T08:30:00.146710+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The agent has decided to reject the job application based on the candidate's bad employment history.",
-      "detailed_reasoning": "Despite your strong qualifications and background, the applicant has a history of leaving jobs abruptly. This raises concerns about their commitment and ability to maintain a stable career path, which is important for this role as a Software Engineer. The agent believes that these gaps in employment could potentially reflect on their work ethic or reliability.",
-      "next_steps": [
-        "Review the candidate's professional development plan",
-        "Consider additional references from previous employers"
-      ],
-      "conditions": [
-        "Ensure all references are verified and positive",
-        "Document any potential mitigating actions taken by the applicant to address the gap"
-      ],
-      "override_context": "The agent decided to override the AI recommendation of 'APPROVED' due to concerns about the candidate's employment history, which could impact their ability to perform effectively in a job where stability is crucial."
-    }
-  },
-  {
-    "id": "d5b7237a",
-    "domain": "job",
-    "data": {
-      "job_title": "Software Engineer",
-      "years_experience": "5",
-      "education_level": "PhD",
-      "companies_worked": "2",
-      "career_gaps": "0",
-      "expected_salary": "5000"
-    },
-    "status": "pending_human",
-    "timestamp": "2026-01-13T18:08:38.278155+00:00",
-    "ai_result": {
-      "decision_type": "job",
-      "applicant": {
-        "job_title": "Software Engineer",
-        "years_experience": "5",
-        "education_level": "PhD",
-        "companies_worked": "2",
-        "career_gaps": "0",
-        "expected_salary": "5000"
-      },
-      "decision": {
-        "status": "APPROVED",
-        "confidence": 0.95,
-        "reasoning": "The candidate meets the required experience and educational standards for a Software Engineer position."
-      },
-      "counterfactuals": [
-        {
-          "years_experience": "4",
-          "status": "APPROVED"
-        },
-        {
-          "education_level": "Master's degree",
-          "years_experience": "6",
-          "status": "APPROVED"
-        }
-      ],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-13T18:09:26.480188+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "age": 27,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 6,
-      "employment_type": "Permanent",
-      "monthly_income": 15000,
-      "existing_debt": 15005,
-      "credit_score": 499,
-      "loan_amount": 850000,
-      "loan_purpose": "Vehicle"
-    },
-    "status": "completed",
-    "id": "c69c759a",
-    "timestamp": "2026-01-27T16:09:10.203764+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 27,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 6,
-        "employment_type": "Permanent",
-        "monthly_income": 15000,
-        "existing_debt": 15005,
-        "credit_score": 499,
-        "loan_amount": 850000,
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete"
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-27T16:11:11.025388+00:00"
-      }
-    },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-01-27T16:27:28.095053+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete"
-      },
-      "counterfactuals": [],
-      "fairness": {
-        "assessment": "Fair",
-        "concerns": "None"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      }
-    }
-  },
-  {
-    "id": "APP-4104",
-    "domain": "loan",
-    "data": {
-      "age": 58,
-      "gender": "M",
-      "marital_status": "Widowed",
-      "employment_years": 19,
-      "employment_type": "Permanent",
-      "monthly_income": 49998,
-      "existing_debt": 199997,
-      "credit_score": 847,
-      "loan_amount": 249994,
-      "loan_purpose": "Business",
-      "created_at": "2026-01-27T17:29:46.157318+00:00"
-    },
-    "status": "completed",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 58,
-        "gender": "M",
-        "marital_status": "Widowed",
-        "employment_years": 19,
-        "employment_type": "Permanent",
-        "monthly_income": 49998,
-        "existing_debt": 199997,
-        "credit_score": 847,
-        "loan_amount": 249994,
-        "loan_purpose": "Business",
-        "created_at": "2026-01-27T17:29:46.157318+00:00"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-27T17:29:50.597352+00:00"
-      }
-    },
-    "timestamp": "2026-01-27T17:29:50.597370+00:00",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-01-28T05:45:41.468149+00:00",
-    "final_decision": "approved",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The agent overrode your recommendation due to additional evidence provided.",
-      "detailed_reasoning": "Based on the comprehensive application data, including the individual's age (58), gender (Male), marital status (Widowed), employment years (19), employment type (Permanent), monthly income ($49,998), existing debt ($199,997), credit score (847), loan amount ($249,994), and loan purpose (Business), the agent reviewed additional evidence provided by the applicant. This review revealed that while the initial recommendation was appropriate due to low risk factors, there were new developments in the applicant's financial situation or circumstances not previously considered.",
-      "next_steps": [
-        "Provide documentation of any changes in income or debt since the application date",
-        "Review and provide updated credit report"
-      ],
-      "conditions": [
-        "The agent requires at least two additional pieces of evidence beyond the original data to make a decision",
-        "Documentation must include specific details such as new income sources or decreased debt"
-      ],
-      "override_context": "The human decision was based on a review that included supplementary information not previously considered by the AI system."
-    },
-    "agent_explanation": "AI Suggestion: REJECTED. Model output invalid or incomplete - System Error",
-    "explanation_edited": true
-  },
-  {
-    "id": "APP-1147",
-    "domain": "loan",
-    "data": {
-      "age": 74,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 49,
-      "employment_type": "Permanent",
-      "monthly_income": 5000,
-      "existing_debt": -1,
-      "credit_score": 848,
-      "loan_amount": 49999,
-      "loan_purpose": "Vehicle",
-      "created_at": "2026-01-27T17:42:09.653863+00:00"
-    },
-    "status": "completed",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 74,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 49,
-        "employment_type": "Permanent",
-        "monthly_income": 5000,
-        "existing_debt": -1,
-        "credit_score": 848,
-        "loan_amount": 49999,
-        "loan_purpose": "Vehicle",
-        "created_at": "2026-01-27T17:42:09.653863+00:00"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-27T17:42:12.204950+00:00"
-      }
-    },
-    "timestamp": "2026-01-27T17:42:12.204974+00:00",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-01-28T04:46:07.799673+00:00",
-    "final_decision": "approved",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The loan application was manually approved by an auditor due to provided evidence.",
-      "detailed_reasoning": "The applicant is elderly (age 74), has a high credit score (848), and meets all other criteria for the 'loan' category. However, the agent had concerns about long-term affordability of the loan amount ($49,999) over a period of several years. The auditor determined that the provided evidence justifies the approved decision.",
-      "next_steps": [
-        "Contact an assistant manager to inquire further about the approval process for elderly applicants"
-      ],
-      "conditions": [
-        "Applicant is at least 18 years old and has no debt obligations",
-        "Credit score must be above 700"
-      ],
-      "override_context": "The human agent, recognizing a discrepancy between the AI's recommendation and their understanding of customer need, intervened to manually approve the loan based on additional verification."
-    },
-    "agent_explanation": "bullshit",
-    "explanation_edited": true,
-    "explanation_edited_at": "2026-01-28T05:43:04.731099+00:00"
-  },
-  {
-    "id": "APP-4608",
-    "domain": "loan",
-    "data": {
-      "age": 44,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 20,
-      "employment_type": "Permanent",
-      "monthly_income": 15000,
-      "existing_debt": 19999,
-      "credit_score": 748,
-      "loan_amount": 500000,
-      "loan_purpose": "Home",
-      "created_at": "2026-01-27T17:59:53.170022+00:00"
-    },
-    "status": "completed",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 44,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 20,
-        "employment_type": "Permanent",
-        "monthly_income": 15000,
-        "existing_debt": 19999,
-        "credit_score": 748,
-        "loan_amount": 500000,
-        "loan_purpose": "Home",
-        "created_at": "2026-01-27T17:59:53.170022+00:00"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.95,
-        "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount."
-      },
-      "counterfactuals": [
-        "Step 1: Improve your credit score by paying off high-interest debt and avoiding late payments.",
-        "Step 2: Increase your monthly income to better match the required payment amount (i.e., $495.63).",
-        "Step 3: Consider applying for a lower-amount loan or refinancing if possible."
-      ],
-      "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "Loan approvals are based on credit score, which may discriminate against individuals with lower scores."
-      },
-      "key_metrics": {
-        "risk_score": 20,
-        "approval_probability": 0.15,
-        "critical_factors": [
-          "Credit Score",
-          "Existing Debt"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-27T18:00:37.129711+00:00"
-      }
-    },
-    "timestamp": "2026-01-27T18:00:37.129738+00:00",
-    "reviewer_comment": "The applicant's credit score is below the threshold required for a loan of this amount.",
-    "reviewed_at": "2026-01-28T05:44:31.124430+00:00",
-    "final_decision": "rejected",
-    "is_override": false,
-    "override_explanation": null
-  },
-  {
-    "id": "APP-7185",
-    "domain": "loan",
-    "data": {
-      "age": 34,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 14,
-      "employment_type": "Permanent",
-      "monthly_income": 14999,
-      "existing_debt": -1,
-      "credit_score": 650,
-      "loan_amount": 1250000,
-      "loan_purpose": "Vehicle",
-      "created_at": "2026-01-27T18:52:25.747453+00:00"
-    },
-    "status": "completed",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 34,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 14,
-        "employment_type": "Permanent",
-        "monthly_income": 14999,
-        "existing_debt": -1,
-        "credit_score": 650,
-        "loan_amount": 1250000,
-        "loan_purpose": "Vehicle",
-        "created_at": "2026-01-27T18:52:25.747453+00:00"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "alternative_reasoning": "Unable to generate alternative explanation due to parsing error.",
-      "counterfactuals": [
-        "Ensure all application fields are filled correctly.",
-        "Verify income and employment details.",
-        "Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-01-27T18:53:43.845559+00:00"
-      }
-    },
-    "timestamp": "2026-01-27T18:53:43.845593+00:00",
-    "reviewer_comment": "Unable to generate alternative explanation due to parsing error.",
-    "reviewed_at": "2026-01-28T05:50:02.251003+00:00",
-    "final_decision": "approved",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The loan application has been approved due to a combination of factors that led to a reassessment of risk.",
-      "detailed_reasoning": "The agent considered your existing debt (which is negative), lower credit score, and higher monthly income. Your age and employment history were also taken into account. After reviewing all the information provided, it was determined that despite these risks, you are still within the financial means to meet the loan requirements.",
-      "next_steps": [
-        "Contact the bank for any necessary paperwork"
-      ],
-      "conditions": [
-        "Loan amount exceeds maximum acceptable by your credit score",
-        "Verification of income and employment details beyond current data"
-      ],
-      "override_context": "The human agent's decision was overridden based on their initial analysis, but after additional verification steps, it became clear that you were still a suitable candidate for the loan."
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "age": 48,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 20,
-      "employment_type": "Permanent",
-      "monthly_income": 250000,
-      "existing_debt": 20000,
+      "applicant_id": 12,
+      "age": 80,
+      "monthly_income": 500000,
+      "existing_debt": 0,
       "credit_score": 850,
-      "loan_amount": 5000000,
-      "loan_purpose": "Business"
+      "loan_amount": 6000000
+    },
+    "status": "pending_ai",
+    "id": "9e835df4",
+    "timestamp": "2026-02-05T06:24:34.070063+00:00"
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "full_name": "bavithran alagna",
+      "age": 21,
+      "gender": "M",
+      "marital_status": "Single",
+      "employment_years": 11,
+      "employment_type": "Permanent",
+      "monthly_income": 25000,
+      "existing_debt": 0,
+      "credit_score": 754,
+      "loan_amount": 1500000,
+      "loan_purpose": "Vehicle"
     },
     "status": "completed",
-    "id": "408df76a",
-    "timestamp": "2026-01-28T04:39:03.630898+00:00",
+    "id": "c87b30fb",
+    "timestamp": "2026-02-05T06:50:29.752695+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "age": 48,
+        "full_name": "bavithran alagna",
+        "age": 21,
         "gender": "M",
         "marital_status": "Single",
-        "employment_years": 20,
+        "employment_years": 11,
         "employment_type": "Permanent",
-        "monthly_income": 250000,
-        "existing_debt": 20000,
-        "credit_score": 850,
-        "loan_amount": 5000000,
-        "loan_purpose": "Business"
+        "monthly_income": 25000,
+        "existing_debt": 0,
+        "credit_score": 754,
+        "loan_amount": 1500000,
+        "loan_purpose": "Vehicle"
       },
       "decision": {
         "status": "REJECTED",
-        "confidence": 1.0,
-        "reasoning": "The applicant's credit score is below the threshold required for a loan of this amount."
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100."
       },
       "counterfactuals": [
-        "Step 1: Improve the credit score by increasing income or reducing debt.",
-        "Step 2: Increase employment type to 'Temporary' with a lower income and/or add another job.",
-        "Step 3: Explore alternative collateral options, such as real estate or a business partnership."
+        "Step 1: Increase your monthly income above $25,000",
+        "Step 3: Request a smaller loan amount"
       ],
       "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "The system may unfairly limit access to credit for individuals with certain characteristics based on past performance rather than their true financial needs."
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 75,
-        "approval_probability": 0.01,
+        "risk_score": 55,
+        "approval_probability": 0.45,
         "critical_factors": [
-          "Credit Score",
-          "Loan Amount"
+          "Low income",
+          "Excellent credit",
+          "High loan-to-income"
         ]
       },
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-01-28T04:39:46.258841+00:00"
+        "timestamp": "2026-02-05T06:50:29.758453+00:00"
       }
     },
-    "agent_explanation": "AI Suggestion: REJECTED. The applicant's credit score is below the threshold required for a loan of this amount. the applicant is broke",
-    "explanation_edited": true,
-    "explanation_edited_at": "2026-01-28T04:42:38.141308+00:00",
     "final_decision": "rejected",
-    "reviewer_comment": "The applicant's credit score is below the threshold required for a loan of this amount.",
-    "reviewed_at": "2026-01-28T04:43:00.758939+00:00",
+    "reviewer_comment": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100. so problem la",
+    "reviewed_at": "2026-02-05T06:51:13.154201+00:00",
     "is_override": false,
     "override_explanation": null
   },
   {
     "domain": "loan",
     "data": {
-      "age": 37,
+      "full_name": "zep",
+      "age": 50,
       "gender": "M",
       "marital_status": "Single",
-      "employment_years": 10,
+      "employment_years": 50,
       "employment_type": "Permanent",
-      "monthly_income": 10000,
-      "existing_debt": 20000,
+      "monthly_income": 9000,
+      "existing_debt": 0,
       "credit_score": 850,
-      "loan_amount": 30000,
-      "loan_purpose": "Business"
+      "loan_amount": 14999,
+      "loan_purpose": "Vehicle"
     },
     "status": "pending_human",
-    "id": "f7ae1673",
-    "timestamp": "2026-02-03T03:25:05.302307+00:00",
+    "id": "8de72d09",
+    "timestamp": "2026-02-05T06:52:18.191836+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "age": 37,
+        "full_name": "zep",
+        "age": 50,
         "gender": "M",
         "marital_status": "Single",
-        "employment_years": 10,
+        "employment_years": 50,
         "employment_type": "Permanent",
-        "monthly_income": 10000,
-        "existing_debt": 20000,
+        "monthly_income": 9000,
+        "existing_debt": 0,
         "credit_score": 850,
-        "loan_amount": 30000,
-        "loan_purpose": "Business"
+        "loan_amount": 14999,
+        "loan_purpose": "Vehicle"
       },
       "decision": {
         "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100."
       },
       "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
+        "Step 1: Increase your monthly income above $25,000",
+        "Step 3: Request a smaller loan amount"
       ],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 55,
+        "approval_probability": 0.45,
         "critical_factors": [
-          "Invalid AI response"
+          "Low income",
+          "Excellent credit",
+          "High loan-to-income"
         ]
       },
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T03:25:05.407592+00:00"
+        "timestamp": "2026-02-05T06:52:18.195742+00:00"
       }
     }
   },
   {
     "domain": "loan",
     "data": {
-      "age": 37,
+      "full_name": "zepernest",
+      "age": 20,
       "gender": "M",
       "marital_status": "Single",
-      "employment_years": 37,
+      "employment_years": 5,
       "employment_type": "Permanent",
-      "monthly_income": 10000,
-      "existing_debt": 50000,
-      "credit_score": 700,
-      "loan_amount": 20000,
-      "loan_purpose": "Home"
-    },
-    "status": "pending_human",
-    "id": "dfa01940",
-    "timestamp": "2026-02-03T03:26:35.565026+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "age": 37,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 37,
-        "employment_type": "Permanent",
-        "monthly_income": 10000,
-        "existing_debt": 50000,
-        "credit_score": 700,
-        "loan_amount": 20000,
-        "loan_purpose": "Home"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
-      },
-      "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
-      ],
-      "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
-      },
-      "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
-        "critical_factors": [
-          "Invalid AI response"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T03:26:35.606479+00:00"
-      }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "age": 37,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 10,
-      "employment_type": "Permanent",
-      "monthly_income": 10000,
-      "existing_debt": 40000,
-      "credit_score": 806,
-      "loan_amount": 70000,
+      "monthly_income": 12000,
+      "existing_debt": 0,
+      "credit_score": 750,
+      "loan_amount": 6000,
       "loan_purpose": "Personal"
     },
     "status": "pending_human",
-    "id": "652cefe3",
-    "timestamp": "2026-02-03T03:45:00.164102+00:00",
+    "id": "c773a264",
+    "timestamp": "2026-02-05T07:04:04.178357+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "age": 37,
+        "full_name": "zepernest",
+        "age": 20,
         "gender": "M",
         "marital_status": "Single",
-        "employment_years": 10,
+        "employment_years": 5,
         "employment_type": "Permanent",
-        "monthly_income": 10000,
-        "existing_debt": 40000,
-        "credit_score": 806,
-        "loan_amount": 70000,
+        "monthly_income": 12000,
+        "existing_debt": 0,
+        "credit_score": 750,
+        "loan_amount": 6000,
         "loan_purpose": "Personal"
       },
       "decision": {
         "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour reported income of $0 is below our preferred threshold of $25,000. This significantly impacts your debt-to-income ratio and loan repayment capacity. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of $6,000 represents a loan-to-income ratio of infx, which exceeds our maximum threshold of 5x annual income."
       },
       "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
+        "Step 1: Increase your monthly income above $25,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Request a smaller loan amount that keeps your loan-to-income ratio below 5x, or consider increasing your income before reapplying"
       ],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 55,
+        "approval_probability": 0.45,
         "critical_factors": [
-          "Invalid AI response"
+          "Low income",
+          "Excellent credit",
+          "High loan-to-income"
         ]
       },
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T03:45:00.221938+00:00"
+        "timestamp": "2026-02-05T07:04:04.181620+00:00"
       }
     }
   },
   {
     "domain": "loan",
     "data": {
-      "full_name": "Raja Vikraman ",
-      "age": 37,
+      "full_name": "collin",
+      "age": 22,
       "gender": "M",
       "marital_status": "Married",
-      "employment_years": 10,
-      "employment_type": "Permanent",
-      "monthly_income": 20000,
-      "existing_debt": 70000,
+      "employment_years": 1,
+      "employment_type": "Self-Employed",
+      "monthly_income": 5000,
+      "existing_debt": 1000,
       "credit_score": 850,
-      "loan_amount": 100000,
+      "loan_amount": 50000,
       "loan_purpose": "Business"
     },
-    "status": "pending_human",
-    "id": "f6eefe27",
-    "timestamp": "2026-02-03T05:16:46.439913+00:00",
+    "status": "completed",
+    "id": "7b79b045",
+    "timestamp": "2026-02-05T07:19:04.207229+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "full_name": "Raja Vikraman ",
-        "age": 37,
+        "full_name": "collin",
+        "age": 22,
         "gender": "M",
         "marital_status": "Married",
-        "employment_years": 10,
-        "employment_type": "Permanent",
-        "monthly_income": 20000,
-        "existing_debt": 70000,
+        "employment_years": 1,
+        "employment_type": "Self-Employed",
+        "monthly_income": 5000,
+        "existing_debt": 1000,
         "credit_score": 850,
-        "loan_amount": 100000,
+        "loan_amount": 50000,
         "loan_purpose": "Business"
       },
       "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM5,000 (RM60,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
       },
-      "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
-      ],
+      "counterfactuals": [],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 10,
+        "approval_probability": 0.9,
         "critical_factors": [
-          "Invalid AI response"
+          "Good income",
+          "Excellent credit"
         ]
       },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T05:16:46.551926+00:00"
+        "timestamp": "2026-02-05T07:19:04.213554+00:00"
+      }
+    },
+    "final_decision": "approved",
+    "reviewer_comment": "Based on automated analysis: Good income, Excellent credit. Risk score: 90/100.\n\nDetailed Analysis:\nYour monthly income of RM5,000 (RM60,000/year) shows solid financial standing and meets our standard requirements. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
+    "reviewed_at": "2026-02-05T07:19:50.456400+00:00",
+    "is_override": false,
+    "override_explanation": null
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "full_name": "bob bobison",
+      "age": 52,
+      "gender": "F",
+      "marital_status": "Married",
+      "employment_years": 5,
+      "employment_type": "Part-Time",
+      "monthly_income": 1500,
+      "existing_debt": 15000,
+      "credit_score": 420,
+      "loan_amount": 100000,
+      "loan_purpose": "Personal"
+    },
+    "status": "pending_human",
+    "id": "0ce7ecad",
+    "timestamp": "2026-02-05T07:23:10.767977+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "full_name": "bob bobison",
+        "age": 52,
+        "gender": "F",
+        "marital_status": "Married",
+        "employment_years": 5,
+        "employment_type": "Part-Time",
+        "monthly_income": 1500,
+        "existing_debt": 15000,
+        "credit_score": 420,
+        "loan_amount": 100000,
+        "loan_purpose": "Personal"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.1,
+        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,500 (RM18,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM100,000 represents a loan-to-income ratio of 5.6x your annual income (RM18,000), which exceeds BNM's prudent lending threshold of 5x annual income."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
+        "Step 3: Request a smaller loan amount (max RM90,000 based on your income) or increase your income before reapplying"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 100,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Low income",
+          "Poor credit",
+          "High loan-to-income"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_counterfactuals": [],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T07:23:10.771944+00:00"
       }
     }
   },
   {
     "domain": "loan",
     "data": {
-      "full_name": "Zeperrnest",
+      "full_name": "raja fail",
       "age": 50,
       "gender": "M",
       "marital_status": "Married",
-      "employment_years": 20,
+      "employment_years": 39,
       "employment_type": "Permanent",
-      "monthly_income": 20000,
-      "existing_debt": 300000,
-      "credit_score": 849,
-      "loan_amount": 50000,
+      "monthly_income": 120000,
+      "existing_debt": 0,
+      "credit_score": 750,
+      "loan_amount": 59999,
       "loan_purpose": "Vehicle"
     },
     "status": "pending_human",
-    "id": "bb0210a8",
-    "timestamp": "2026-02-03T06:53:10.113696+00:00",
+    "id": "d331fee4",
+    "timestamp": "2026-02-05T07:25:44.890272+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "full_name": "Zeperrnest",
+        "full_name": "raja fail",
         "age": 50,
         "gender": "M",
         "marital_status": "Married",
-        "employment_years": 20,
+        "employment_years": 39,
         "employment_type": "Permanent",
-        "monthly_income": 20000,
-        "existing_debt": 300000,
-        "credit_score": 849,
-        "loan_amount": 50000,
+        "monthly_income": 120000,
+        "existing_debt": 0,
+        "credit_score": 750,
+        "loan_amount": 59999,
         "loan_purpose": "Vehicle"
       },
       "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM120,000 (RM1,440,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 750 is excellent, indicating a strong history of responsible credit management and timely payments."
       },
-      "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
-      ],
+      "counterfactuals": [],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 5,
+        "approval_probability": 0.95,
         "critical_factors": [
-          "Invalid AI response"
+          "High income",
+          "Excellent credit"
         ]
       },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T06:53:10.210997+00:00"
+        "timestamp": "2026-02-05T07:25:44.894259+00:00"
       }
     }
   },
   {
-    "domain": "job",
+    "domain": "loan",
     "data": {
-      "full_name": "Bavithran",
-      "job_title": "General Manager",
-      "years_experience": 20,
-      "education_level": "Master",
-      "companies_worked": 2,
-      "career_gaps": 0,
-      "expected_salary": 10000
+      "full_name": "bavi",
+      "age": 80,
+      "gender": "M",
+      "marital_status": "Divorced",
+      "employment_years": 20,
+      "employment_type": "Self-Employed",
+      "monthly_income": 2000,
+      "credit_score": 850,
+      "existing_debt": 0,
+      "loan_amount": 5000000,
+      "loan_purpose": "Home"
     },
     "status": "pending_human",
-    "id": "79710c86",
-    "timestamp": "2026-02-03T06:55:32.844552+00:00",
+    "id": "a16d7d60",
+    "timestamp": "2026-02-05T07:43:40.600319+00:00",
     "ai_result": {
-      "decision_type": "job",
+      "decision_type": "loan",
       "applicant": {
-        "full_name": "Bavithran",
-        "job_title": "General Manager",
-        "years_experience": 20,
-        "education_level": "Master",
-        "companies_worked": 2,
-        "career_gaps": 0,
-        "expected_salary": 10000
+        "full_name": "bavi",
+        "age": 80,
+        "gender": "M",
+        "marital_status": "Divorced",
+        "employment_years": 20,
+        "employment_type": "Self-Employed",
+        "monthly_income": 2000,
+        "credit_score": 850,
+        "existing_debt": 0,
+        "loan_amount": 5000000,
+        "loan_purpose": "Home"
       },
       "decision": {
         "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "confidence": 0.55,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit, High loan-to-income. Risk score: 45/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments. The requested loan amount of RM5,000,000 represents a loan-to-income ratio of 208.3x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income."
       },
       "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Request a smaller loan amount (max RM120,000 based on your income) or increase your income before reapplying"
       ],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 55,
+        "approval_probability": 0.45,
         "critical_factors": [
-          "Invalid AI response"
+          "Low income",
+          "Excellent credit",
+          "High loan-to-income"
         ]
       },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_counterfactuals": [],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T06:55:32.904338+00:00"
+        "timestamp": "2026-02-05T07:43:40.606426+00:00"
       }
     }
   },
   {
-    "domain": "job",
+    "domain": "loan",
     "data": {
-      "full_name": "Zeperrnest",
-      "job_title": "Software engineer",
-      "years_experience": 10,
-      "education_level": "Master",
-      "companies_worked": 4,
-      "career_gaps": 0,
-      "expected_salary": 8000
+      "full_name": "uhsu",
+      "age": 27,
+      "gender": "M",
+      "marital_status": "Divorced",
+      "employment_years": 9,
+      "employment_type": "Permanent",
+      "monthly_income": 19000,
+      "existing_debt": 0,
+      "credit_score": 850,
+      "loan_amount": 1200,
+      "loan_purpose": "Personal"
     },
     "status": "completed",
-    "id": "b89ff9d8",
-    "timestamp": "2026-02-03T07:01:29.952942+00:00",
+    "id": "31dd8f7f",
+    "timestamp": "2026-02-05T07:44:51.819376+00:00",
     "ai_result": {
-      "decision_type": "job",
+      "decision_type": "loan",
       "applicant": {
-        "full_name": "Zeperrnest",
-        "job_title": "Software engineer",
-        "years_experience": 10,
-        "education_level": "Master",
-        "companies_worked": 4,
-        "career_gaps": 0,
-        "expected_salary": 8000
+        "full_name": "uhsu",
+        "age": 27,
+        "gender": "M",
+        "marital_status": "Divorced",
+        "employment_years": 9,
+        "employment_type": "Permanent",
+        "monthly_income": 19000,
+        "existing_debt": 0,
+        "credit_score": 850,
+        "loan_amount": 1200,
+        "loan_purpose": "Personal"
       },
       "decision": {
-        "status": "REJECTED",
-        "confidence": 0.5,
-        "reasoning": "Model output invalid or incomplete - System Error"
+        "status": "APPROVED",
+        "confidence": 0.95,
+        "reasoning": "Based on automated analysis: High income, Excellent credit. Risk score: 95/100.\n\nDetailed Analysis:\nYour monthly income of RM19,000 (RM228,000/year) demonstrates strong financial capacity, placing you in our preferred income bracket for loan applicants. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
       },
-      "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
-      ],
+      "counterfactuals": [],
       "fairness": {
-        "assessment": "Unknown",
-        "concerns": "Processing Error"
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
       },
       "key_metrics": {
-        "risk_score": 50,
-        "approval_probability": 0.0,
+        "risk_score": 5,
+        "approval_probability": 0.95,
         "critical_factors": [
-          "Invalid AI response"
+          "High income",
+          "Excellent credit"
         ]
       },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
       "audit": {
         "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T07:01:30.551825+00:00"
+        "timestamp": "2026-02-05T07:44:51.823756+00:00"
       }
     },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-02-03T07:02:25.099763+00:00",
+    "final_decision": "rejected",
+    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+    "reviewed_at": "2026-02-05T07:47:46.871574+00:00",
     "is_override": true,
     "override_explanation": {
       "decision": {
@@ -1145,45 +552,150 @@
   {
     "domain": "loan",
     "data": {
-      "full_name": "yooooo",
-      "age": 56,
+      "full_name": "uyxr",
+      "age": 75,
       "gender": "M",
       "marital_status": "Married",
-      "employment_years": 30,
-      "employment_type": "Permanent",
-      "monthly_income": 10000,
-      "existing_debt": 49998,
-      "credit_score": 849,
-      "loan_amount": 10000,
+      "employment_years": 14,
+      "employment_type": "Part-Time",
+      "monthly_income": 1996,
+      "existing_debt": 50000,
+      "credit_score": 418,
+      "loan_amount": 1000000,
       "loan_purpose": "Business"
     },
-    "status": "pending_human",
-    "id": "b6192e0b",
-    "timestamp": "2026-02-03T07:06:54.881198+00:00",
+    "status": "completed",
+    "id": "25b325b7",
+    "timestamp": "2026-02-05T07:58:26.493941+00:00",
     "ai_result": {
       "decision_type": "loan",
       "applicant": {
-        "full_name": "yooooo",
-        "age": 56,
+        "full_name": "uyxr",
+        "age": 75,
         "gender": "M",
         "marital_status": "Married",
-        "employment_years": 30,
-        "employment_type": "Permanent",
-        "monthly_income": 10000,
-        "existing_debt": 49998,
-        "credit_score": 849,
-        "loan_amount": 10000,
+        "employment_years": 14,
+        "employment_type": "Part-Time",
+        "monthly_income": 1996,
+        "existing_debt": 50000,
+        "credit_score": 418,
+        "loan_amount": 1000000,
         "loan_purpose": "Business"
       },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.1,
+        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,996 (RM23,952/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM1,000,000 represents a loan-to-income ratio of 41.8x your annual income (RM23,952), which exceeds BNM's prudent lending threshold of 5x annual income."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
+        "Step 3: Request a smaller loan amount (max RM119,760 based on your income) or increase your income before reapplying"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 100,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Low income",
+          "Poor credit",
+          "High loan-to-income"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_counterfactuals": [],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T07:58:26.503127+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM1,996 (RM23,952/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 418 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM1,000,000 represents a loan-to-income ratio of 41.8x your annual income (RM23,952), which exceeds BNM's prudent lending threshold of 5x annual income.",
+    "reviewed_at": "2026-02-05T07:59:22.946308+00:00",
+    "is_override": false,
+    "override_explanation": null
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "full_name": "Qhabylen",
+      "age": 32,
+      "gender": "M",
+      "marital_status": "Single",
+      "employment_years": 15,
+      "employment_type": "Permanent",
+      "monthly_income": 2600,
+      "existing_debt": 30000,
+      "credit_score": 850,
+      "loan_amount": 50000,
+      "loan_purpose": "Business"
+    },
+    "status": "completed",
+    "id": "49065ecf",
+    "timestamp": "2026-02-05T08:26:17.480868+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "full_name": "Qhabylen",
+        "age": 32,
+        "gender": "M",
+        "marital_status": "Single",
+        "employment_years": 15,
+        "employment_type": "Permanent",
+        "monthly_income": 2600,
+        "existing_debt": 30000,
+        "credit_score": 850,
+        "loan_amount": 50000,
+        "loan_purpose": "Business"
+      },
+      "decision": {
+        "status": "APPROVED",
+        "confidence": 0.7,
+        "reasoning": "Based on automated analysis: Low income, Excellent credit. Risk score: 60/100.\n\nDetailed Analysis:\nYour monthly income of RM2,600 (RM31,200/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 40,
+        "approval_probability": 0.6,
+        "critical_factors": [
+          "Low income",
+          "Excellent credit"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations.",
+      "alternative_counterfactuals": [
+        "Step 1: Request a detailed explanation from our customer service team regarding the specific concerns identified",
+        "Step 2: Provide additional documentation such as proof of income, employment verification, or collateral",
+        "Step 3: Wait 6 months and reapply with improved financial standing or additional supporting evidence"
+      ],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T08:26:17.488839+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "After manual review by our assessment officer, this application has been declined. While automated screening passed, additional scrutiny revealed concerns regarding debt serviceability under Bank Negara Malaysia (BNM) guidelines. Per BNM's Responsible Lending Guidelines, all loans must demonstrate sustainable repayment capacity considering total debt obligations. very noty boy kenot asept",
+    "reviewed_at": "2026-02-05T08:29:43.437428+00:00",
+    "is_override": true,
+    "override_explanation": {
       "decision": {
         "status": "REJECTED",
         "confidence": 0.5,
         "reasoning": "Model output invalid or incomplete - System Error"
       },
       "counterfactuals": [
-        "Step 1: Ensure all application fields are filled correctly.",
-        "Step 2: Verify income and employment details.",
-        "Step 3: Contact support for manual review."
+        "Ensure all application fields are filled correctly.",
+        "Verify income and employment details.",
+        "Contact support for manual review."
       ],
       "fairness": {
         "assessment": "Unknown",
@@ -1195,316 +707,7 @@
         "critical_factors": [
           "Invalid AI response"
         ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T07:06:55.090994+00:00"
       }
-    }
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "Ferrari",
-      "age": 40,
-      "gender": "M",
-      "marital_status": "Married",
-      "employment_years": 20,
-      "employment_type": "Permanent",
-      "monthly_income": 10000,
-      "existing_debt": 30000,
-      "credit_score": 850,
-      "loan_amount": 10000,
-      "loan_purpose": "Vehicle"
-    },
-    "status": "completed",
-    "id": "3a187c2e",
-    "timestamp": "2026-02-03T07:20:56.305824+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "Ferrari",
-        "age": 40,
-        "gender": "M",
-        "marital_status": "Married",
-        "employment_years": 20,
-        "employment_type": "Permanent",
-        "monthly_income": 10000,
-        "existing_debt": 30000,
-        "credit_score": 850,
-        "loan_amount": 10000,
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 85,
-        "reasoning": "After evaluating the provided data, it was determined that Mr. Ferrari's financial situation is not strong enough to qualify for this loan. His existing debt of $30,000 already exceeds a healthy threshold relative to his income and employment stability (Employment Years: 20). With an employment type as Permanent and no additional details indicating he has substantial savings or other sources of income that could reduce the impact of the existing debt, it would be risky for us to approve this loan. We recommend looking at ways to improve Mr. Ferrari's financial health through reducing his debt or increasing his income."
-      },
-      "counterfactuals": [
-        "Step 1: Consider paying down some of the existing debt.",
-        "Step 2: Explore side hustles or additional job opportunities to boost your income.",
-        "Step 3: Increase savings, even if it's a small amount each month to improve financial stability."
-      ],
-      "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "Existing debt levels may disproportionately impact low-income applicants when compared to more financially stable ones in similar situations. This could lead to unfair outcomes for certain demographics based on their credit history and current employment status."
-      },
-      "key_metrics": {
-        "risk_score": 85,
-        "approval_probability": 0.12,
-        "critical_factors": [
-          "Existing Debt",
-          "Employment Years"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T07:23:55.638939+00:00"
-      }
-    },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-02-03T07:41:01.192889+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The loan application was initially recommended to be rejected due to high existing debt and low credit score. However, after review of additional evidence provided by the auditor, it was manually approved based on their discretion.",
-      "detailed_reasoning": "Although the applicant had a relatively high income ($10,000/month) and a favorable credit score (850), they also had a significant existing debt ($30,000). Given these circumstances, which led to an overall debt-to-income ratio that exceeded 43%, the application was initially recommended for rejection. The auditor reviewed additional evidence provided by the applicant regarding their employment stability and financial situation, concluding that despite their high income and good credit score, they were still in a precarious financial position given their existing debt. Therefore, they decided to approve the loan based on this new information, recognizing the importance of mitigating any undue hardship for the applicant.",
-      "next_steps": [
-        "Please provide the necessary documents required by our bank for further processing.",
-        "We will review your employment stability and current financial status as part of our ongoing monitoring process."
-      ],
-      "conditions": [
-        "Maintain regular payments on existing debts.",
-        "Regularly report any changes in income or debt to us."
-      ],
-      "override_context": "The loan application was manually approved by an auditor based on additional evidence provided by the applicant, which suggested that despite having a high income and good credit score, they were still experiencing financial hardship due to their existing debt. The final decision took into account their employment stability and willingness to manage their debts effectively moving forward."
-    }
-  },
-  {
-    "domain": "job",
-    "data": {
-      "full_name": "Natalie",
-      "job_title": "Software developer",
-      "years_experience": 9,
-      "education_level": "Bachelor",
-      "companies_worked": 5,
-      "career_gaps": 0,
-      "expected_salary": 9000
-    },
-    "status": "completed",
-    "id": "eb0779b1",
-    "timestamp": "2026-02-03T07:47:38.996881+00:00",
-    "ai_result": {
-      "decision_type": "job",
-      "applicant": {
-        "full_name": "Natalie",
-        "job_title": "Software developer",
-        "years_experience": 9,
-        "education_level": "Bachelor",
-        "companies_worked": 5,
-        "career_gaps": 0,
-        "expected_salary": 9000
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 0.85,
-        "reasoning": "Based on the provided information, Natalie does not meet our current approval criteria for a job application as a Software Developer with 9 years of experience and a bachelor's degree. The expected salary of $9000 seems unusually low given her qualifications and industry standards."
-      },
-      "counterfactuals": [
-        "Step 1: Natalie should consider updating the expected salary to reflect more reasonable market rates for a software developer with similar experience.",
-        "Step 2: Natalie could also seek references from current or former colleagues who can vouch for her abilities and provide recommendations on her behalf."
-      ],
-      "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "The application's expected salary is significantly below industry standards, potentially indicating a bias against applicants with higher expected compensation."
-      },
-      "key_metrics": {
-        "risk_score": 80,
-        "approval_probability": 0.15,
-        "critical_factors": [
-          "Expected Salary"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T07:50:35.277577+00:00"
-      }
-    },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-02-03T07:54:45.275511+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The agent approved the job application based on additional evidence provided by an auditor, overriding your initial recommendation to reject it.",
-      "detailed_reasoning": "Despite Natalie having a strong background as a software developer with nine years of experience and five companies worked for, the agent deemed the application suitable due to new information. The auditor's review revealed that Natalie had successfully completed an important project at her latest company, which significantly boosted her credentials. This accomplishment made her more competitive in the job market compared to similar candidates who may not have such a notable achievement.",
-      "next_steps": [
-        "The applicant should ensure all provided documents are up-to-date and complete their application form accurately to avoid any delays or rejections.",
-        "Natalie is encouraged to keep an open line of communication with her current employer, as they might be able to provide more context on the project she completed."
-      ],
-      "conditions": [
-        "The applicant must present all relevant documentation for the job application process.",
-        "Candidates are advised to maintain active and positive relationships with their previous employers for potential references or additional information."
-      ],
-      "override_context": "The agent's decision was influenced by new evidence that highlighted Natalie's strong performance on a significant project, which improved her overall profile. The AI recommendation did not account for this specific achievement, leading the human to override it in favor of a more comprehensive evaluation of the applicant."
-    }
-  },
-  {
-    "domain": "job",
-    "data": {
-      "full_name": "Keluar",
-      "job_title": "Security Guard",
-      "years_experience": 10,
-      "education_level": "Diploma",
-      "companies_worked": 7,
-      "career_gaps": 1,
-      "expected_salary": 6000
-    },
-    "status": "completed",
-    "id": "2fff7564",
-    "timestamp": "2026-02-03T08:00:21.840666+00:00",
-    "ai_result": {
-      "decision_type": "job",
-      "applicant": {
-        "full_name": "Keluar",
-        "job_title": "Security Guard",
-        "years_experience": 10,
-        "education_level": "Diploma",
-        "companies_worked": 7,
-        "career_gaps": 1,
-        "expected_salary": 6000
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 85,
-        "reasoning": "Kelvin has more than 10 years of experience as a Security Guard and completed a Diploma, which is within the acceptable range for this position. However, his expected salary of $6000 does not align well with industry standards and expectations based on his level of experience and education. While Kelvin may still be suitable in terms of experience and qualifications, his expected salary falls below what would typically be considered reasonable for a professional in this field."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your savings or look for higher-paying job opportunities.",
-        "Step 2: Enhance your resume to reflect more responsibilities or achievements related to security guard work.",
-        "Step 3: Seek additional training or certifications that could justify a higher salary expectation."
-      ],
-      "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "The expected salary might be lower than what is considered fair for an experienced Security Guard with the same level of education and experience as Kelvin. This could be seen as discriminatory, especially in a field where wages can vary significantly based on location and company policies."
-      },
-      "key_metrics": {
-        "risk_score": 75,
-        "approval_probability": 0.15,
-        "critical_factors": [
-          "Experience",
-          "Education Level"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T08:03:30.446988+00:00"
-      }
-    },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-02-03T08:16:47.321856+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The agent approved the job application based on additional evidence provided by an auditor, overriding your initial recommendation to reject it.",
-      "detailed_reasoning": "Your initial recommendation was to REJECT the job application due to a low expected salary of $6000 for a Security Guard with 10 years of experience. However, upon reviewing new evidence from an auditor indicating strong qualifications and relevant experiences that justify a higher expected salary, the agent approved the application. This decision aligns with the objective of ensuring fair consideration of all applications and accommodating valid justifications.",
-      "next_steps": [
-        "Review the updated application information thoroughly",
-        "Prepare a comprehensive report for future reference"
-      ],
-      "conditions": [],
-      "override_context": "The override occurred due to new evidence provided by an auditor that justified a higher expected salary, contrary to your initial recommendation."
-    }
-  },
-  {
-    "domain": "job",
-    "data": {
-      "full_name": "Mani",
-      "job_title": "Help desk",
-      "years_experience": 5,
-      "education_level": "Bachelor",
-      "companies_worked": 7,
-      "career_gaps": 1,
-      "expected_salary": 3999
-    },
-    "status": "pending_ai",
-    "id": "f6ce1498",
-    "timestamp": "2026-02-03T08:12:21.490414+00:00"
-  },
-  {
-    "domain": "loan",
-    "data": {
-      "full_name": "Zep Ernest",
-      "age": 18,
-      "gender": "M",
-      "marital_status": "Single",
-      "employment_years": 1,
-      "employment_type": "Contract",
-      "monthly_income": 2699,
-      "existing_debt": 0,
-      "credit_score": 499,
-      "loan_amount": 19999,
-      "loan_purpose": "Vehicle"
-    },
-    "status": "completed",
-    "id": "a179f6ce",
-    "timestamp": "2026-02-03T08:26:16.893139+00:00",
-    "ai_result": {
-      "decision_type": "loan",
-      "applicant": {
-        "full_name": "Zep Ernest",
-        "age": 18,
-        "gender": "M",
-        "marital_status": "Single",
-        "employment_years": 1,
-        "employment_type": "Contract",
-        "monthly_income": 2699,
-        "existing_debt": 0,
-        "credit_score": 499,
-        "loan_amount": 19999,
-        "loan_purpose": "Vehicle"
-      },
-      "decision": {
-        "status": "REJECTED",
-        "confidence": 100.0,
-        "reasoning": "After evaluating the provided data, it was determined that Zep Ernest's financial situation is not strong enough to qualify for this loan. His Monthly Income of $2699 is significantly below a healthy threshold relative to his Employment Years (1 year) and existing debt level ($0). An additional $500 in monthly income would make him more financially stable, which could improve his credit score and increase the likelihood of approval."
-      },
-      "counterfactuals": [
-        "Step 1: Increase your monthly income by finding a higher-paying job or taking on part-time work.",
-        "Step 2: Build an emergency fund with at least $500 to cover unexpected expenses, which could help manage any financial challenges.",
-        "Step 3: Ensure you have strong savings in case of unemployment or other emergencies."
-      ],
-      "fairness": {
-        "assessment": "Potentially Unfair",
-        "concerns": "The applicant may not have the opportunity to increase income immediately due to his young age and limited work experience."
-      },
-      "key_metrics": {
-        "risk_score": 75,
-        "approval_probability": 0.12,
-        "critical_factors": [
-          "Income"
-        ]
-      },
-      "audit": {
-        "engine": "universal-xai-http",
-        "timestamp": "2026-02-03T08:29:05.827069+00:00"
-      }
-    },
-    "final_decision": "approved",
-    "reviewer_comment": "Manually approved by auditor based on provided evidence.",
-    "reviewed_at": "2026-02-03T08:33:03.239861+00:00",
-    "is_override": true,
-    "override_explanation": {
-      "summary": "The agent manually approved Zep Ernest's loan application based on additional evidence provided.",
-      "detailed_reasoning": "While the initial recommendation was to reject the application due to factors such as low age (18), short employment history, and high credit score, the agent reviewed new information which indicated a higher likelihood of success. The auditor concluded that Zep Ernest had substantial financial stability evidenced by his employment type and income level despite being underage. Therefore, the agent decided to approve the application.",
-      "next_steps": [
-        "The customer should provide any requested additional documentation or explanations.",
-        "Zep Ernest will be informed about the approved loan amount and terms."
-      ],
-      "conditions": [
-        "The new evidence must align with the provided criteria for manual approval.",
-        "There might be future requirements to verify financial status periodically as per lender's policy."
-      ],
-      "override_context": "The agent overrode your initial recommendation based on additional evidence, which indicated a higher likelihood of success in this case. The low credit score and short employment period were deemed less relevant given the other factors."
     }
   }
 ]

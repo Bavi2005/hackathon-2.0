@@ -21,11 +21,12 @@ export type FormField = {
 };
 
 export type AiResultType = {
-	decision: {
+	decision: string | {
 		status: string;
 		confidence: number;
 		reasoning: string;
 	};
+	summary?: string;  // Explanation summary for customer display
 	alternative_reasoning?: string;
 	counterfactuals?: string[];
 	fairness?: {

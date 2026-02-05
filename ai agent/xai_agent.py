@@ -1286,6 +1286,49 @@ async def bulk_upload(
         raise HTTPException(400, f"Error processing bulk upload: {str(e)}")
 
 # =====================================================
+# AUDIT LOG ENDPOINT
+# =====================================================
+from fastapi.responses import JSONResponse
+
+@app.get("/audit-log")
+async def download_audit_log():
+    """
+    Download all applications as an audit log.
+    Returns a JSON array of all applications with their review history.
+    """
+    all_apps = db._read_db()
+    
+    # Build audit log entries
+    audit_log = []
+    for app in all_apps:
+        entry = {
+            "application_id": app.get("id"),
+            "domain": app.get("domain"),
+            "submitted_at": app.get("timestamp"),
+            "applicant_data": app.get("data", {}),
+            "ai_decision": app.get("ai_result", {}).get("decision", {}).get("status"),
+            "ai_confidence": app.get("ai_result", {}).get("decision", {}).get("confidence"),
+            "ai_reasoning": app.get("ai_result", {}).get("decision", {}).get("reasoning"),
+            "final_status": app.get("status"),
+            "final_decision": app.get("final_decision"),
+            "reviewed_at": app.get("reviewed_at"),
+            "reviewer_comment": app.get("reviewer_comment"),
+            "is_override": app.get("is_override", False),
+            "override_explanation": app.get("override_explanation")
+        }
+        audit_log.append(entry)
+    
+    # Sort by timestamp descending (newest first)
+    audit_log.sort(key=lambda x: x.get("submitted_at", ""), reverse=True)
+    
+    return JSONResponse(
+        content=audit_log,
+        headers={
+            "Content-Disposition": "attachment; filename=audit_log.json"
+        }
+    )
+
+# =====================================================
 # HEALTH CHECK ENDPOINT
 # =====================================================
 @app.get("/health")

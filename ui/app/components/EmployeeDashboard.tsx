@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Download, Upload, Loader2 } from 'lucide-react';
+import { ArrowLeft, Search, CheckCircle2, AlertCircle, User, Hash, Clock, Check, X, Settings, Edit, Upload, Loader2, FileText } from 'lucide-react';
+import Link from 'next/link';
 import { CaseData } from '../lib/types';
 import { CATEGORIES, CATEGORY_CONFIG } from '../lib/constants';
 import DonutChart from './DonutChart';
@@ -205,6 +206,8 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 
 	if (loading) return <div className="min-h-screen bg-[#1a100e] flex items-center justify-center text-amber-500 font-black tracking-widest animate-pulse">LOADING DASHBOARD DATA...</div>;
 
+
+
 	// --- CATEGORY SELECTION VIEW ---
 	if (!selectedCategory) {
 		return (
@@ -214,6 +217,15 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 				<div className="absolute inset-0 bg-gradient-to-b from-[#1a100e]/60 via-transparent to-[#1a100e]" />
 
 				<button onClick={onBack} className="absolute top-8 left-8 flex items-center gap-2 text-amber-500 hover:text-amber-400 font-bold z-20"><ArrowLeft size={20} /> Back</button>
+				
+				{/* Audit Trail Link */}
+				<Link 
+					href="/audit-trail" 
+					className="absolute top-8 right-8 flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-500 font-bold rounded-xl z-20 transition-all"
+				>
+					<FileText size={18} /> Audit Trail
+				</Link>
+				
 				<h1 className="text-5xl font-black text-white mb-12">Employee Audit Portal</h1>
 				<div className="grid grid-cols-4 gap-8 max-w-7xl w-full">
 					{categoriesWithStats.map(cat => {
@@ -527,7 +539,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 										onClick={() => setExplanationEditorState({
 											isOpen: true,
 											mode: 'edit',
-											initialText: activeCase.explanation.summary
+											initialText: activeCase.explanation.fullReasoning || activeCase.explanation.summary
 										})}
 										className="p-2 hover:bg-amber-500/20 rounded-lg text-amber-500 transition-all flex items-center gap-2 text-sm font-bold"
 									>
@@ -535,7 +547,7 @@ export default function EmployeeDashboard({ onBack }: EmployeeDashboardProps) {
 									</button>
 								</div>
 								<div className="bg-gradient-to-br from-[#291d1a] to-[#1a100e] rounded-3xl p-8 border-2 border-amber-500/40 shadow-2xl">
-									<p className="text-lg text-gray-200 leading-relaxed mb-8 font-medium">"{activeCase.explanation.summary}"</p>
+									<p className="text-lg text-gray-200 leading-relaxed mb-8 font-medium">"{activeCase.explanation.fullReasoning || activeCase.explanation.summary}"</p>
 
 									{/* Counterfactuals Display - More Prominent */}
 									{(activeCase as any).ai_result?.counterfactuals && (activeCase as any).ai_result.counterfactuals.length > 0 && (

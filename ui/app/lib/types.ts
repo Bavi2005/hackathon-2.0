@@ -4,7 +4,7 @@ export type CaseData = {
 	timestamp: string;
 	input_features: any;
 	model_output: { label: string; confidence: number | null; };
-	explanation: { summary: string; };
+	explanation: { summary: string; fullReasoning?: string; };
 	counterfactual: string;
 	applicant_name?: string;
 	ai_result?: AiResultType;

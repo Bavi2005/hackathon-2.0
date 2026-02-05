@@ -2,6 +2,12 @@
   "decisions": [
     {
       "type": "loan",
+      "decision": "REJECTED",
+      "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
+      "timestamp": "2026-02-05T08:59:58.208841+00:00"
+    },
+    {
+      "type": "loan",
       "decision": "APPROVED",
       "reasoning": "Based on automated analysis: Low income, Excellent credit. Risk score: 60/100.\n\nDetailed Analysis:\nYour monthly income of RM2,600 (RM31,200/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 850 is excellent, indicating a strong history of responsible credit management and timely payments.",
       "timestamp": "2026-02-05T08:26:17.485142+00:00"
@@ -293,12 +299,6 @@
       "decision": "REJECTED",
       "reasoning": "Model output invalid or incomplete - System Error",
       "timestamp": "2026-02-05T06:12:09.614261+00:00"
-    },
-    {
-      "type": "loan",
-      "decision": "REJECTED",
-      "reasoning": "Model output invalid or incomplete - System Error",
-      "timestamp": "2026-02-05T06:12:09.607676+00:00"
     }
   ]
 }

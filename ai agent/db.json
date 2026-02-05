@@ -709,5 +709,74 @@
         ]
       }
     }
+  },
+  {
+    "domain": "loan",
+    "data": {
+      "full_name": "uehbssibsbsbsun",
+      "age": 56,
+      "gender": "M",
+      "marital_status": "Married",
+      "employment_years": 20,
+      "employment_type": "Contract",
+      "monthly_income": 2000,
+      "existing_debt": 4999,
+      "credit_score": 420,
+      "loan_amount": 123000,
+      "loan_purpose": "Personal"
+    },
+    "status": "completed",
+    "id": "082e60c4",
+    "timestamp": "2026-02-05T08:59:58.206626+00:00",
+    "ai_result": {
+      "decision_type": "loan",
+      "applicant": {
+        "full_name": "uehbssibsbsbsun",
+        "age": 56,
+        "gender": "M",
+        "marital_status": "Married",
+        "employment_years": 20,
+        "employment_type": "Contract",
+        "monthly_income": 2000,
+        "existing_debt": 4999,
+        "credit_score": 420,
+        "loan_amount": 123000,
+        "loan_purpose": "Personal"
+      },
+      "decision": {
+        "status": "REJECTED",
+        "confidence": 0.1,
+        "reasoning": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income."
+      },
+      "counterfactuals": [
+        "Step 1: Increase your monthly income to at least RM3,000 through additional employment, side income, or by adding a co-applicant with higher income",
+        "Step 2: Improve your credit score above 650 by paying down existing debts, making all payments on time, and disputing any errors on your credit report",
+        "Step 3: Request a smaller loan amount (max RM120,000 based on your income) or increase your income before reapplying"
+      ],
+      "fairness": {
+        "assessment": "Fair",
+        "concerns": "Automated rule-based evaluation"
+      },
+      "key_metrics": {
+        "risk_score": 100,
+        "approval_probability": 0.0,
+        "critical_factors": [
+          "Low income",
+          "Poor credit",
+          "High loan-to-income"
+        ]
+      },
+      "alternative_reasoning": "After manual review by our assessment officer, this application has been approved with conditions. Despite automated screening concerns, manual verification confirmed adequate repayment capacity per BNM guidelines. Additional factors such as employment stability, savings history, or collateral support this approval.",
+      "alternative_counterfactuals": [],
+      "audit": {
+        "engine": "universal-xai-http",
+        "timestamp": "2026-02-05T08:59:58.215079+00:00"
+      }
+    },
+    "final_decision": "rejected",
+    "reviewer_comment": "Based on automated analysis: Low income, Poor credit, High loan-to-income. Risk score: 0/100.\n\nDetailed Analysis:\nYour monthly income of RM2,000 (RM24,000/year) is below the minimum threshold of RM3,000/month as per BNM prudent lending guidelines. This significantly impacts your debt service ratio (DSR) and loan repayment capacity. Your credit score of 420 is below our minimum threshold of 600. This indicates potential issues with credit history such as missed payments, high utilization, or recent derogatory marks. The requested loan amount of RM123,000 represents a loan-to-income ratio of 5.1x your annual income (RM24,000), which exceeds BNM's prudent lending threshold of 5x annual income.",
+    "reviewed_at": "2026-02-05T09:00:18.847905+00:00",
+    "is_override": false,
+    "override_explanation": null
   }
 ]

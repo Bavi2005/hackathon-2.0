@@ -111,9 +111,18 @@ export default function EmployeeDashboard() {
                 {/* Compact Sidebar */}
                 <div className="w-80 flex-shrink-0 border-r border-slate-800 bg-slate-900/60 backdrop-blur-md flex flex-col">
                     <div className="p-6 border-b border-slate-800/50">
-                        <div className="flex items-center space-x-2 text-cyan-400 mb-6">
-                            <Zap className="w-6 h-6 fill-current" />
-                            <span className="font-bold text-lg tracking-tight text-white">XAI Cortex</span>
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center space-x-2 text-cyan-400">
+                                <Zap className="w-6 h-6 fill-current" />
+                                <span className="font-bold text-lg tracking-tight text-white">XAI Cortex</span>
+                            </div>
+                            <Link 
+                                href="/audit-trail"
+                                className="flex items-center gap-1 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-semibold rounded-lg transition-all"
+                            >
+                                <FileText className="w-3.5 h-3.5" />
+                                Audit Trail
+                            </Link>
                         </div>
                         
                         <div className="flex bg-slate-800/50 p-1 rounded-lg mb-6">

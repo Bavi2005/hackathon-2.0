@@ -15,6 +15,24 @@ const transform = (app: any): CaseData => {
 	
 	// Check if application has been reviewed (not pending anymore)
 	const isReviewed = app.status === 'approved' || app.status === 'rejected' || app.status === 'completed';
+	
+	// Create a short customer-friendly summary (first 2 sentences or 200 chars max)
+	const createShortSummary = (text: string): string => {
+		if (!text) return "";
+		// Split by sentence endings
+		const sentences = text.split(/(?<=[.!?])\s+/);
+		const shortText = sentences.slice(0, 2).join(' ');
+		// Cap at 200 characters
+		if (shortText.length > 200) {
+			return shortText.substring(0, 197) + "...";
+		}
+		return shortText;
+	};
+	
+	// Short summary for customer view
+	const customerSummary = isReviewed
+		? createShortSummary(reviewerComment || aiReasoning)
+		: `Your application is being processed.`;
 
 	return {
 		decision_id: app.id,
@@ -29,7 +47,10 @@ const transform = (app: any): CaseData => {
 			confidence: app.ai_result?.decision?.confidence || null
 		},
 		explanation: {
-			summary: isReviewed
+			// Short summary for customers
+			summary: customerSummary,
+			// Full reasoning available for employee dashboard
+			fullReasoning: isReviewed
 				? `${aiReasoning}${reviewerComment ? ` | ${reviewerComment}` : ""}`
 				: `AI Suggestion: ${app.ai_result?.decision?.status || 'Processing'}. ${aiReasoning}`
 		},

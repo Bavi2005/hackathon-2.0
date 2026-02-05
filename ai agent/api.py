@@ -165,21 +165,26 @@ async def review_application(
                 break
         db._write_db(all_apps)
 
-        # Generate explanation in background
-        try:
-            dtype = DecisionType(app_record["domain"])
-            prompt = build_override_prompt(
-                dtype, 
-                app_record["data"],
-                ai_status,
-                human_status,
-                comment
-            )
-            # Add to background tasks
-            background_tasks.add_task(process_override_explanation, app_id, prompt)
-            
-        except Exception as e:
-            print(f"Error preparing override explanation task: {e}")
+        # Skip AI generation if auditor already provided a comment (instant response)
+        # This avoids double explanation and speeds up the deny action
+        if comment and len(comment.strip()) > 10:
+            print(f"DEBUG: Skipping AI override - auditor provided comment for {app_id}")
+        else:
+            # Generate explanation in background only if no comment provided
+            try:
+                dtype = DecisionType(app_record["domain"])
+                prompt = build_override_prompt(
+                    dtype, 
+                    app_record["data"],
+                    ai_status,
+                    human_status,
+                    comment
+                )
+                # Add to background tasks
+                background_tasks.add_task(process_override_explanation, app_id, prompt)
+                
+            except Exception as e:
+                print(f"Error preparing override explanation task: {e}")
             
     # Update DB - effectively we need to replace the record
     # SimpleDB doesn't have update, so we read-modify-write manually
@@ -307,3 +312,46 @@ async def batch_upload(
         processed_count += 1
         
     return {"message": "Batch processing completed", "count": processed_count}
+
+# =====================================================
+# AUDIT LOG ENDPOINT
+# =====================================================
+from fastapi.responses import JSONResponse
+
+@app.get("/audit-log")
+async def download_audit_log():
+    """
+    Download all applications as an audit log.
+    Returns a JSON array of all applications with their review history.
+    """
+    all_apps = db._read_db()
+    
+    # Build audit log entries
+    audit_log = []
+    for app in all_apps:
+        entry = {
+            "application_id": app.get("id"),
+            "domain": app.get("domain"),
+            "submitted_at": app.get("timestamp"),
+            "applicant_data": app.get("data", {}),
+            "ai_decision": app.get("ai_result", {}).get("decision", {}).get("status"),
+            "ai_confidence": app.get("ai_result", {}).get("decision", {}).get("confidence"),
+            "ai_reasoning": app.get("ai_result", {}).get("decision", {}).get("reasoning"),
+            "final_status": app.get("status"),
+            "final_decision": app.get("final_decision"),
+            "reviewed_at": app.get("reviewed_at"),
+            "reviewer_comment": app.get("reviewer_comment"),
+            "is_override": app.get("is_override", False),
+            "override_explanation": app.get("override_explanation")
+        }
+        audit_log.append(entry)
+    
+    # Sort by timestamp descending (newest first)
+    audit_log.sort(key=lambda x: x.get("submitted_at", ""), reverse=True)
+    
+    return JSONResponse(
+        content=audit_log,
+        headers={
+            "Content-Disposition": "attachment; filename=audit_log.json"
+        }
+    )
